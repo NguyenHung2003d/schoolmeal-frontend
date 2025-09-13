@@ -5,27 +5,37 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "/pho_ga.jpg",
     title: "Phở gà",
     description: "Phở gà thơm ngon, đầy đủ dưỡng chất, bé ăn là mê!",
+    category: "",
+    price: 50000,
   },
   {
     image: "/com_ga_nuong.jpg",
     title: "Cơm Gà Nướng",
     description: "Gà nướng thơm lừng, mềm ngon, đủ chất.",
+    category: "",
+    price: 50000,
   },
   {
     image: "/bun_bo.jpg",
     title: "Bún bò",
     description: "Bún bò thơm ngon, ăn là ghiền.",
+    category: "",
+    price: 50000,
   },
   {
     image: "/com_tron_thap_cam.jpg",
-    title: 'Cơm trộn thập cẩm',
-    description: 'Cơm trộn thập cẩm thơm ngon !'
+    title: "Cơm trộn thập cẩm",
+    description: "Cơm trộn thập cẩm thơm ngon !",
+    category: "",
+    price: 50000,
   },
   {
-    image: '/banh_canh.jpg',
-    title: 'Bánh canh chả cua',
-    description: 'Bánh canh chả cua thơm ngon bổ dưỡng'
-  }
+    image: "/banh_canh.jpg",
+    title: "Bánh canh chả cua",
+    description: "Bánh canh chả cua thơm ngon bổ dưỡng",
+    category: "",
+    price: 50000,
+  },
 ];
 
 export const slides = [
