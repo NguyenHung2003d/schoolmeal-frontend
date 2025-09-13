@@ -2,6 +2,8 @@ export interface FoodItem {
   image: string;
   title: string;
   description: string;
+  category: string,
+  price: number 
 }
 
 export interface NavigationItem {
