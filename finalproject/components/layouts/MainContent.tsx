@@ -1,10 +1,10 @@
 import React from "react";
-import { MainContentProps } from "@/types";
 import Slider from "@/sections/Slider";
-import FoodCarousel from "@/sections/FoodCarousel";
+import FoodBento from "@/sections/FoodBento";
 import HeroSection from "@/sections/HeroSection";
+import WEEKLY_MENU_DATA from "@/data/weeklyMenuData";
 
-const MainContent: React.FC<MainContentProps> = ({ foodItems }) => {
+const MainContent = () => {
   return (
     <main>
       <div className="pt-24">
@@ -12,7 +12,7 @@ const MainContent: React.FC<MainContentProps> = ({ foodItems }) => {
       </div>
       <Slider />
       <div className="max-w-7xl mx-auto px-5 py-10">
-        <FoodCarousel foodItems={foodItems} />
+        <FoodBento />
       </div>
     </main>
   );

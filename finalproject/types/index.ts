@@ -1,27 +1,27 @@
-export interface FoodItem {
+export interface BaseItem {
   image: string;
-  title: string;
   description: string;
-  category: string,
-  price: number 
 }
 
-export interface NavigationItem {
-  label: string;
-  href: string;
-  icon?: string;
+export interface FoodItem extends BaseItem {
+  title: string;
+  category: string;
+  price: number;
 }
 
-export interface MainContentProps {
-  foodItems: FoodItem[];
+export interface MealItem extends BaseItem {
+  name: string;
+  nutrition?: string;
 }
 
-export interface FoodCarouselProps {
-  foodItems: FoodItem[];
+export interface DayMenu {
+  day: string;
+  dayVn: string;
+  breakfast: MealItem;
+  lunch: MealItem;
+  snack: MealItem;
 }
 
-export interface LoadingContextType {
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
+export interface WithWeeklyMenu {
+  weeklyMenu: DayMenu[];
 }
-
