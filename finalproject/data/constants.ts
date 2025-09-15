@@ -27,17 +27,8 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "/ca_kho_to.jpg",
     title: "Cá kho tộ",
     description: "Cá kho tộ đậm đà, thấm vị, ăn với cơm nóng rất ngon",
-    category: "cá",
+    category: "fish",
     price: 48000,
-  },
-  // Món bún/phở
-  {
-    image: "/bun_cha.jpeg",
-    title: "Bún chả Hà Nội",
-    description:
-      "Bún chả truyền thống với thịt nướng thơm và nước mắm chua ngọt",
-    category: "noodles",
-    price: 52000,
   },
   {
     image: "/pho_bo.jpg",
@@ -157,6 +148,14 @@ export const FOOD_ITEMS: FoodItem[] = [
     category: "dessert",
     price: 15000,
   },
+  {
+    image: "/banana.jpg",
+    title: "fruit",
+    description: "Chuối chín tự nhiên, giàu kali và vitamin",
+    category: "fruit",
+    price: 15000,
+  },
+
   // Món đặc biệt
   {
     image: "/lau_ca_khoai.jpg",
