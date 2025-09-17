@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "@/sections/Slider";
 import FoodBento from "@/sections/FoodBento";
 import HeroSection from "@/sections/HeroSection";
+import Features from "@/sections/Features";
 
 const MainContent = () => {
   return (
@@ -12,6 +13,9 @@ const MainContent = () => {
       <Slider />
       <div className="mx-auto px-5 py-10">
         <FoodBento />
+      </div>
+      <div>
+        <Features/>
       </div>
     </main>
   );

@@ -1,4 +1,4 @@
-import { FoodItem } from "@/types";
+import { Features, FoodItem } from "@/types";
 
 export const FOOD_ITEMS: FoodItem[] = [
   // Món cơm
@@ -8,6 +8,16 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Cơm chiên đầy màu sắc với tôm, trứng và rau củ tươi ngon",
     category: "rice",
     price: 45000,
+    nutrition: {
+      nutrients: ["Carbohydrate", "Protein", "Vitamin B1", "Sắt", "Phosphorus"],
+      benefits: "Cung cấp năng lượng chính, protein hoàn chỉnh từ tôm và trứng",
+      calories: 380,
+      protein: 15,
+      carbs: 58,
+      fat: 12,
+      vitamins: ["B1", "B2", "A"],
+      minerals: ["Sắt", "Phosphorus", "Kẽm"],
+    },
   },
   {
     image: "/trung_chien.jpg",
@@ -15,6 +25,22 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Trứng gà chiên vàng ươm, thơm ngon, dễ ăn",
     category: "egg",
     price: 20000,
+    nutrition: {
+      nutrients: [
+        "Protein hoàn chỉnh",
+        "Vitamin D",
+        "Choline",
+        "Selen",
+        "Vitamin B12",
+      ],
+      benefits: "Phát triển não bộ, tăng cường trí nhớ, xây dựng cơ bắp",
+      calories: 155,
+      protein: 13,
+      carbs: 1,
+      fat: 11,
+      vitamins: ["D", "B12", "A", "E"],
+      minerals: ["Selen", "Phosphorus", "Sắt"],
+    },
   },
   {
     image: "/com_suon_nuong.jpg",
@@ -22,6 +48,16 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Sườn nướng mật ong thơm phức, ăn kèm cơm trắng dẻo ngon",
     category: "rice",
     price: 55000,
+    nutrition: {
+      nutrients: ["Protein", "Carbohydrate", "Vitamin B6", "Niacin", "Sắt"],
+      benefits: "Cung cấp năng lượng bền vững, protein cho cơ bắp",
+      calories: 520,
+      protein: 25,
+      carbs: 45,
+      fat: 28,
+      vitamins: ["B6", "B12", "Niacin"],
+      minerals: ["Sắt", "Kẽm", "Phosphorus"],
+    },
   },
   {
     image: "/ca_kho_to.jpg",
@@ -29,6 +65,16 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Cá kho tộ đậm đà, thấm vị, ăn với cơm nóng rất ngon",
     category: "fish",
     price: 48000,
+    nutrition: {
+      nutrients: ["Omega-3", "Protein", "Vitamin D", "Iodine", "Selenium"],
+      benefits: "Tốt cho não bộ, thị lực, hệ tim mạch khỏe mạnh",
+      calories: 245,
+      protein: 22,
+      carbs: 8,
+      fat: 14,
+      vitamins: ["D", "B12", "B6"],
+      minerals: ["Iodine", "Selenium", "Phosphorus"],
+    },
   },
   {
     image: "/pho_bo.jpg",
@@ -36,6 +82,16 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Phở bò tái nóng hổi, nước dùng ngọt thanh, thịt bò tươi ngon",
     category: "noodles",
     price: 58000,
+    nutrition: {
+      nutrients: ["Protein", "Carbohydrate", "Vitamin B12", "Sắt", "Kẽm"],
+      benefits: "Bổ máu, tăng sức đề kháng, cung cấp năng lượng",
+      calories: 435,
+      protein: 28,
+      carbs: 52,
+      fat: 15,
+      vitamins: ["B12", "B6", "Niacin"],
+      minerals: ["Sắt", "Kẽm", "Phosphorus"],
+    },
   },
   {
     image: "/bun_rieu_cua.jpg",
@@ -43,6 +99,16 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Bún riêu cua đồng đậm đà, chua chua ngọt ngọt rất hấp dẫn",
     category: "noodles",
     price: 46000,
+    nutrition: {
+      nutrients: ["Protein", "Carbohydrate", "Canxi", "Kẽm", "Vitamin C"],
+      benefits: "Tăng cường xương răng, bổ sung khoáng chất",
+      calories: 385,
+      protein: 18,
+      carbs: 58,
+      fat: 12,
+      vitamins: ["C", "A", "B1"],
+      minerals: ["Canxi", "Kẽm", "Sắt"],
+    },
   },
   {
     image: "/mi_quang.jpg",
@@ -50,6 +116,16 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Mì Quảng đặc sản miền Trung với tôm, thịt và trứng cút",
     category: "noodles",
     price: 54000,
+    nutrition: {
+      nutrients: ["Protein", "Carbohydrate", "Vitamin A", "Sắt", "Kẽm"],
+      benefits: "Đa dạng dinh dưỡng, tốt cho tiêu hóa",
+      calories: 465,
+      protein: 24,
+      carbs: 62,
+      fat: 16,
+      vitamins: ["A", "B1", "B2"],
+      minerals: ["Sắt", "Kẽm", "Phosphorus"],
+    },
   },
   // Món canh/soup
   {
@@ -59,6 +135,16 @@ export const FOOD_ITEMS: FoodItem[] = [
       "Canh chua cá thanh mát, chua ngọt hài hòa, kích thích vị giác",
     category: "soup",
     price: 42000,
+    nutrition: {
+      nutrients: ["Protein", "Vitamin C", "Kali", "Phosphorus", "Omega-3"],
+      benefits: "Kích thích tiêu hóa, bổ sung nước, tốt cho tim mạch",
+      calories: 185,
+      protein: 16,
+      carbs: 12,
+      fat: 8,
+      vitamins: ["C", "A", "B6"],
+      minerals: ["Kali", "Phosphorus", "Magie"],
+    },
   },
   {
     image: "/canh_bau_tom.jpg",
@@ -66,6 +152,17 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Canh bầu tôm thanh đạm, ngọt mát, rất tốt cho sức khỏe",
     category: "soup",
     price: 38000,
+    nutrition: {
+      nutrients: ["Protein", "Vitamin C", "Kali", "Chất xơ", "Canxi"],
+      benefits: "Thanh nhiệt, bổ sung nước, tốt cho da và tiêu hóa",
+      calories: 125,
+      protein: 12,
+      carbs: 8,
+      fat: 5,
+      fiber: 3,
+      vitamins: ["C", "A", "Folate"],
+      minerals: ["Kali", "Canxi", "Magie"],
+    },
   },
   {
     image: "/sup_cua_chay.jpg",
@@ -73,28 +170,23 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Súp cua chay dinh dưỡng với nấm và đậu phụ thơm ngon",
     category: "soup",
     price: 40000,
-  },
-  // Món thịt
-  {
-    image: "/thit_kho_tau.jpg",
-    title: "Thịt kho tàu",
-    description: "Thịt kho tàu đậm đà, mềm ngon, ăn với bánh mì rất tuyệt",
-    category: "meat",
-    price: 65000,
-  },
-  {
-    image: "/ga_nuong_mat_ong.jpg",
-    title: "Gà nướng mật ong",
-    description: "Gà nướng mật ong vàng ươm, da giòn thịt mềm, thơm phức",
-    category: "meat",
-    price: 85000,
-  },
-  {
-    image: "/ca_chien_nuoc_mam.jpg",
-    title: "Cá chiên nước mắm",
-    description: "Cá chiên giòn tan, tẩm nước mắm đậm đà, ăn kèm rau sống",
-    category: "meat",
-    price: 72000,
+    nutrition: {
+      nutrients: [
+        "Protein thực vật",
+        "Chất xơ",
+        "Isoflavone",
+        "Vitamin B",
+        "Sắt",
+      ],
+      benefits: "Protein thực vật tốt, ít cholesterol, tốt cho tim mạch",
+      calories: 145,
+      protein: 10,
+      carbs: 12,
+      fat: 6,
+      fiber: 4,
+      vitamins: ["B1", "B2", "K"],
+      minerals: ["Sắt", "Magie", "Phosphorus"],
+    },
   },
   // Món rau củ
   {
@@ -103,6 +195,17 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Rau muống xào tỏi giòn ngon, đơn giản mà đưa cơm",
     category: "vegetable",
     price: 25000,
+    nutrition: {
+      nutrients: ["Vitamin A", "Vitamin C", "Sắt", "Chất xơ", "Folate"],
+      benefits: "Tăng cường miễn dịch, tốt cho mắt, chống táo bón",
+      calories: 85,
+      protein: 4,
+      carbs: 12,
+      fat: 3,
+      fiber: 5,
+      vitamins: ["A", "C", "K", "Folate"],
+      minerals: ["Sắt", "Kali", "Canxi"],
+    },
   },
   {
     image: "/canh_chua_rau_muong.jpg",
@@ -110,6 +213,17 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Canh chua rau muống thanh mát, chua ngọt tự nhiên",
     category: "vegetable",
     price: 28000,
+    nutrition: {
+      nutrients: ["Vitamin A", "Vitamin C", "Kali", "Chất xơ", "Folate"],
+      benefits: "Thanh nhiệt, detox, tốt cho tiêu hóa",
+      calories: 65,
+      protein: 3,
+      carbs: 8,
+      fat: 2,
+      fiber: 4,
+      vitamins: ["A", "C", "K"],
+      minerals: ["Kali", "Sắt", "Magie"],
+    },
   },
   {
     image: "/dau_hu_sot_ca_chua.jpg",
@@ -117,22 +231,48 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Đậu hũ sốt cà chua đậm đà, giàu protein thực vật",
     category: "vegetable",
     price: 32000,
+    nutrition: {
+      nutrients: [
+        "Protein thực vật",
+        "Lycopene",
+        "Vitamin C",
+        "Isoflavone",
+        "Sắt",
+      ],
+      benefits: "Protein hoàn chỉnh, chống oxy hóa, tốt cho tim mạch",
+      calories: 165,
+      protein: 12,
+      carbs: 14,
+      fat: 8,
+      fiber: 3,
+      vitamins: ["C", "K", "B1"],
+      minerals: ["Sắt", "Magie", "Phosphorus"],
+    },
   },
-  // Món ăn vặt/tráng miệng
-  {
-    image: "/banh_mi_thit_nuong.jpg",
-    title: "Bánh mì thịt nướng",
-    description:
-      "Bánh mì giòn tan với thịt nướng thơm phức và rau sống tươi mát",
-    category: "snack",
-    price: 35000,
-  },
+  // Món tráng miệng
   {
     image: "/che_ba_mau.jpg",
     title: "Chè ba màu",
     description: "Chè ba màu mát lành, ngọt dịu, là món tráng miệng lý tưởng",
     category: "dessert",
     price: 18000,
+    nutrition: {
+      nutrients: [
+        "Carbohydrate",
+        "Chất xơ",
+        "Vitamin E",
+        "Protein",
+        "Khoáng chất",
+      ],
+      benefits: "Cung cấp năng lượng, mát gan, giải khát",
+      calories: 245,
+      protein: 6,
+      carbs: 52,
+      fat: 3,
+      fiber: 4,
+      vitamins: ["E", "B1", "B2"],
+      minerals: ["Kali", "Magie", "Phosphorus"],
+    },
   },
   {
     image: "/banh_flan.jpg",
@@ -140,6 +280,16 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Bánh flan mềm mịn, vị caramel đậm đà, tan chảy trong miệng",
     category: "dessert",
     price: 22000,
+    nutrition: {
+      nutrients: ["Protein", "Canxi", "Vitamin D", "Vitamin B12", "Phosphorus"],
+      benefits: "Bổ sung canxi, tốt cho xương răng, protein từ trứng sữa",
+      calories: 185,
+      protein: 8,
+      carbs: 28,
+      fat: 6,
+      vitamins: ["D", "B12", "A"],
+      minerals: ["Canxi", "Phosphorus", "Kali"],
+    },
   },
   {
     image: "/kem_trai_cay.jpg",
@@ -147,60 +297,41 @@ export const FOOD_ITEMS: FoodItem[] = [
     description: "Kem trái cây tự nhiên, mát lạnh, nhiều hương vị thơm ngon",
     category: "dessert",
     price: 15000,
+    nutrition: {
+      nutrients: [
+        "Vitamin C",
+        "Chất chống oxy hóa",
+        "Canxi",
+        "Kali",
+        "Chất xơ",
+      ],
+      benefits: "Vitamin C tự nhiên, mát lạnh, tăng cường miễn dịch",
+      calories: 125,
+      protein: 3,
+      carbs: 28,
+      fat: 2,
+      vitamins: ["C", "A", "E"],
+      minerals: ["Kali", "Canxi", "Magie"],
+    },
   },
   {
     image: "/banana.jpg",
-    title: "fruit",
+    title: "Chuối",
     description: "Chuối chín tự nhiên, giàu kali và vitamin",
     category: "fruit",
     price: 15000,
-  },
-
-  // Món đặc biệt
-  {
-    image: "/lau_ca_khoai.jpg",
-    title: "Lẩu cá khoai",
-    description: "Lẩu cá khoai đậm đà, chua cay vừa phải, ăn nhóm rất vui",
-    category: "special",
-    price: 120000,
-  },
-  {
-    image: "/banh_xeo_mien_tay.jpg",
-    title: "Bánh xèo miền Tây",
-    description: "Bánh xèo giòn rụm, nhân tôm thịt đầy đặn, ăn kèm rau sống",
-    category: "special",
-    price: 45000,
-  },
-  {
-    image: "/nem_nuong_ninh_hoa.jpg",
-    title: "Nem nướng Ninh Hòa",
-    description: "Nem nướng thơm phức, cuốn với bánh tráng và rau thơm",
-    category: "special",
-    price: 58000,
-  },
-  // Đồ uống
-  {
-    image: "/nuoc_chanh_tuyet.jpg",
-    title: "Nước chanh tuyết",
-    description:
-      "Nước chanh tuyết mát lạnh, chua ngọt hài hòa, giải khát tuyệt vời",
-    category: "drink",
-    price: 12000,
-  },
-  {
-    image: "/tra_sua_tran_chau.jpg",
-    title: "Trà sữa trân châu",
-    description:
-      "Trà sữa trân châu đen ngọt ngào, thơm béo, rất được yêu thích",
-    category: "drink",
-    price: 25000,
-  },
-  {
-    image: "/nuoc_cam_vat.jpg",
-    title: "Nước cam vắt",
-    description: "Nước cam vắt tươi ngon, giàu vitamin C, tốt cho sức khỏe",
-    category: "drink",
-    price: 18000,
+    nutrition: {
+      nutrients: ["Kali", "Vitamin B6", "Vitamin C", "Chất xơ", "Folate"],
+      benefits:
+        "Tốt cho tim mạch, cung cấp năng lượng tự nhiên, chống chuột rút",
+      calories: 105,
+      protein: 1,
+      carbs: 27,
+      fat: 0,
+      fiber: 3,
+      vitamins: ["B6", "C", "Folate"],
+      minerals: ["Kali", "Magie", "Mangan"],
+    },
   },
 ];
 
@@ -219,5 +350,23 @@ export const slides = [
   },
   {
     image: "/anh_banner5.jpg",
+  },
+];
+
+export const features: Features[] = [
+  {
+    title: "Đăng ký bữa ăn",
+    desc: "Đăng ký, chỉnh sửa, và hủy bữa ăn cho con theo tuần hoặc tháng dễ dàng.",
+    image: "/images/meal.png",
+  },
+  {
+    title: "Hồ sơ học sinh",
+    desc: "Theo dõi thông tin và các chỉ số phát triển (BMI, chiều cao, cân nặng) của con.",
+    image: "/images/student.png",
+  },
+  {
+    title: "Thư viện ảnh",
+    desc: "Xem những bức ảnh được đăng tải về con một cách an toàn và bảo mật.",
+    image: "/images/gallery.png",
   },
 ];
