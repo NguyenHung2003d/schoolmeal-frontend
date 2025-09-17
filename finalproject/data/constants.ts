@@ -357,16 +357,16 @@ export const features: Features[] = [
   {
     title: "Đăng ký bữa ăn",
     desc: "Đăng ký, chỉnh sửa, và hủy bữa ăn cho con theo tuần hoặc tháng dễ dàng.",
-    image: "/images/meal.png",
+    image: "/dang_ky_bua_an.jpg",
   },
   {
     title: "Hồ sơ học sinh",
     desc: "Theo dõi thông tin và các chỉ số phát triển (BMI, chiều cao, cân nặng) của con.",
-    image: "/images/student.png",
+    image: "/hoc_ba.jpg",
   },
   {
     title: "Thư viện ảnh",
     desc: "Xem những bức ảnh được đăng tải về con một cách an toàn và bảo mật.",
-    image: "/images/gallery.png",
+    image: "/thu_vien_anh.jpg",
   },
 ];
