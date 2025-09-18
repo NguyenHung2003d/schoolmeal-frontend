@@ -3,6 +3,11 @@ export interface BaseItem {
   description: string;
 }
 
+export interface NavigationItem {
+  label: string;
+  href: string;
+}
+
 export interface NutritionInfo {
   nutrients: string[];
   benefits: string;
@@ -46,4 +51,9 @@ export interface ParentFeedback {
     avatar: string;
   };
   feedback: string;
+}
+
+export interface LoadingContextType {
+  loading: boolean;
+  setLoading: (value: boolean) => void;
 }
