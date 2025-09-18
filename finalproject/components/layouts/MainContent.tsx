@@ -3,6 +3,7 @@ import Slider from "@/sections/Slider";
 import FoodBento from "@/sections/FoodBento";
 import HeroSection from "@/sections/HeroSection";
 import Features from "@/sections/Features";
+import ParentFeedbackSection from "@/sections/FeedBack";
 
 const MainContent = () => {
   return (
@@ -15,7 +16,8 @@ const MainContent = () => {
         <FoodBento />
       </div>
       <div>
-        <Features/>
+        <Features />
+        <ParentFeedbackSection />
       </div>
     </main>
   );

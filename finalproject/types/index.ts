@@ -22,25 +22,28 @@ export interface FoodItem extends BaseItem {
   nutrition?: NutritionInfo;
 }
 
-export interface MealItem extends BaseItem {
-  name: string;
-  nutrition?: NutritionInfo;
-}
-
 export interface DayMenu {
   day: string;
   dayVn: string;
-  breakfast: MealItem;
-  lunch: MealItem;
-  snack: MealItem;
 }
 
-export interface WithWeeklyMenu {
-  weeklyMenu: DayMenu[];
-}
-
-export interface Features {
+export interface Feature {
   title: string;
   desc: string;
   image: string;
+  features?: string[];
+  badge?: string;
+}
+
+export interface ParentFeedback {
+  id: number;
+  rating: number;
+  stars: number;
+  text: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  feedback: string;
 }

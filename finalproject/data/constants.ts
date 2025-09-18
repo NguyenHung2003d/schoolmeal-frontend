@@ -1,4 +1,4 @@
-import { Features, FoodItem } from "@/types";
+import { Feature, FoodItem, ParentFeedback } from "@/types";
 
 export const FOOD_ITEMS: FoodItem[] = [
   // Món cơm
@@ -353,20 +353,82 @@ export const slides = [
   },
 ];
 
-export const features: Features[] = [
+export const features: Feature[] = [
   {
     title: "Đăng ký bữa ăn",
     desc: "Đăng ký, chỉnh sửa, và hủy bữa ăn cho con theo tuần hoặc tháng dễ dàng.",
     image: "/dang_ky_bua_an.jpg",
+    badge: "Tiện lợi",
+    features: [
+      "Đăng ký theo tuần hoặc tháng",
+      "Chỉnh sửa đơn hàng linh hoạt",
+      "Hủy bữa ăn dễ dàng",
+      "Thông báo tự động",
+    ],
   },
   {
     title: "Hồ sơ học sinh",
     desc: "Theo dõi thông tin và các chỉ số phát triển (BMI, chiều cao, cân nặng) của con.",
     image: "/hoc_ba.jpg",
+    badge: "Theo dõi sức khỏe",
+    features: [
+      "Theo dõi chỉ số BMI",
+      "Ghi nhận chiều cao, cân nặng",
+      "Biểu đồ phát triển trực quan",
+      "Báo cáo sức khỏe định kỳ",
+    ],
   },
   {
     title: "Thư viện ảnh",
     desc: "Xem những bức ảnh được đăng tải về con một cách an toàn và bảo mật.",
     image: "/thu_vien_anh.jpg",
+    badge: "An toàn & Bảo mật",
+    features: [
+      "Bảo mật cao cấp",
+      "Phân loại ảnh thông minh",
+      "Tải xuống chất lượng cao",
+      "Chia sẻ với gia đình",
+    ],
   },
 ];
+
+export const ParentFeedbackData: ParentFeedback[] = [
+  {
+    id: 1,
+    rating: 9.9,
+    stars: 5,
+    text: "EduMeal giúp tôi theo dõi chi tiết các bữa ăn của con tại trường. Tôi đặc biệt yêu thích tính năng xem trước thực đơn và thông tin dinh dưỡng, giúp tôi biết được con mình ăn món gì ngay.",
+    author: {
+      name: "Chị Nguyễn Thị Hương",
+      role: "Phụ huynh học sinh lớp 2A",
+      avatar: "N",
+    },
+    feedback: "Con tôi rất thích món cơm gà rau củ và luôn xin thêm!",
+  },
+  {
+    id: 2,
+    rating: 9.9,
+    stars: 5,
+    text: "Tôi đánh giá cao việc nhà trường cập nhật hình ảnh hoạt động của các con. Thực đơn đa dạng và đầy đủ dinh dưỡng, con tôi đã tăng cân đều đặn từ khi sử dụng dịch vụ bán trú của trường.",
+    author: {
+      name: "Anh Trần Văn Minh",
+      role: "Phụ huynh học sinh lớp 4C",
+      avatar: "A",
+    },
+    feedback: "Con tôi thích nhất bữa phở với các loại trái cây tươi.",
+  },
+  {
+    id: 3,
+    rating: 9.9,
+    stars: 5,
+    text: "EduMeal không chỉ giúp tôi theo dõi bữa ăn mà còn giúp tôi nắm bắt hoạt động của con tại trường. Giao diện dễ sử dụng và thông tin cập nhật liên tục. Tôi đặc biệt thích chức năng đánh giá món ăn.",
+    author: {
+      name: "Chị Lê Thị Mai",
+      role: "Phụ huynh học sinh lớp 1B",
+      avatar: "L",
+    },
+    feedback: "Con tôi đã bớt kén ăn hơn khi ở trường!",
+  },
+];
+
+export type { Feature, FoodItem };
