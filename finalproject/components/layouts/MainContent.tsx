@@ -12,10 +12,8 @@ const MainContent = () => {
         <HeroSection />
       </div>
       <Slider />
-      <div className="mx-auto px-5 py-10">
+      <div className="py-12">
         <FoodBento />
-      </div>
-      <div>
         <Features />
         <ParentFeedbackSection />
       </div>

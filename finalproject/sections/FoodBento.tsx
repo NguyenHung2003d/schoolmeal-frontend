@@ -59,13 +59,17 @@ const FoodBento: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen py-20 px-4 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50"
+      className="relative min-h-screen py-20 px-4"
+      style={{
+        background:
+          "linear-gradient(135deg, #ec8b2f, #ef7031, #ee5a30, #ca5d35)",
+      }}
     >
       <div className="text-center mb-12">
-        <h2 className="text-5xl font-extrabold bg-gradient-to-r from-orange-600 via-red-500 to-pink-600 bg-clip-text text-transparent mb-4">
+        <h2 className="text-7xl font-extrabold bg-gradient-to-r from-orange-100 via-yellow-100 to-white bg-clip-text text-transparent mb-4">
           Món ngon mỗi ngày
         </h2>
-        <p className="text-lg text-gray-700">
+        <p className="text-2xl text-gray-700">
           Khám phá thực đơn đầy màu sắc và bổ dưỡng cho bé
         </p>
       </div>
