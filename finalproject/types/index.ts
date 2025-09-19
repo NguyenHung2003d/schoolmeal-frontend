@@ -32,7 +32,7 @@ export interface DayMenu {
   dayVn: string;
 }
 
-export interface Feature {
+export interface Features {
   title: string;
   desc: string;
   image: string;
@@ -56,4 +56,19 @@ export interface ParentFeedback {
 export interface LoadingContextType {
   loading: boolean;
   setLoading: (value: boolean) => void;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: {
+    id: string;
+    phone: string;
+  };
+}
+
+export interface RegisterResponse {
+  token: string;
+  user: {
+    phone: string;
+  };
 }

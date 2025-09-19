@@ -1,16 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
-export function LoginForm({
+export default function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const phoneId = useId();
+  const passwordId = useId();
   const [isLoading, setIsLoading] = useState(false);
-  const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,109 +22,68 @@ export function LoginForm({
 
   return (
     <div
-      className={cn("flex flex-col gap-6 w-full", className)}
+      className={cn(
+        "flex flex-col gap-5 w-full max-w-md mx-auto p-5 bg-gradient-to-br from-orange-50 via-yellow-50 to-green-50 rounded-2xl shadow-lg border-2 border-white relative",
+        className
+      )}
       {...props}
     >
-      <div className="flex flex-col items-center gap-3 text-center">
-        <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-2 shadow-lg shadow-blue-500/25 transform rotate-1 hover:rotate-3 transition-transform duration-300">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-            <div className="w-4 h-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-sm"></div>
-          </div>
-        </div>
-
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
-          Welcome Back
+      <div className="flex flex-col items-center gap-2 text-center">
+        <div className="text-4xl">🍱</div>
+        <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+          Bữa trưa ngon! 🥗
         </h1>
-        <p className="text-gray-600 text-sm leading-relaxed max-w-xs">
-          Sign in to your account and continue your journey
+        <p className="text-gray-600 text-sm max-w-xs">
+          Đăng nhập để xem thực đơn hôm nay và đặt bữa trưa nhé! 🍽️
         </p>
       </div>
 
-      <div className="grid gap-6">
-        {/* Email Field */}
-        <div className="space-y-2">
+      <div className="grid gap-4">
+        <div className="relative w-full">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">🍎</div>
+          <Input
+            id={phoneId}
+            type="tel"
+            required
+            className="peer h-11 pl-10 pr-3 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm shadow-sm"
+          />
           <Label
-            htmlFor="email"
-            className="text-sm font-medium text-gray-700 flex items-center gap-2"
+            htmlFor={phoneId}
+            className="absolute left-10 top-1/2 -translate-y-1/2 text-sm text-gray-500 px-2 transition-all
+            peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-400
+            peer-focus:top-0 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-orange-600 bg-white rounded-md cursor-text"
           >
-            <svg
-              className="w-4 h-4 text-gray-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-              />
-            </svg>
-            Email Address
+            Số điện thoại
           </Label>
-          <div className="relative">
-            <Input
-              id="email"
-              type="email"
-              placeholder="enter@example.com"
-              required
-              className={cn(
-                "h-12 px-4 bg-white/70 border-2 border-gray-200/80 rounded-xl transition-all duration-300 placeholder:text-gray-400",
-                "focus:border-blue-400 focus:bg-white focus:shadow-lg focus:shadow-blue-500/10",
-                focusedInput === "email" &&
-                  "border-blue-400 bg-white shadow-lg shadow-blue-500/10"
-              )}
-              onFocus={() => setFocusedInput("email")}
-              onBlur={() => setFocusedInput(null)}
-            />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-purple-500/0 pointer-events-none opacity-0 transition-opacity duration-300 hover:opacity-100"></div>
-          </div>
         </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <Label
-              htmlFor="password"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
-              <svg
-                className="w-4 h-4 text-gray-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-              Password
-            </Label>
-            <a
+        {/* Password */}
+        <div className="w-full relative flex flex-col gap-1">
+          <div className="flex justify-end">
+            <Link
               href="#"
-              className="text-sm text-blue-600 hover:text-blue-800 underline-offset-4 hover:underline transition-colors duration-200 font-medium"
+              className="text-xs font-medium text-green-600 hover:text-green-800 underline-offset-2 hover:underline"
             >
-              Forgot password?
-            </a>
+              🔐 Quên mật khẩu?
+            </Link>
           </div>
+
           <div className="relative">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">🥕</div>
             <Input
-              id="password"
+              id={passwordId}
               type="password"
-              placeholder="••••••••"
               required
-              className={cn(
-                "h-12 px-4 bg-white/70 border-2 border-gray-200/80 rounded-xl transition-all duration-300 placeholder:text-gray-400",
-                "focus:border-blue-400 focus:bg-white focus:shadow-lg focus:shadow-blue-500/10",
-                focusedInput === "password" &&
-                  "border-blue-400 bg-white shadow-lg shadow-blue-500/10"
-              )}
-              onFocus={() => setFocusedInput("password")}
-              onBlur={() => setFocusedInput(null)}
+              className="peer h-11 pl-10 pr-3 rounded-xl border-2 border-green-200 focus:border-green-400 bg-white text-sm shadow-sm"
             />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-purple-500/0 pointer-events-none opacity-0 transition-opacity duration-300 hover:opacity-100"></div>
+            <Label
+              htmlFor={passwordId}
+              className="absolute left-10 top-1/2 -translate-y-1/2 text-sm text-gray-500 px-2 transition-all
+              peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-400
+              peer-focus:top-0 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-green-600 bg-white rounded-md cursor-text"
+            >
+              Mật khẩu
+            </Label>
           </div>
         </div>
 
@@ -130,52 +91,49 @@ export function LoginForm({
           type="submit"
           disabled={isLoading}
           onClick={handleSubmit}
-          className="h-12 w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/25 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="h-11 w-full bg-gradient-to-r from-orange-400 via-yellow-500 to-green-500 hover:from-orange-500 hover:via-yellow-600 hover:to-green-600 text-white font-semibold text-sm rounded-xl shadow-md transition-all"
         >
-          {isLoading ? (
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-              Signing in...
-            </div>
-          ) : (
-            "Sign In"
-          )}
+          {isLoading ? "🍳 Đang đăng nhập..." : "Đăng nhập"}
         </Button>
 
         <div className="relative flex items-center">
-          <div className="flex-1 border-t border-gray-200"></div>
-          <span className="mx-4 text-sm text-gray-500 bg-white px-2">
-            Or continue with
+          <div className="flex-1 border-t border-orange-200"></div>
+          <span className="mx-3 text-xs text-gray-500 bg-white px-2">
+            🥪 Hoặc
           </span>
-          <div className="flex-1 border-t border-gray-200"></div>
+          <div className="flex-1 border-t border-orange-200"></div>
         </div>
 
         <Button
           type="button"
           variant="outline"
-          className="h-12 w-full border-2 border-gray-200 hover:border-gray-300 bg-white/70 hover:bg-white text-gray-700 font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg group"
+          className="h-11 w-full border-2 border-yellow-300 hover:border-yellow-400 bg-yellow-50 hover:bg-yellow-100 text-yellow-700 font-semibold text-sm rounded-xl shadow-sm"
         >
-          <div className="flex items-center gap-3">
-            <svg
-              className="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-            </svg>
-            Continue with GitHub
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center">
+              <svg
+                className="w-4 h-4 text-white"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+              </svg>
+            </div>
+            <span>Dùng GitHub</span>
           </div>
         </Button>
       </div>
 
-      <div className="text-center text-sm text-gray-600">
-        Don't have an account?{" "}
-        <a
-          href="#"
-          className="font-semibold text-blue-600 hover:text-blue-800 underline-offset-4 hover:underline transition-colors duration-200"
-        >
-          Create account
-        </a>
+      <div className="text-center text-xs text-gray-600 bg-white/60 rounded-xl p-3 border border-yellow-200">
+        <div>
+          Chưa có tài khoản?{" "}
+          <Link
+            href="/register"
+            className="font-semibold text-orange-600 hover:underline"
+          >
+            🍎 Tạo tài khoản ngay!
+          </Link>
+        </div>
       </div>
     </div>
   );

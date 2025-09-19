@@ -1,132 +1,133 @@
 "use client";
-import { useState } from "react";
-import { User, Lock, Eye, EyeOff, Check } from "lucide-react";
-import { useRegisterForm, RegisterFormData } from "@/hooks/useRegisterForm";
-import { useRegisterMutation } from "@/hooks/useRegisterMutation";
+import { useId, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const RegisterForm = () => {
+  const phoneId = useId();
+  const passwordId = useId();
+  const confirmPasswordId = useId();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useRegisterForm();
-
-  const mutation = useRegisterMutation({
-    onSuccess: (data) => {
-      reset();
-      console.log(data)
-    },
-    onError: (error) => {
-      console.log("Handling error in component:", error.message);
-    },
-  });
-
-  const onSubmit = (data: RegisterFormData) => {
-    console.log("Form submitted:", data);
-    const { confirmPassword, ...submitData } = data;
-    mutation.mutate(submitData);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      console.log("Form submitted");
+    }, 2000);
   };
 
   return (
-    <div className="w-full max-w-md pt-[100px]">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">
-          Create Account
+    <div className="w-full max-w-md mx-auto pt-2">
+      <div className="text-center mb-6">
+        <div className="text-4xl mb-2">🍽️</div>
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent mb-2">
+          Tạo tài khoản EduMeal
         </h2>
-        <p className="text-gray-600">Start your journey with us</p>
+        <p className="text-gray-600 text-sm">
+          Đăng ký để đặt bữa trưa ngon cho con yêu! 🥗
+        </p>
       </div>
 
-      <div className="relative">
-        {/* Main Form */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Phone Number
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <input
-                  type="text"
-                  {...register("phone")}
-                  placeholder="Enter your phone number"
-                  disabled={mutation.isPending}
-                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                    errors.phone
-                      ? "border-red-300 focus:ring-red-500 focus:border-red-500"
-                      : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("password")}
-                  placeholder="Create a strong password"
-                  disabled={mutation.isPending}
-                  className={`w-full pl-10 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                    errors.password
-                      ? "border-red-300 focus:ring-red-500 focus:border-red-500"
-                      : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Confirm Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <input
-                  type="password"
-                  {...register("confirmPassword")}
-                  placeholder="Confirm your password"
-                  disabled={mutation.isPending}
-                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                    errors.confirmPassword
-                      ? "border-red-300 focus:ring-red-500 focus:border-red-500"
-                      : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={mutation.isPending}
-              className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-200 ${
-                mutation.isPending
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-lg transform hover:-translate-y-0.5"
-              }`}
+      <div className="bg-gradient-to-br from-orange-50 via-yellow-50 to-green-50 rounded-2xl shadow-lg border-2 border-white p-6">
+        <div className="space-y-4">
+          <div className="group relative">
+            <Input
+              type="tel"
+              id={phoneId}
+              disabled={isLoading}
+              placeholder=""
+              className="peer h-11 pl-10 pr-3 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm shadow-sm"
+            />
+            <Label
+              htmlFor={phoneId}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 px-2 transition-all
+            peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-400
+            peer-focus:top-0 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-orange-600 bg-white rounded-md cursor-text"
             >
-              {mutation.isPending ? "Creating Account..." : "Create Account"}
+              Số điện thoại phụ huynh
+            </Label>
+          </div>
+
+          <div className="group relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              disabled={isLoading}
+              id={passwordId}
+              className="peer h-11 pl-10 pr-3 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm shadow-sm"
+            />
+
+            <Label
+              htmlFor={passwordId}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 px-2 transition-all
+            peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-400
+            peer-focus:top-0 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-orange-600 bg-white rounded-md cursor-text"
+            >
+              Mật khẩu
+            </Label>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-green-600 hover:text-green-800"
+            >
+              {showPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
             </button>
-          </form>
+          </div>
+
+          <div className="group relative">
+            <Input
+              id={confirmPasswordId}
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder=""
+              disabled={isLoading}
+              className="peer h-11 pl-10 pr-3 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm shadow-sm"
+            />
+
+            <Label
+              htmlFor={confirmPasswordId}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 px-2 transition-all
+            peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-400
+            peer-focus:top-0 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-orange-600 bg-white rounded-md cursor-text"
+            >
+              Nhập lại mật khẩu
+            </Label>
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-800"
+            >
+              {showConfirmPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            onClick={handleSubmit}
+            className="w-full py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-orange-400 via-yellow-500 to-green-500 hover:from-orange-500 hover:via-yellow-600 hover:to-green-600 shadow-md transition-all"
+          >
+            {isLoading ? "⏳ Đang tạo..." : "🎉 Tạo tài khoản"}
+          </button>
         </div>
+      </div>
+
+      <div className="text-center mt-4 text-sm text-gray-600">
+        Đã có tài khoản?{" "}
+        <a href="/login" className="font-bold text-orange-600 hover:underline">
+          Đăng nhập ngay
+        </a>
       </div>
     </div>
   );

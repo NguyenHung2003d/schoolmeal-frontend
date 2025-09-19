@@ -10,7 +10,7 @@ export default function HomePage() {
         <HeroSection />
       </div>
       <Slider />
-      <div className="py-12">
+      <div>
         <FoodBento />
         <Features />
         <ParentFeedbackSection />

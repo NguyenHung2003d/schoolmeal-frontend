@@ -10,6 +10,7 @@ import { slides } from "@/data/constants";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { useLoading } from "@/context/LoadingContext";
+import Link from "next/link";
 
 gsap.registerPlugin(SplitText);
 
@@ -76,7 +77,7 @@ export default function HeroSection() {
         autoplay={{
           delay: 4000,
           disableOnInteraction: false,
-          pauseOnMouseEnter: false
+          pauseOnMouseEnter: false,
         }}
         effect="fade"
         fadeEffect={{ crossFade: true }}
@@ -120,9 +121,12 @@ export default function HeroSection() {
             Đặt cơm ngon, theo dõi dinh dưỡng và tận hưởng những bữa ăn bổ dưỡng
             mỗi ngày một cách dễ dàng và tiện lợi.
           </p>
-          <button className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-110 active:scale-95 text-lg">
-            Đặt cơm ngay
-          </button>
+          <Link
+            href="/register"
+            className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-110 active:scale-95 text-lg"
+          >
+            Khám phá ngay
+          </Link>
         </div>
       </div>
       <style jsx global>{`

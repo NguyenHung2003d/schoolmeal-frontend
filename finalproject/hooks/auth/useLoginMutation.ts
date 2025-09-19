@@ -1,37 +1,16 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoginFormData } from "./useLoginForm";
+import { LoginResponse } from "@/types";
+import { authService } from "@/services/authService";
+import { AxiosError } from "axios";
 
-type LoginResponse = {
-  token: string;
-  user: {
-    id: string;
-    phone: string;
-    name?: string;
-  };
-};
-
-async function loginApi(data: LoginFormData): Promise<LoginResponse> {
-  const res = await fetch("/api/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+export const useLoginMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation<LoginResponse, AxiosError, LoginFormData>({
+    mutationFn: (data) => authService.login(data),
+    onSuccess: (data) => {
+      localStorage.setItem("accessToken", data.token);
+      queryClient.setQueryData(["user"], data.user);
     },
-    body: JSON.stringify(data),
-  });
-
-  if (!res.ok) {
-    const errorData = await res.json().catch(() => ({}));
-    throw new Error(errorData?.message || "Login failed");
-  }
-
-  return res.json();
-}
-
-export const useLoginMutation = (
-  options?: Parameters<typeof useMutation<LoginResponse, Error, LoginFormData>>[0]
-) => {
-  return useMutation<LoginResponse, Error, LoginFormData>({
-    mutationFn: loginApi,
-    ...options,
   });
 };
