@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "http://localhost:8080/tpedu/v1/auth";
+export const BASE_URL = "/api";
 export const SOCKET_URL = "http://localhost:8080";
 export const axiosInstance = axios.create({
   baseURL: `${BASE_URL}`,

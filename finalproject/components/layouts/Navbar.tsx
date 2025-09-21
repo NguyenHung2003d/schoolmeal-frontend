@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Menu, X, Sparkles, Heart } from "lucide-react";
+import { Menu, X, Sparkles, Heart, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NavigationItem } from "@/types";
 import Link from "next/link";
@@ -19,7 +19,6 @@ const Navbar: React.FC = () => {
 
   const navigationItems: NavigationItem[] = [
     { label: "Trang chủ", href: "/" },
-    { label: "Thực đơn", href: "/menu" },
     { label: "Về SchoolMeal", href: "/about" },
     { label: "Liên hệ", href: "/contact" },
   ];
@@ -136,44 +135,22 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          <ul className="hidden lg:flex items-center space-x-6">
-            {navigationItems.map((item, index) => (
-              <li key={index} className="relative">
-                <Link
-                  href={item.href}
-                  className="relative text-gray-700 hover:text-orange-600 font-semibold text-base transition-all duration-300 px-4 py-2 rounded-xl group overflow-hidden"
-                >
-                  <span className="relative z-10">{item.label}</span>
-                  <span className="absolute bottom-1 left-4 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 group-hover:w-[calc(100%-2rem)] transition-all duration-300 rounded-full"></span>
-                </Link>
-              </li>
-            ))}
-
-            <li className="flex space-x-4 ml-8">
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  className="bg-white text-orange-600 border-2 border-orange-400 font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
-                  type="button"
-                >
-                  Đăng nhập
-                </Button>
-              </Link>
-
-              <Link href="/register">
-                <Button
-                  className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white font-bold px-8 py-2.5 rounded-xl shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
-                  type="button"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Đăng ký ngay!
-                    <Heart className="w-4 h-4" />
-                  </span>
-                </Button>
-              </Link>
-            </li>
-          </ul>
-
+          <div className="hidden lg:flex flex-1 justify-center">
+            <ul className="flex items-center gap-20">
+              {navigationItems.map((item, index) => (
+                <li key={index} className="relative">
+                  <Link
+                    href={item.href}
+                    className="relative text-gray-700 hover:text-orange-600 font-semibold text-base transition-all duration-300 px-4 py-2 rounded-xl group overflow-hidden"
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                    <span className="absolute bottom-1 left-4 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 group-hover:w-[calc(100%-2rem)] transition-all duration-300 rounded-full"></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Mobile */}
           <button
             className="lg:hidden p-2 rounded-lg bg-orange-100 text-orange-600 shadow-sm hover:bg-orange-200 hover:scale-105 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -204,32 +181,6 @@ const Navbar: React.FC = () => {
                   {item.label}
                 </Link>
               ))}
-
-              <div className="flex flex-col space-y-4 mt-8 pt-6 border-t border-orange-200/50">
-                <Link href="/login">
-                  <Button
-                    variant="outline"
-                    onClick={handleMobileMenuClose}
-                    className="w-full bg-white/90 text-orange-600 border-2 border-orange-400 font-bold py-3 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
-                    type="button"
-                  >
-                    Đăng nhập
-                  </Button>
-                </Link>
-
-                <Link href="/register">
-                  <Button
-                    onClick={handleMobileMenuClose}
-                    className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white font-bold py-3 rounded-full shadow-xl hover:scale-105 transition-all duration-300 relative overflow-hidden group"
-                    type="button"
-                  >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Đăng ký ngay!
-                      <Heart className="w-4 h-4" />
-                    </span>
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </div>

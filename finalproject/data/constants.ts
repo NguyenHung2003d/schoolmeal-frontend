@@ -1,4 +1,4 @@
-import { Feature, FoodItem, ParentFeedback } from "@/types";
+import { Features, FoodItem, ParentFeedback } from "@/types";
 
 export const FOOD_ITEMS: FoodItem[] = [
   // Món cơm
@@ -353,7 +353,7 @@ export const slides = [
   },
 ];
 
-export const features: Feature[] = [
+export const features: Features[] = [
   {
     title: "Đăng ký bữa ăn",
     desc: "Đăng ký, chỉnh sửa, và hủy bữa ăn cho con theo tuần hoặc tháng dễ dàng.",
@@ -431,4 +431,4 @@ export const ParentFeedbackData: ParentFeedback[] = [
   },
 ];
 
-export type { Feature, FoodItem };
+export type { Features, FoodItem };

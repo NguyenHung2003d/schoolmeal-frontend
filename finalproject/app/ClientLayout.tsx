@@ -6,7 +6,8 @@ import RouteLoaderOverlay from "@/components/RouteLoaderOverlay";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import Loader from "./loading";
 
 export default function ClientLayout({
   children,
@@ -35,7 +36,9 @@ export default function ClientLayout({
           }}
         >
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <Suspense fallback={<Loader />}>
+            <main className="flex-1">{children}</main>
+          </Suspense>
           <Footer />
         </div>
         <RouteLoaderOverlay />

@@ -1,32 +1,16 @@
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useForm, UseFormProps } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema, RegisterFormData } from "@/schemas/authSchemas";
 
-const registerSchema = z
-  .object({
-    phone: z
-      .string()
-      .min(9, "Phone must be at least 9 digits")
-      .regex(/^[0-9]+$/, "Phone must only contain numbers"),
-    password: z.string().min(6, "Password must be at least 6 characters long"),
-    confirmPassword: z
-      .string()
-      .min(6, "Confirm password must be at least 6 characters long"),
-  })
-  .refine((data: any) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
-
-export type RegisterFormData = z.infer<typeof registerSchema>;
-
-export const useRegisterForm = () => {
-  const form = useForm<RegisterFormData>({
+export const useRegisterForm = (options?: UseFormProps<RegisterFormData>) => {
+  return useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
+    defaultValues: {
+      phone: "",
+      password: "",
+      confirmPassword: "",
+    },
+    mode: "onChange",
+    ...options,
   });
-
-  return {
-    ...form,
-    schema: registerSchema,
-  };
 };

@@ -1,42 +1,41 @@
-import { useMutation } from "@tanstack/react-query";
-import { RegisterFormData } from "./useRegisterForm";
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import { AuthResponse } from "@/types/auth";
+import { authService } from "@/services/authService";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
+import { RegisterFormData } from "@/schemas/authSchemas";
 
-const registerUser = async (
-  data: Omit<RegisterFormData, "confirmPassword">
+export const useRegisterMutation = (
+  options?: Omit<
+    UseMutationOptions<
+      AuthResponse,
+      AxiosError,
+      Omit<RegisterFormData, "confirmPassword">
+    >,
+    "mutationFn"
+  >
 ) => {
-  console.log("Sending registration request:", data);
-  
-  const response = await fetch("/api/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
+  const router = useRouter();
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => null);
-    throw new Error(errorData?.message || "Registration failed");
-  }
-
-  const result = await response.json();
-  console.log("Registration response:", result);
-  return result;
-};
-
-interface UseRegisterMutationCallbacks {
-  onSuccess?: (data: any) => void;
-  onError?: (error: Error) => void;
-}
-
-export const useRegisterMutation = (callbacks?: UseRegisterMutationCallbacks) => {
-  return useMutation({
-    mutationFn: registerUser,
+  return useMutation<
+    AuthResponse,
+    AxiosError,
+    Omit<RegisterFormData, "confirmPassword">
+  >({
+    mutationFn: authService.register,
     onSuccess: (data) => {
-      console.log("Registration successful:", data);
-      callbacks?.onSuccess?.(data);
+      toast.success("🎉 Tạo tài khoản thành công!");
+      router.push("/login");
+      console.log(data);
     },
-    onError: (error) => {
-      console.error("Registration error:", error);
-      callbacks?.onError?.(error);
+    onError: (error: AxiosError<any>) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Đăng ký thất bại, vui lòng thử lại!";
+      toast.error(errorMessage);
     },
+    ...options,
   });
 };

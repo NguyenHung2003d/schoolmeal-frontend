@@ -1,8 +1,9 @@
 import Slider from "@/sections/Slider";
-import FoodBento from "@/sections/FoodBento";
+// import FoodBento from "@/sections/FoodBento";
 import HeroSection from "@/sections/HeroSection";
 import Features from "@/sections/Features";
 import ParentFeedbackSection from "@/sections/FeedBack";
+import Contact from "@/sections/Contact";
 export default function HomePage() {
   return (
     <main>
@@ -11,9 +12,10 @@ export default function HomePage() {
       </div>
       <Slider />
       <div>
-        <FoodBento />
+        {/* <FoodBento /> */}
         <Features />
         <ParentFeedbackSection />
+        <Contact />
       </div>
     </main>
   );
