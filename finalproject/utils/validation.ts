@@ -7,18 +7,15 @@ export const createPhoneValidation = (options?: {
 }) => {
   const { minLength = 9, maxLength = 12, required = true } = options || {};
 
-  let validation = z.string();
-
-  if (required) {
-    validation = validation.min(1, "Số điện thoại không được để trống");
-  } else {
-    validation = validation.optional();
-  }
-
-  return validation
+  let base = z
+    .string()
     .min(minLength, `Số điện thoại phải có ít nhất ${minLength} chữ số`)
     .max(maxLength, `Số điện thoại không được quá ${maxLength} chữ số`)
     .regex(/^[0-9]+$/, "Số điện thoại chỉ được chứa số");
+
+  return required
+    ? base.min(1, "Số điện thoại không được để trống")
+    : base.optional();
 };
 
 export const createPasswordValidation = (options?: {
