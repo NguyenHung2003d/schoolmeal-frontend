@@ -70,18 +70,9 @@ const Features = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative">
           <div ref={headerRef} className="text-center mb-16">
-            <div className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full border border-blue-200 mb-6">
-              <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 animate-pulse"></span>
-              <span className="text-blue-700 font-semibold">
-                Tính năng nổi bật
-              </span>
-            </div>
-
-            <h2 className="text-4xl md:text-6xl font-bold text-orange-500 mb-6">
-              Giá Trị Cốt Lõi 
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#2D1B69] via-[#1a1a1a] to-[#2D1B69] bg-clip-text text-transparent">
+              Giá Trị Cốt Lõi
             </h2>
-
-            <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
