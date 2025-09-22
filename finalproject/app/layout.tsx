@@ -2,7 +2,7 @@ import "./globals.css";
 import type React from "react";
 import type { Metadata } from "next";
 import { Merriweather } from "next/font/google";
-import ClientLayout from "./ClientLayout";
+import Providers from "./providers";
 
 const merriweather = Merriweather({
   subsets: ["latin"],
@@ -21,13 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${merriweather.variable}`}
-        style={{ fontFamily: "var(--font-merriweather)" }}
-        suppressHydrationWarning
-      >
-        <ClientLayout>{children}</ClientLayout>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${merriweather.variable}`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

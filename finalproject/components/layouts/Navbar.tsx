@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Menu, X, Sparkles, Heart } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NavigationItem } from "@/types";
 import Link from "next/link";
@@ -19,7 +19,6 @@ const Navbar: React.FC = () => {
 
   const navigationItems: NavigationItem[] = [
     { label: "Trang chủ", href: "/" },
-    { label: "Thực đơn", href: "/menu" },
     { label: "Về SchoolMeal", href: "/about" },
     { label: "Liên hệ", href: "/contact" },
   ];
@@ -59,7 +58,6 @@ const Navbar: React.FC = () => {
         trigger: document.documentElement,
         start: "top -20",
         end: "bottom top",
-        toggleActions: "play none reverse none",
         scrub: 0.3,
       },
     });
@@ -72,7 +70,6 @@ const Navbar: React.FC = () => {
         trigger: document.documentElement,
         start: "top -20",
         end: "bottom top",
-        toggleActions: "play none reverse none",
         scrub: 0.3,
       },
     });
@@ -86,7 +83,6 @@ const Navbar: React.FC = () => {
         trigger: document.documentElement,
         start: "top -10",
         end: "top -50",
-        toggleActions: "play none reverse none",
         scrub: 0.4,
       },
     });
@@ -95,15 +91,13 @@ const Navbar: React.FC = () => {
       logoBoxTween.kill();
       logoTextTween.kill();
       taglineTween.kill();
-
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
-  ``;
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transform transition-transform duration-500 bg-white backdrop-blur-md shadow-md ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-500 bg-white backdrop-blur-md shadow-md ${
         showNav ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -136,9 +130,9 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          <ul className="hidden lg:flex items-center space-x-6">
+          <ul className="hidden lg:flex flex-1 justify-center items-center space-x-12">
             {navigationItems.map((item, index) => (
-              <li key={index} className="relative">
+              <li key={index}>
                 <Link
                   href={item.href}
                   className="relative text-gray-700 hover:text-orange-600 font-semibold text-base transition-all duration-300 px-4 py-2 rounded-xl group overflow-hidden"
@@ -148,32 +142,20 @@ const Navbar: React.FC = () => {
                 </Link>
               </li>
             ))}
-
-            <li className="flex space-x-4 ml-8">
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  className="bg-white text-orange-600 border-2 border-orange-400 font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
-                  type="button"
-                >
-                  Đăng nhập
-                </Button>
-              </Link>
-
-              <Link href="/register">
-                <Button
-                  className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white font-bold px-8 py-2.5 rounded-xl shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
-                  type="button"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Đăng ký ngay!
-                    <Heart className="w-4 h-4" />
-                  </span>
-                </Button>
-              </Link>
-            </li>
           </ul>
 
+          <div className="hidden lg:flex">
+            <Link href="/login">
+              <Button
+                variant="outline"
+                className="bg-orange-500 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:scale-105 hover:bg-orange-600 transition-all duration-300"
+              >
+                Bắt đầu ngay !!!
+              </Button>
+            </Link>
+          </div>
+
+          {/* Mobile menu toggle */}
           <button
             className="lg:hidden p-2 rounded-lg bg-orange-100 text-orange-600 shadow-sm hover:bg-orange-200 hover:scale-105 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -184,6 +166,7 @@ const Navbar: React.FC = () => {
           </button>
         </div>
 
+        {/* Mobile menu */}
         <div
           className={`lg:hidden transition-all duration-500 ease-in-out ${
             isMenuOpen
@@ -192,7 +175,6 @@ const Navbar: React.FC = () => {
           }`}
         >
           <div className="relative bg-white backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-orange-200/50">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-50/80 to-red-50/80 rounded-3xl -z-10"></div>
             <div className="flex flex-col space-y-6 text-center">
               {navigationItems.map((item, index) => (
                 <Link
@@ -205,31 +187,15 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
 
-              <div className="flex flex-col space-y-4 mt-8 pt-6 border-t border-orange-200/50">
-                <Link href="/login">
-                  <Button
-                    variant="outline"
-                    onClick={handleMobileMenuClose}
-                    className="w-full bg-white/90 text-orange-600 border-2 border-orange-400 font-bold py-3 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
-                    type="button"
-                  >
-                    Đăng nhập
-                  </Button>
-                </Link>
-
-                <Link href="/register">
-                  <Button
-                    onClick={handleMobileMenuClose}
-                    className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white font-bold py-3 rounded-full shadow-xl hover:scale-105 transition-all duration-300 relative overflow-hidden group"
-                    type="button"
-                  >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Đăng ký ngay!
-                      <Heart className="w-4 h-4" />
-                    </span>
-                  </Button>
-                </Link>
-              </div>
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  onClick={handleMobileMenuClose}
+                  className="w-full bg-orange-500 text-white font-bold py-3 rounded-full shadow-lg hover:scale-105 hover:bg-orange-600 transition-all duration-300"
+                >
+                  Bắt đầu ngay !!!
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import Slider from "@/sections/Slider";
-import FoodBento from "@/sections/FoodBento";
+// import FoodBento from "@/sections/FoodBento";
 import HeroSection from "@/sections/HeroSection";
 import Features from "@/sections/Features";
 import ParentFeedbackSection from "@/sections/FeedBack";
@@ -11,7 +11,7 @@ export default function HomePage() {
       </div>
       <Slider />
       <div>
-        <FoodBento />
+        {/* <FoodBento /> */}
         <Features />
         <ParentFeedbackSection />
       </div>

@@ -80,7 +80,7 @@ const Features = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden"
+      className="py-20 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
         <div ref={headerRef} className="text-center mb-20">

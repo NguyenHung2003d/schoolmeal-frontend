@@ -38,7 +38,7 @@ export default function MarqueeGallery() {
     <section className="relative overflow-hidden py-10">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
-          Hoạt động của nhà trường
+          Hoạt động của các trường
         </h2>
       </div>{" "}
       <div ref={containerRef} className="flex gap-6 w-max">

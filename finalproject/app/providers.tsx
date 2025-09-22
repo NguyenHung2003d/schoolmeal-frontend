@@ -31,7 +31,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         <LoadingProvider>
-          <div className="relative min-h-screen flex flex-col bg-background text-foreground">
+          <div
+            className="relative min-h-screen flex flex-col"
+            style={{
+              background: "linear-gradient(135deg, #D3CAE2, #E6C17A)",
+            }}
+          >
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />

@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { slides } from "@/data/constants";
+import { images } from "@/data/constants";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { useLoading } from "@/context/LoadingContext";
@@ -92,11 +92,11 @@ export default function HeroSection() {
         }}
         className="h-full w-full"
       >
-        {slides.map((slide, index) => (
+        {images.map((image, index) => (
           <SwiperSlide key={index}>
             <div
               className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${slide.image})` }}
+              style={{ backgroundImage: `url(${image.image})` }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none"></div>
             </div>
