@@ -70,7 +70,7 @@ const Features = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative">
           <div ref={headerRef} className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#2D1B69] via-[#1a1a1a] to-[#2D1B69] bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-black bg-clip-text">
               Giá Trị Cốt Lõi
             </h2>
           </div>
