@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Menu, X, Sparkles, Heart, User, LogOut } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { NavigationItem } from "@/types";
 import Link from "next/link";
 import gsap from "gsap";
@@ -102,7 +101,7 @@ const Navbar: React.FC = () => {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-">
           <Link href="/" className="flex items-center group cursor-pointer">
             <div
               ref={logoBoxRef}
@@ -138,7 +137,7 @@ const Navbar: React.FC = () => {
                     href={item.href}
                     className="relative text-gray-700 hover:text-orange-600 font-semibold text-base transition-all duration-300 px-4 py-2 rounded-xl group overflow-hidden"
                   >
-                    <span className="relative z-10">{item.label}</span>
+                    <span className="relative z-10 text-2xl">{item.label}</span>
                     <span className="absolute bottom-1 left-4 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 group-hover:w-[calc(100%-2rem)] transition-all duration-300 rounded-full"></span>
                   </Link>
                 </li>

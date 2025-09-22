@@ -1,76 +1,109 @@
-import { Features, FoodItem, ParentFeedback } from "@/types";
+import { Features, ParentFeedback } from "@/types";
 
 export const images = [
   {
-    image: "/anh_banner1.jpg",
-  },
-  {
-    image: "/anh_banner2.jpg",
-  },
-  {
-    image: "/anh_banner3.jpg",
-  },
-  {
-    image: "/anh_banner4.jpg",
-  },
-  {
-    image: "/anh_banner5.png",
+    image: "/hero_section.png",
   },
 ];
 
-export const slides = [
-  {
-    image: "/slides_1.jpg",
-  },
-  {
-    image: "/slides_2.jpg",
-  },
-  {
-    image: "/slides_3.jpg",
-  },
-  {
-    image: "/slides_4.jpg",
-  },
-];
-
-export const features: Features[] = [
-  {
-    title: "Quản lý thực đơn linh hoạt",
-    desc: "Nhà trường dễ dàng xây dựng và cập nhật thực đơn theo ngày, tuần hoặc tháng, phụ huynh có thể theo dõi mọi lúc.",
-    image: "/features_1.jpg",
-    badge: "Tiện lợi",
-    features: [
-      "Xây dựng thực đơn theo tuần/tháng",
-      "Điều chỉnh món ăn nhanh chóng",
-      "Tích hợp dị ứng/thói quen ăn uống",
-      "Thông báo thay đổi tức thì",
-    ],
-  },
-  {
-    title: "Thông tin dinh dưỡng rõ ràng",
-    desc: "Mỗi món ăn đều hiển thị chi tiết thành phần, năng lượng và giá trị dinh dưỡng, giúp phụ huynh yên tâm hơn.",
-    image: "/hoc_ba.jpg",
-    badge: "Theo dõi sức khỏe",
-    features: [
-      "Chi tiết thành phần dinh dưỡng",
-      "Tính toán calo và dưỡng chất",
-      "Đề xuất khẩu phần hợp lý",
-      "Bảng so sánh dinh dưỡng trực quan",
-    ],
-  },
-  {
-    title: "Kết nối phụ huynh - nhà trường",
-    desc: "Phụ huynh nhận thông báo, hình ảnh hoạt động và cập nhật trực tiếp từ nhà trường trong môi trường an toàn.",
-    image: "/thu_vien_anh.jpg",
-    badge: "An toàn & Bảo mật",
-    features: [
-      "Thông báo nhanh chóng từ giáo viên",
-      "Thư viện ảnh hoạt động của học sinh",
-      "Tin nhắn/bình luận bảo mật",
-      "Chia sẻ riêng tư với gia đình",
-    ],
-  },
-];
+export const features = [
+    {
+      id: 1,
+      title: "Đặt Món Online",
+      subtitle: "Chọn từ menu hàng tuần, tránh xếp hàng",
+      color: "from-blue-500 to-blue-600",
+      bgColor: "bg-blue-50",
+      image: "/api/placeholder/400/300",
+      details: {
+        title: "Đặt Món Online Thông Minh",
+        description: "Hệ thống đặt món hiện đại giúp phụ huynh và học sinh dễ dàng chọn bữa trưa yêu thích chỉ với vài thao tác đơn giản.",
+        benefits: [
+          "Menu được cập nhật hàng tuần với đa dạng món ăn",
+          "Đặt trước để tránh hết suất, không cần xếp hàng",
+          "Lưu món yêu thích để đặt lại nhanh chóng",
+          "Thông báo tự động khi có món mới hoặc khuyến mãi"
+        ],
+        mockupFeatures: [
+          "Giao diện thân thiện, dễ sử dụng",
+          "Tìm kiếm món ăn theo danh mục",
+          "Xem trước hình ảnh và mô tả chi tiết",
+          "Đặt lịch trước cho cả tuần"
+        ]
+      }
+    },
+    {
+      id: 2,
+      title: "Theo Dõi Dinh Dưỡng",
+      subtitle: "Cảnh báo dị ứng, gợi ý món lành mạnh",
+      color: "from-green-500 to-green-600",
+      bgColor: "bg-green-50",
+      image: "/api/placeholder/400/300",
+      details: {
+        title: "Theo Dõi Dinh Dưỡng Toàn Diện",
+        description: "AI thông minh phân tích thói quen ăn uống và đưa ra những gợi ý dinh dưỡng phù hợp cho từng trẻ.",
+        benefits: [
+          "Cảnh báo tự động về các thành phần gây dị ứng",
+          "Phân tích calo và chất dinh dưỡng hàng ngày",
+          "Gợi ý menu cân bằng protein, vitamin, khoáng chất",
+          "Báo cáo dinh dưỡng chi tiết gửi về phụ huynh"
+        ],
+        nutritionFeatures: [
+          "Biểu đồ dinh dưỡng trực quan",
+          "Cảnh báo thiếu hụt vitamin",
+          "Theo dõi lượng nước uống",
+          "Tư vấn từ chuyên gia dinh dưỡng"
+        ]
+      }
+    },
+    {
+      id: 3,
+      title: "Thanh Toán An Toàn",
+      subtitle: "Nạp tiền dễ dàng, báo cáo chi tiêu cho phụ huynh",
+      color: "from-purple-500 to-purple-600",
+      bgColor: "bg-purple-50",
+      image: "/api/placeholder/400/300",
+      details: {
+        title: "Ví Điện Tử An Toàn & Tiện Lợi",
+        description: "Hệ thống thanh toán bảo mật cao với nhiều phương thức nạp tiền và theo dõi chi tiêu minh bạch.",
+        benefits: [
+          "Nạp tiền qua banking, ví điện tử, thẻ cào",
+          "Bảo mật 2 lớp, mã hóa thông tin thanh toán",
+          "Báo cáo chi tiêu chi tiết theo ngày/tuần/tháng",
+          "Cảnh báo khi số dư thấp hoặc chi tiêu bất thường"
+        ],
+        paymentFeatures: [
+          "Hỗ trợ tất cả ngân hàng lớn",
+          "Cashback cho giao dịch thường xuyên",
+          "Kiểm soát hạn mức chi tiêu",
+          "Lịch sử giao dịch minh bạch"
+        ]
+      }
+    },
+    {
+      id: 4,
+      title: "Dành Cho Học Sinh",
+      subtitle: "Chọn món yêu thích qua app, nhận badge vui khi ăn đủ",
+      color: "from-orange-500 to-orange-600",
+      bgColor: "bg-orange-50",
+      image: "/api/placeholder/400/300",
+      details: {
+        title: "Trải Nghiệm Vui Nhộn Cho Học Sinh",
+        description: "Ứng dụng được thiết kế đặc biệt để tạo động lực cho trẻ em có thói quen ăn uống lành mạnh.",
+        benefits: [
+          "Giao diện game hóa với avatar và level up",
+          "Nhận badge khi hoàn thành thử thách dinh dưỡng",
+          "Bảng xếp hạng lớp về việc ăn uống lành mạnh",
+          "Mini-game giáo dục về dinh dưỡng và sức khỏe"
+        ],
+        studentFeatures: [
+          "Tạo avatar cá nhân độc đáo",
+          "Thử thách ăn uống hàng ngày",
+          "Chia sẻ thành tích với bạn bè",
+          "Quà tặng khi đạt mục tiêu"
+        ]
+      }
+    }
+  ];
 
 export const ParentFeedbackData: ParentFeedback[] = [
   {
@@ -111,4 +144,56 @@ export const ParentFeedbackData: ParentFeedback[] = [
   },
 ];
 
-export type { Features, FoodItem };
+export const solutions = [
+  {
+    icon: "💻",
+    title: "Quản lý trực tuyến",
+    description:
+      "Tất cả thông tin bữa ăn, học sinh, lớp học được quản lý tập trung trên hệ thống web.",
+  },
+  {
+    icon: "🥗",
+    title: "Thực đơn minh bạch",
+    description:
+      "Phụ huynh và giáo viên xem trước thực đơn hàng tuần, kèm thông tin dinh dưỡng.",
+  },
+  {
+    icon: "🏦",
+    title: "Thanh toán trực tuyến",
+    description:
+      "Hỗ trợ tích hợp cổng thanh toán, lưu vết hóa đơn rõ ràng, tiện lợi và minh bạch.",
+  },
+  {
+    icon: "📈",
+    title: "Thống kê & báo cáo",
+    description:
+      "Tự động tổng hợp số suất ăn, chi phí và tình hình sử dụng, giảm lãng phí cho nhà trường.",
+  },
+];
+
+export const problems = [
+  {
+    icon: "📋",
+    title: "Quản lý thủ công",
+    description:
+      "Nhà trường và phụ huynh vẫn ghi chép suất ăn bằng giấy tờ, dễ sai sót và khó tổng hợp.",
+  },
+  {
+    icon: "🍲",
+    title: "Không nắm rõ thực đơn",
+    description:
+      "Phụ huynh không biết con mình hôm nay ăn gì, dinh dưỡng có đủ hay không.",
+  },
+  {
+    icon: "💰",
+    title: "Thanh toán rườm rà",
+    description:
+      "Thu tiền trực tiếp gây mất thời gian, dễ thất lạc và khó minh bạch.",
+  },
+  {
+    icon: "♻️",
+    title: "Lãng phí suất ăn",
+    description:
+      "Số lượng bữa ăn không khớp thực tế, dẫn đến thừa hoặc thiếu, gây lãng phí.",
+  },
+];

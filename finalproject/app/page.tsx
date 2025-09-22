@@ -1,5 +1,5 @@
 "use client";
-import Slider from "@/sections/Slider";
+import Slider from "@/sections/ProblemSolution";
 // import FoodBento from "@/sections/FoodBento";
 import HeroSection from "@/sections/HeroSection";
 import Features from "@/sections/Features";
@@ -12,29 +12,12 @@ import { useEffect, useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomePage() {
-  const heroRef = useRef(null);
   const slideRef = useRef(null);
   const featureRef = useRef(null);
   const feedbackRef = useRef(null);
   const contactRef = useRef(null);
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    tl.fromTo(
-      heroRef.current,
-      {
-        opacity: 0,
-        y: 100,
-        scale: 0.9,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "power3.out",
-      }
-    );
     gsap.fromTo(
       slideRef.current,
       {
@@ -119,23 +102,13 @@ export default function HomePage() {
         },
       }
     );
-    gsap.to(heroRef.current, {
-      yPercent: -50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
   return (
     <main className="overflow-hidden">
-      <div ref={heroRef} className="pt-24">
+      <div >
         <HeroSection />
       </div>
       <div ref={slideRef}>

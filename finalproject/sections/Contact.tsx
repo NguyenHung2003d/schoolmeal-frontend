@@ -69,7 +69,7 @@ const Contact = () => {
     formData.availableTime &&
     formData.message;
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-4">
+    <div className="min-h-screen py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Bên trái */}
