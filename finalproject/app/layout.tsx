@@ -2,7 +2,7 @@ import "./globals.css";
 import type React from "react";
 import type { Metadata } from "next";
 import { Merriweather } from "next/font/google";
-import Providers from "./providers";
+import ClientLayout from "./ClientLayout";
 
 const merriweather = Merriweather({
   subsets: ["latin"],
@@ -22,8 +22,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${merriweather.variable}`}>
-        <Providers>{children}</Providers>
+      <body className={`${merriweather.variable}`} suppressHydrationWarning>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
