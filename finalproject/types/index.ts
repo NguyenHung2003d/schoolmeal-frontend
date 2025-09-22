@@ -57,18 +57,3 @@ export interface LoadingContextType {
   loading: boolean;
   setLoading: (value: boolean) => void;
 }
-
-export interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    phone: string;
-  };
-}
-
-export interface RegisterResponse {
-  token: string;
-  user: {
-    phone: string;
-  };
-}

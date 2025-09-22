@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, Heart, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NavigationItem } from "@/types";
 import Link from "next/link";
@@ -130,32 +130,22 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          <ul className="hidden lg:flex flex-1 justify-center items-center space-x-12">
-            {navigationItems.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.href}
-                  className="relative text-gray-700 hover:text-orange-600 font-semibold text-base transition-all duration-300 px-4 py-2 rounded-xl group overflow-hidden"
-                >
-                  <span className="relative z-10">{item.label}</span>
-                  <span className="absolute bottom-1 left-4 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 group-hover:w-[calc(100%-2rem)] transition-all duration-300 rounded-full"></span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden lg:flex">
-            <Link href="/login">
-              <Button
-                variant="outline"
-                className="bg-orange-500 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:scale-105 hover:bg-orange-600 transition-all duration-300"
-              >
-                Bắt đầu ngay !!!
-              </Button>
-            </Link>
+          <div className="hidden lg:flex flex-1 justify-center">
+            <ul className="flex items-center gap-20">
+              {navigationItems.map((item, index) => (
+                <li key={index} className="relative">
+                  <Link
+                    href={item.href}
+                    className="relative text-gray-700 hover:text-orange-600 font-semibold text-base transition-all duration-300 px-4 py-2 rounded-xl group overflow-hidden"
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                    <span className="absolute bottom-1 left-4 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 group-hover:w-[calc(100%-2rem)] transition-all duration-300 rounded-full"></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          {/* Mobile menu toggle */}
+          {/* Mobile */}
           <button
             className="lg:hidden p-2 rounded-lg bg-orange-100 text-orange-600 shadow-sm hover:bg-orange-200 hover:scale-105 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -186,16 +176,6 @@ const Navbar: React.FC = () => {
                   {item.label}
                 </Link>
               ))}
-
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  onClick={handleMobileMenuClose}
-                  className="w-full bg-orange-500 text-white font-bold py-3 rounded-full shadow-lg hover:scale-105 hover:bg-orange-600 transition-all duration-300"
-                >
-                  Bắt đầu ngay !!!
-                </Button>
-              </Link>
             </div>
           </div>
         </div>

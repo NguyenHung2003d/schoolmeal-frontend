@@ -1,0 +1,36 @@
+note-uc-review
+1. bổ sung các writing ở report 1
+2. có thể remove "feature tree" ở rp_1
+3. xử lý vụ parents đăng ký → cần clear lại (giữ hay bỏ?)
+4. tách uc_[CUD class] → sửa lại với uc_[assign ss]
+5. sửa overall uc cho actor teacher, principal → uc_reports
+6. ko sử dụng cud hay crud
+7. đổi role principal → manager
+8. đổi từ vựng cho các usecase
+9. tách CRUD ra từng cái
+10. sửa lại uc_[view invoice] ở parents => dùng từ sát nghĩa
+11. sửa lại khâu ứng tiền hay chi tiền của uc_[ đi chợ ] => khâu thu chi
+12. manager thừa kế kitchen staff nhưng chỉ là [view only]
+13. => crud ko ghi ra mà thay thế = cái tiêu biểu trong crud thôi (ở overall)
+
+14. quản sinh gì đó => đến giờ là gv chỉ việc cho student ăn, ...
+15. quá đơn điệu UI figma
+16. thêm ảnh ở feedback → UI
+17. sửa lại UI sao cho đa trường / 1 trường
+18. Nếu đa trường → chỉ đưa mấy cái hoạt động của trường trong trang riêng
+còn lại nếu 
+19. web based school => ko phải web platform → xử lý đại diện cho 1 trường
+20. xử lý phân quyền => group policy cho từng role
+21. quản lý bữa trưa → vứt bán trú đi
+22. bỏ quản lý kho → xoá role
+23. do mỗi trường mỗi khác => xử lý khác ?
+24. note lại chi phú bên teacher (kể cả quản sinh → nhiều role chung gộp lại)
+25. đóng gói ???
+26. landing page → quảng cáo sử dụng dịch vụ của web platform/ web-based của trường
+27. thêm hotline → được thì zalo integrated ?
+28. đưa về thành web platform thì bán các dạng gói dịch vụ
+→ theo số lượng chẳng hạn
+→ thêm khâu xử lý pháp lý hợp đồng, ký kết
+→ template hợp đồng, User Guide, đki dịch vụ web
+→ xử lý hoàn toàn online qua website 
+29. xử lý lại workflow

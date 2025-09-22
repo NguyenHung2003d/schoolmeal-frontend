@@ -40,12 +40,14 @@ export default function LoginForm({
 
       <div className="grid gap-4">
         <div className="relative w-full">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">🍎</div>
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">
+            🍎
+          </div>
           <Input
             id={phoneId}
             type="tel"
             required
-            className="peer h-11 pl-10 pr-3 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm shadow-sm"
+            className="peer h-12 lg:h-14 pl-10 pr-3 lg:pl-12 lg:pr-4 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm lg:text-base shadow-sm"
           />
           <Label
             htmlFor={phoneId}
@@ -57,7 +59,6 @@ export default function LoginForm({
           </Label>
         </div>
 
-        {/* Password */}
         <div className="w-full relative flex flex-col gap-1">
           <div className="flex justify-end">
             <Link
@@ -69,12 +70,14 @@ export default function LoginForm({
           </div>
 
           <div className="relative">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">🥕</div>
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">
+              🥕
+            </div>
             <Input
               id={passwordId}
               type="password"
               required
-              className="peer h-11 pl-10 pr-3 rounded-xl border-2 border-green-200 focus:border-green-400 bg-white text-sm shadow-sm"
+              className="peer h-12 lg:h-14 pl-10 pr-3 lg:pl-12 lg:pr-4 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm lg:text-base shadow-sm"
             />
             <Label
               htmlFor={passwordId}
@@ -91,7 +94,7 @@ export default function LoginForm({
           type="submit"
           disabled={isLoading}
           onClick={handleSubmit}
-          className="h-11 w-full bg-gradient-to-r from-orange-400 via-yellow-500 to-green-500 hover:from-orange-500 hover:via-yellow-600 hover:to-green-600 text-white font-semibold text-sm rounded-xl shadow-md transition-all"
+          className="h-12 w-full bg-gradient-to-r from-orange-400 via-yellow-500 to-green-500 hover:from-orange-500 hover:via-yellow-600 hover:to-green-600 text-white font-semibold text-sm rounded-xl shadow-md transition-all"
         >
           {isLoading ? "🍳 Đang đăng nhập..." : "Đăng nhập"}
         </Button>

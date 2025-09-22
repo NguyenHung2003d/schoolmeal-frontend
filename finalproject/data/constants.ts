@@ -1,4 +1,5 @@
 import { Features, FoodItem, ParentFeedback } from "@/types";
+import { Features, FoodItem, ParentFeedback } from "@/types";
 
 export const images = [
   {
@@ -33,6 +34,7 @@ export const slides = [
   },
 ];
 
+export const features: Features[] = [
 export const features: Features[] = [
   {
     title: "Quản lý thực đơn linh hoạt",
@@ -111,4 +113,5 @@ export const ParentFeedbackData: ParentFeedback[] = [
   },
 ];
 
+export type { Features, FoodItem };
 export type { Features, FoodItem };

@@ -1,15 +1,26 @@
-import { axiosInstance } from "../lib/axiosInstance";
-import { LoginFormData } from "../hooks/auth/useLoginForm";
-import { RegisterFormData } from "../hooks/auth/useRegisterForm";
-import { LoginResponse, RegisterResponse } from "../types/index";
+import { axiosInstance } from "@/lib/axiosInstance";
+import { LoginFormData, RegisterFormData } from "@/schemas/authSchemas";
+import { AuthResponse, User } from "@/types/auth";
 
 export const authService = {
-  login: async (data: LoginFormData): Promise<LoginResponse> => {
-    const res = await axiosInstance.post<LoginResponse>("/login", data);
+  login: async (data: LoginFormData): Promise<AuthResponse> => {
+    const res = await axiosInstance.post<AuthResponse>("/login", data);
     return res.data;
   },
-  register: async (data: RegisterFormData): Promise<RegisterResponse> => {
-    const res = await axiosInstance.post<RegisterResponse>("/register", data);
+
+  register: async (
+    data: Omit<RegisterFormData, "confirmPassword">
+  ): Promise<AuthResponse> => {
+    const res = await axiosInstance.post<AuthResponse>("/register", data);
     return res.data;
+  },
+
+  getCurrentUser: async (): Promise<User> => {
+    const res = await axiosInstance.get<AuthResponse>("/me");
+    return res.data.user;
+  },
+
+  logout: async (): Promise<void> => {
+    await axiosInstance.post("/logout");
   },
 };
