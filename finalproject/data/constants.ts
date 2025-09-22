@@ -12,7 +12,7 @@ export const features = [
       title: "Đặt Món Online",
       subtitle: "Chọn từ menu hàng tuần, tránh xếp hàng",
       color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50",
+      bgColor: "bg-blue-200",
       image: "/api/placeholder/400/300",
       details: {
         title: "Đặt Món Online Thông Minh",
@@ -36,7 +36,7 @@ export const features = [
       title: "Theo Dõi Dinh Dưỡng",
       subtitle: "Cảnh báo dị ứng, gợi ý món lành mạnh",
       color: "from-green-500 to-green-600",
-      bgColor: "bg-green-50",
+      bgColor: "bg-green-200",
       image: "/api/placeholder/400/300",
       details: {
         title: "Theo Dõi Dinh Dưỡng Toàn Diện",
@@ -60,7 +60,7 @@ export const features = [
       title: "Thanh Toán An Toàn",
       subtitle: "Nạp tiền dễ dàng, báo cáo chi tiêu cho phụ huynh",
       color: "from-purple-500 to-purple-600",
-      bgColor: "bg-purple-50",
+      bgColor: "bg-purple-200",
       image: "/api/placeholder/400/300",
       details: {
         title: "Ví Điện Tử An Toàn & Tiện Lợi",
@@ -84,7 +84,7 @@ export const features = [
       title: "Dành Cho Học Sinh",
       subtitle: "Chọn món yêu thích qua app, nhận badge vui khi ăn đủ",
       color: "from-orange-500 to-orange-600",
-      bgColor: "bg-orange-50",
+      bgColor: "bg-orange-200",
       image: "/api/placeholder/400/300",
       details: {
         title: "Trải Nghiệm Vui Nhộn Cho Học Sinh",

@@ -21,11 +21,6 @@ const ParentFeedbackSection = () => {
   return (
     <div className="min-h-screen py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-orange-200 animate-pulse">
-          <span>💬</span>
-          Phản hồi từ phụ huynh
-        </div>
-
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">
           Phụ huynh nói gì về EduMeal
         </h2>

@@ -61,10 +61,7 @@ const Features = () => {
 
   return (
     <>
-      <section
-        ref={sectionRef}
-        className="py-20 relative overflow-hidden"
-      >
+      <section ref={sectionRef} className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-20 w-32 h-32 bg-blue-300 rounded-full blur-3xl"></div>
           <div className="absolute bottom-40 right-20 w-40 h-40 bg-purple-300 rounded-full blur-3xl"></div>
@@ -80,11 +77,8 @@ const Features = () => {
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Giá Trị{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Cốt Lõi
-              </span>
+            <h2 className="text-4xl md:text-6xl font-bold text-orange-500 mb-6">
+              Giá Trị Cốt Lõi 
             </h2>
 
             <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
