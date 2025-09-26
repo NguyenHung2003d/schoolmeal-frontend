@@ -3,7 +3,7 @@ import LoginForm from "@/app/(auth)/login/login-form";
 
 export default function LoginPage() {
   return (
-    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-5 pt-10 pb-5">
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-5 pt-10">
       <div className="relative hidden lg:block lg:col-span-3 overflow-hidden h-full">
         <Image
           src="/anh_nen.jpg"

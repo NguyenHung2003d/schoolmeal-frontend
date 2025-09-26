@@ -62,7 +62,7 @@ export default function LoginForm({
         <div className="w-full relative flex flex-col gap-1">
           <div className="flex justify-end">
             <Link
-              href="#"
+              href={"/forgot-password"}
               className="text-xs font-medium text-green-600 hover:text-green-800 underline-offset-2 hover:underline"
             >
               🔐 Quên mật khẩu?

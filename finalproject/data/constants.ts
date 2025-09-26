@@ -1,4 +1,4 @@
-import { Features, ParentFeedback } from "@/types";
+import { ParentFeedback } from "@/types";
 
 export const images = [
   {
