@@ -8,6 +8,7 @@ import Footer from "@/components/layouts/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, useState } from "react";
 import Loader from "./loading";
+import { Toaster } from "react-hot-toast";
 
 export default function ClientLayout({
   children,
@@ -40,6 +41,7 @@ export default function ClientLayout({
             <main className="flex-1">{children}</main>
           </Suspense>
           <Footer />
+          <Toaster position="top-right" />
         </div>
         <RouteLoaderOverlay />
       </LoadingProvider>
