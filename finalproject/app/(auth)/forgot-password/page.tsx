@@ -1,27 +1,18 @@
 "use client";
-import { auth } from "@/lib/firebaseConfig";
-import { FormEvent, useEffect, useState, useTransition } from "react";
-import {
-  signInWithPhoneNumber,
-  RecaptchaVerifier,
-  ConfirmationResult,
-} from "firebase/auth";
+import { FormEvent, useState, useTransition, useEffect } from "react";
+import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 export default function ForgotPasswordPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
-  const [confirmationResult, setConfirmationResult] =
-    useState<ConfirmationResult | null>(null);
-  const [recaptchaVerifier, setRecaptchaVerifier] =
-    useState<RecaptchaVerifier | null>(null);
-  const [isPending, startTransition] = useTransition();
-  const [resendCountdown, setResendCountdown] = useState(0);
   const [isOtpSent, setIsOtpSent] = useState(false);
-
+  const [resendCountdown, setResendCountdown] = useState(0);
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
+  // countdown resend OTP
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (resendCountdown > 0) {
@@ -30,81 +21,31 @@ export default function ForgotPasswordPage() {
     return () => clearTimeout(timer);
   }, [resendCountdown]);
 
-  useEffect(() => {
-    if (!(window as any).recaptchaVerifier) {
-      const verifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-        size: "invisible",
-        callback: (response: any) => {
-          console.log("reCAPTCHA solved:", response);
-        },
-      });
-
-      verifier.render().then(() => {
-        console.log("reCAPTCHA ready!");
-      });
-
-      setRecaptchaVerifier(verifier);
-      (window as any).recaptchaVerifier = verifier;
-    }
-  }, []);
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 10) {
-      setPhoneNumber(value);
-    }
-    setIsOtpSent(false);
-    setConfirmationResult(null);
-    setOtp("");
-  };
-  //gửi otp
+  // Gửi OTP qua BE
   const handleSendOTP = async () => {
-    const appVerifier = (window as any).recaptchaVerifier;
-    if (!appVerifier) {
-      toast.error("reCAPTCHA chưa sẵn sàng, thử lại sau");
-      return;
-    }
-
-    if (
-      !phoneNumber ||
-      phoneNumber.length !== 10 ||
-      !phoneNumber.startsWith("0")
-    ) {
-      toast.error(
-        "Số điện thoại không hợp lệ (phải có 10 chữ số, bắt đầu bằng 0)"
-      );
+    if (!phoneNumber || phoneNumber.length !== 10 || !phoneNumber.startsWith("0")) {
+      toast.error("Số điện thoại không hợp lệ");
       return;
     }
 
     try {
       toast.loading("Đang gửi mã OTP...");
-      const formattedPhone = "+84" + phoneNumber.slice(1);
-      const result = await signInWithPhoneNumber(
-        auth,
-        formattedPhone,
-        appVerifier
-      );
-
-      setConfirmationResult(result);
-      setIsOtpSent(true);
+      await axios.post("https://localhost:5001/api/auth/send-otp", {
+        phone: phoneNumber,
+      });
       toast.dismiss();
-      toast.success("Đã gửi mã OTP, vui lòng kiểm tra tin nhắn!");
+      toast.success("Đã gửi OTP, vui lòng kiểm tra tin nhắn!");
+      setIsOtpSent(true);
       setResendCountdown(60);
     } catch (err: any) {
-      console.error("[SendOTP] Error:", err);
       toast.dismiss();
-      setIsOtpSent(false);
-      toast.error(err.message || "Không thể gửi OTP");
+      toast.error(err.response?.data || "Lỗi khi gửi OTP");
     }
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  // Xác thực OTP
+  const handleVerifyOTP = async (e: FormEvent) => {
     e.preventDefault();
-    if (!confirmationResult) {
-      toast.error("Bạn chưa gửi mã OTP");
-      return;
-    }
-
     if (otp.length !== 6) {
       toast.error("Mã OTP phải có 6 chữ số");
       return;
@@ -112,22 +53,27 @@ export default function ForgotPasswordPage() {
 
     startTransition(async () => {
       try {
-        const result = await confirmationResult.confirm(otp);
-        console.log("User:", result.user);
+        const res = await axios.post("https://localhost:5001/api/auth/verify-otp", {
+          phone: phoneNumber,
+          otp: otp,
+        });
+
+        const resetToken = res.data?.resetToken; // BE trả về token để reset pass
         toast.success("Xác thực thành công!");
-        router.push("/login");
+
+        // TODO: chuyển sang trang đổi mật khẩu
+        router.push(`/reset-password?token=${resetToken}`);
       } catch (err: any) {
         console.error("[VerifyOTP] Error:", err);
-        toast.error("Mã OTP không hợp lệ");
+        toast.error(err.response?.data || "OTP không hợp lệ");
       }
     });
   };
 
   const handleResendOTP = () => {
     if (resendCountdown === 0) {
-      setIsOtpSent(false);
-      setConfirmationResult(null);
       setOtp("");
+      setIsOtpSent(false);
       handleSendOTP();
     }
   };
@@ -137,36 +83,36 @@ export default function ForgotPasswordPage() {
       <div className="relative z-10 bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl rounded-3xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Xác Thực OTP</h1>
-          <p className="text-white/70">
-            Nhập số điện thoại để nhận mã xác thực
-          </p>
+          <p className="text-white/70">Nhập số điện thoại để nhận mã xác thực</p>
         </div>
 
-        <div className="mb-6">
-          <label className="block text-white/90 text-sm font-medium mb-3">
-            Số điện thoại
-          </label>
-          <input
-            type="tel"
-            value={phoneNumber}
-            onChange={handlePhoneChange}
-            placeholder="0901234567"
-            className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
-            maxLength={10}
-            required
-          />
-          {!isOtpSent && (
+        {/* Nhập số điện thoại */}
+        {!isOtpSent && (
+          <div className="mb-6">
+            <label className="block text-white/90 text-sm font-medium mb-3">
+              Số điện thoại
+            </label>
+            <input
+              type="tel"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
+              placeholder="0901234567"
+              className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+              maxLength={10}
+              required
+            />
             <button
               onClick={handleSendOTP}
               className="w-full mt-3 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-xl hover:scale-105 transition"
             >
               Gửi mã OTP
             </button>
-          )}
-        </div>
+          </div>
+        )}
 
+        {/* Nhập OTP */}
         {isOtpSent && (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleVerifyOTP} className="space-y-6">
             <input
               type="text"
               value={otp}
@@ -196,8 +142,6 @@ export default function ForgotPasswordPage() {
             </button>
           </form>
         )}
-
-        <div id="recaptcha-container"></div>
       </div>
     </div>
   );

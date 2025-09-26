@@ -1,6 +1,7 @@
 export interface User {
   id: string;
-  phone: string;
+    role: Role;
+
 }
 
 export interface AuthResponse {
@@ -21,3 +22,5 @@ export interface ContactResponse {
   success: boolean;
   message: string;
 }
+
+export type Role = "admin" | "teacher" | "student" | "parent";
