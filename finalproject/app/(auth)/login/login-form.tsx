@@ -62,7 +62,7 @@ export default function LoginForm({
         <div className="w-full relative flex flex-col gap-1">
           <div className="flex justify-end">
             <Link
-              href="#"
+              href={"/forgot-password"}
               className="text-xs font-medium text-green-600 hover:text-green-800 underline-offset-2 hover:underline"
             >
               🔐 Quên mật khẩu?
@@ -125,18 +125,6 @@ export default function LoginForm({
             <span>Dùng GitHub</span>
           </div>
         </Button>
-      </div>
-
-      <div className="text-center text-xs text-gray-600 bg-white/60 rounded-xl p-3 border border-yellow-200">
-        <div>
-          Chưa có tài khoản?{" "}
-          <Link
-            href="/register"
-            className="font-semibold text-orange-600 hover:underline"
-          >
-            🍎 Tạo tài khoản ngay!
-          </Link>
-        </div>
       </div>
     </div>
   );

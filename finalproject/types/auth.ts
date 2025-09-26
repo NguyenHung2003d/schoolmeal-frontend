@@ -13,7 +13,6 @@ export interface ContactFormData {
   email: string;
   phoneNumber: string;
   schoolName: string;
-  schoolAddress: string;
   availableTime: string;
   message: string;
 }

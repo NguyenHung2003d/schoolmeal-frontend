@@ -91,7 +91,7 @@ export default function HeroSection() {
           mỗi ngày một cách dễ dàng và tiện lợi.
         </p>
         <Link
-          href="/register"
+          href="/login"
           className="inline-block px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-110 active:scale-95 text-lg"
         >
           Khám phá ngay

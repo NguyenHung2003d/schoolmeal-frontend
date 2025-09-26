@@ -6,7 +6,6 @@ import {
   Building,
   Clock,
   Mail,
-  MapPin,
   MessageSquare,
   Phone,
   Send,
@@ -21,7 +20,6 @@ const Contact = () => {
     email: "",
     phoneNumber: "",
     schoolName: "",
-    schoolAddress: "",
     availableTime: "",
     message: "",
   });
@@ -49,7 +47,6 @@ const Contact = () => {
           email: "",
           phoneNumber: "",
           schoolName: "",
-          schoolAddress: "",
           availableTime: "",
           message: "",
         });
@@ -65,7 +62,6 @@ const Contact = () => {
     formData.email &&
     formData.phoneNumber &&
     formData.schoolName &&
-    formData.schoolAddress &&
     formData.availableTime &&
     formData.message;
   return (
@@ -215,25 +211,6 @@ const Contact = () => {
                     placeholder="Nhập tên trường"
                   />
                 </div>
-              </div>
-              <div className="group">
-                <label
-                  htmlFor="schoolAddress"
-                  className="block text-sm font-semibold text-gray-700 mb-2"
-                >
-                  <MapPin className="w-4 h-4 inline mr-2" />
-                  Địa chỉ trường *
-                </label>
-                <input
-                  type="text"
-                  id="schoolAddress"
-                  name="schoolAddress"
-                  value={formData.schoolAddress}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-gray-800 focus:bg-white transition-all duration-300 text-gray-900 placeholder-gray-500"
-                  placeholder="Nhập địa chỉ đầy đủ của trường"
-                />
               </div>
               <div className="group">
                 <label
