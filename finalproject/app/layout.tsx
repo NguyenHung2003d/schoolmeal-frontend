@@ -2,10 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Merriweather } from "next/font/google";
 import { Providers } from "./providers";
-import Navbar from "@/components/layouts/Navbar";
-import Footer from "@/components/layouts/Footer";
-import { Suspense } from "react";
-import Loader from "./loading";
 
 const merriweather = Merriweather({
   subsets: ["latin"],
@@ -24,20 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <body className={`${merriweather.variable}`} suppressHydrationWarning>
-        <Providers>
-          <div
-            className="relative min-h-screen flex flex-col"
-            style={{ background: "linear-gradient(135deg, #D3CAE2, #E6C17A)" }}
-          >
-            <Navbar />
-            <Suspense fallback={<Loader />}>
-              <main className="flex-1">{children}</main>
-            </Suspense>
-            <Footer />
-          </div>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

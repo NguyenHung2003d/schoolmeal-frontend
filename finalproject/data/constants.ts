@@ -268,29 +268,6 @@ export const lowStockItems = [
     unit: "kg",
   },
 ];
-export const allergyAlerts = [
-  {
-    student: "Nguyễn Minh Anh",
-    class: "3A",
-    allergies: ["Đậu phộng", "Hải sản"],
-    meal: "Bữa trưa",
-    dish: "Bún riêu cua",
-  },
-  {
-    student: "Trần Hoàng Nam",
-    class: "2B",
-    allergies: ["Gluten"],
-    meal: "Bữa sáng",
-    dish: "Bánh mì trứng",
-  },
-  {
-    student: "Lê Thu Hà",
-    class: "4C",
-    allergies: ["Sữa"],
-    meal: "Bữa phụ",
-    dish: "Sữa chua & hoa quả",
-  },
-];
 export const recentUpdates = [
   {
     time: "08:15",
@@ -306,5 +283,326 @@ export const recentUpdates = [
     time: "07:30",
     message: "Phụ huynh hủy 3 suất ăn bữa trưa",
     user: "Hệ thống",
+  },
+];
+
+export const students = [
+  {
+    id: 1,
+    name: "Nguyễn Minh Anh",
+    class: "3A",
+    registered: true,
+    present: true,
+    allergies: ["Sữa"],
+    specialRequests: "Không dùng sữa tươi, thay thế bằng sữa đậu nành",
+    image: "https://i.imgur.com/6YQ9Z3z.jpg",
+  },
+  {
+    id: 2,
+    name: "Trần Hoàng Nam",
+    class: "2B",
+    registered: true,
+    present: true,
+    allergies: ["Đậu phộng"],
+    specialRequests: "Không sử dụng đậu phộng trong món ăn",
+    image: "https://i.imgur.com/wgJDypg.jpg",
+  },
+  {
+    id: 3,
+    name: "Lê Thu Hà",
+    class: "1A",
+    registered: true,
+    present: false,
+    allergies: [],
+    specialRequests: "Ăn kiêng đường",
+    image: "https://i.imgur.com/KWaVOLR.jpg",
+  },
+  {
+    id: 4,
+    name: "Phạm Tuấn Kiệt",
+    class: "3A",
+    registered: true,
+    present: true,
+    allergies: ["Hải sản"],
+    specialRequests: "",
+    image: "https://i.imgur.com/F8QXfXh.jpg",
+  },
+  {
+    id: 5,
+    name: "Ngô Thanh Mai",
+    class: "2B",
+    registered: true,
+    present: true,
+    allergies: [],
+    specialRequests: "",
+    image: "https://i.imgur.com/6YQ9Z3z.jpg",
+  },
+];
+export const classes = [
+  {
+    name: "1A",
+    total: 28,
+    present: 25,
+  },
+  {
+    name: "2B",
+    total: 26,
+    present: 24,
+  },
+  {
+    name: "3A",
+    total: 21,
+    present: 19,
+  },
+];
+export const mealSchedule = [
+  {
+    time: "11:30 - 12:00",
+    class: "1A",
+    students: 25,
+  },
+  {
+    time: "12:00 - 12:30",
+    class: "2B",
+    students: 24,
+  },
+  {
+    time: "12:30 - 13:00",
+    class: "3A",
+    students: 19,
+  },
+];
+
+export const allergyAlerts = [
+  {
+    id: 1,
+    student: "Nguyễn Minh Anh",
+    class: "3A",
+    allergies: ["Sữa"],
+    meal: "Bữa trưa",
+    dish: "Sữa chua & hoa quả",
+    status: "high",
+    date: "24/10/2023",
+  },
+  {
+    id: 2,
+    student: "Trần Hoàng Nam",
+    class: "2B",
+    allergies: ["Đậu phộng"],
+    meal: "Bữa trưa",
+    dish: "Cơm gà rau củ",
+    status: "medium",
+    date: "24/10/2023",
+  },
+  {
+    id: 3,
+    student: "Phạm Tuấn Kiệt",
+    class: "3A",
+    allergies: ["Hải sản"],
+    meal: "Bữa trưa",
+    dish: "Bún riêu cua",
+    status: "high",
+    date: "27/10/2023",
+  },
+];
+// Mock data for all allergies
+export const studentAllergies = [
+  {
+    id: 1,
+    student: "Nguyễn Minh Anh",
+    class: "3A",
+    allergies: ["Sữa"],
+    severity: "Cao",
+    notes:
+      "Không được dùng sữa bò, sữa chua, phô mai, thay thế bằng sữa đậu nành",
+    image: "https://i.imgur.com/6YQ9Z3z.jpg",
+  },
+  {
+    id: 2,
+    student: "Trần Hoàng Nam",
+    class: "2B",
+    allergies: ["Đậu phộng"],
+    severity: "Trung bình",
+    notes: "Tránh các món có đậu phộng và dầu đậu phộng",
+    image: "https://i.imgur.com/wgJDypg.jpg",
+  },
+  {
+    id: 3,
+    student: "Phạm Tuấn Kiệt",
+    class: "3A",
+    allergies: ["Hải sản"],
+    severity: "Cao",
+    notes: "Dị ứng nặng với tôm, cua, ghẹ và các loại hải sản",
+    image: "https://i.imgur.com/F8QXfXh.jpg",
+  },
+  {
+    id: 4,
+    student: "Lê Thu Hà",
+    class: "1A",
+    allergies: ["Gluten"],
+    severity: "Trung bình",
+    notes: "Không dùng các món có bột mì, bánh mì",
+    image: "https://i.imgur.com/KWaVOLR.jpg",
+  },
+];
+// Mock data for dietary restrictions
+export const dietaryRestrictions = [
+  {
+    id: 1,
+    student: "Lê Thu Hà",
+    class: "1A",
+    restriction: "Ăn kiêng đường",
+    notes: "Hạn chế đồ ngọt và đường tinh luyện",
+    image: "https://i.imgur.com/KWaVOLR.jpg",
+  },
+  {
+    id: 2,
+    student: "Vũ Hoàng Long",
+    class: "2B",
+    restriction: "Ăn chay",
+    notes: "Không ăn thịt, cá và các sản phẩm từ động vật",
+    image: "https://i.imgur.com/wgJDypg.jpg",
+  },
+];
+// Common allergens
+export const commonAllergens = [
+  {
+    name: "Sữa",
+    count: 1,
+  },
+  {
+    name: "Đậu phộng",
+    count: 1,
+  },
+  {
+    name: "Hải sản",
+    count: 1,
+  },
+  {
+    name: "Gluten",
+    count: 1,
+  },
+  {
+    name: "Trứng",
+    count: 0,
+  },
+  {
+    name: "Đậu nành",
+    count: 0,
+  },
+];
+
+export const inventoryItems = [
+  {
+    id: 1,
+    name: "Gạo",
+    category: "Nguyên liệu chính",
+    quantity: 50,
+    unit: "kg",
+    minimumLevel: 20,
+    status: "Đầy đủ",
+    lastUpdated: "22/10/2023",
+    expiryDate: "15/04/2024",
+  },
+  {
+    id: 2,
+    name: "Thịt gà",
+    category: "Thịt & Hải sản",
+    quantity: 15,
+    unit: "kg",
+    minimumLevel: 10,
+    status: "Đầy đủ",
+    lastUpdated: "23/10/2023",
+    expiryDate: "27/10/2023",
+  },
+  {
+    id: 3,
+    name: "Cà rốt",
+    category: "Rau củ",
+    quantity: 8,
+    unit: "kg",
+    minimumLevel: 5,
+    status: "Đầy đủ",
+    lastUpdated: "23/10/2023",
+    expiryDate: "30/10/2023",
+  },
+  {
+    id: 4,
+    name: "Sữa tươi",
+    category: "Sữa & Trứng",
+    quantity: 12,
+    unit: "lít",
+    minimumLevel: 20,
+    status: "Thấp",
+    lastUpdated: "21/10/2023",
+    expiryDate: "28/10/2023",
+  },
+  {
+    id: 5,
+    name: "Trứng gà",
+    category: "Sữa & Trứng",
+    quantity: 45,
+    unit: "quả",
+    minimumLevel: 100,
+    status: "Thấp",
+    lastUpdated: "20/10/2023",
+    expiryDate: "05/11/2023",
+  },
+  {
+    id: 6,
+    name: "Rau xà lách",
+    category: "Rau củ",
+    quantity: 3,
+    unit: "kg",
+    minimumLevel: 5,
+    status: "Thấp",
+    lastUpdated: "23/10/2023",
+    expiryDate: "27/10/2023",
+  },
+];
+export const upcomingOrders = [
+  {
+    id: 1,
+    supplier: "Công ty Thực phẩm Sạch",
+    items: ["Thịt gà (10kg)", "Thịt heo (15kg)", "Cá (8kg)"],
+    orderDate: "22/10/2023",
+    expectedDelivery: "25/10/2023",
+    status: "Đang giao hàng",
+    total: "2,350,000 VND",
+  },
+  {
+    id: 2,
+    supplier: "Nông trại Xanh",
+    items: ["Rau xà lách (10kg)", "Cà rốt (8kg)", "Bông cải xanh (5kg)"],
+    orderDate: "23/10/2023",
+    expectedDelivery: "24/10/2023",
+    status: "Đã xác nhận",
+    total: "850,000 VND",
+  },
+];
+export const expiryAlerts = [
+  {
+    id: 1,
+    name: "Thịt gà",
+    quantity: 5,
+    unit: "kg",
+    expiryDate: "27/10/2023",
+    daysLeft: 3,
+  },
+  {
+    id: 2,
+    name: "Rau xà lách",
+    quantity: 2,
+    unit: "kg",
+    expiryDate: "27/10/2023",
+    daysLeft: 3,
+  },
+  {
+    id: 3,
+    name: "Sữa tươi",
+    quantity: 4,
+    unit: "lít",
+    expiryDate: "28/10/2023",
+    daysLeft: 4,
   },
 ];
