@@ -1,7 +1,8 @@
-import React from "react";
+"use client";
+
 import { Search, AlertCircle } from "lucide-react";
 
-const AllergiesTab = () => {
+export default function AllergiesTab() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-bold mb-4">Quản lý dị ứng</h2>
@@ -9,8 +10,6 @@ const AllergiesTab = () => {
         Theo dõi và quản lý thông tin dị ứng của học sinh để đảm bảo bữa ăn an
         toàn.
       </p>
-
-      {/* Search section */}
       <div className="border-b border-gray-200 pb-4 mb-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-medium">Danh sách học sinh có dị ứng</h3>
@@ -39,29 +38,27 @@ const AllergiesTab = () => {
           </div>
         </div>
       </div>
-
-      {/* Common allergies */}
       <div>
         <h3 className="text-lg font-medium mb-3">Các loại dị ứng phổ biến</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { name: "Dị ứng đậu phộng", count: 12 },
-            { name: "Dị ứng sữa", count: 8 },
-            { name: "Dị ứng hải sản", count: 15 },
-            { name: "Dị ứng gluten", count: 5 },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-            >
-              <h4 className="font-medium">{item.name}</h4>
-              <p className="text-gray-500 text-sm">{item.count} học sinh</p>
-            </div>
-          ))}
+          <div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <h4 className="font-medium">Dị ứng đậu phộng</h4>
+            <p className="text-gray-500 text-sm">12 học sinh</p>
+          </div>
+          <div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <h4 className="font-medium">Dị ứng sữa</h4>
+            <p className="text-gray-500 text-sm">8 học sinh</p>
+          </div>
+          <div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <h4 className="font-medium">Dị ứng hải sản</h4>
+            <p className="text-gray-500 text-sm">15 học sinh</p>
+          </div>
+          <div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <h4 className="font-medium">Dị ứng gluten</h4>
+            <p className="text-gray-500 text-sm">5 học sinh</p>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default AllergiesTab;
+}

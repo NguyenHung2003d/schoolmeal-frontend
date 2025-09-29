@@ -1,15 +1,14 @@
-import React from "react";
+"use client";
+
 import { FileText } from "lucide-react";
 
-const ReportsTab = () => {
+export default function ReportsTab() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-bold mb-4">Báo cáo</h2>
       <p className="text-gray-500 mb-4">
         Tạo và xem các báo cáo về bữa ăn, nguyên liệu và hoạt động của bếp.
       </p>
-
-      {/* Daily Reports */}
       <div className="border-b border-gray-200 pb-4 mb-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-medium">Báo cáo hàng ngày</h3>
@@ -28,8 +27,6 @@ const ReportsTab = () => {
           </ul>
         </div>
       </div>
-
-      {/* Quick Reports */}
       <div>
         <h3 className="text-lg font-medium mb-3">Báo cáo nhanh</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -49,6 +46,4 @@ const ReportsTab = () => {
       </div>
     </div>
   );
-};
-
-export default ReportsTab;
+}

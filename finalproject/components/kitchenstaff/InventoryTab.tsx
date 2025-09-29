@@ -1,15 +1,14 @@
-import React from "react";
+"use client";
+
 import { Eye, Plus } from "lucide-react";
 
-const InventoryTab = () => {
+export default function InventoryTab() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-bold mb-4">Quản lý kho nguyên liệu</h2>
       <p className="text-gray-500 mb-4">
         Theo dõi tồn kho và quản lý nguyên liệu cho các bữa ăn.
       </p>
-
-      {/* Inventory status */}
       <div className="border-b border-gray-200 pb-4 mb-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-medium">Tình trạng kho</h3>
@@ -34,8 +33,6 @@ const InventoryTab = () => {
           </ul>
         </div>
       </div>
-
-      {/* Inventory categories */}
       <div>
         <h3 className="text-lg font-medium mb-3">Danh mục nguyên liệu</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -57,6 +54,4 @@ const InventoryTab = () => {
       </div>
     </div>
   );
-};
-
-export default InventoryTab;
+}
