@@ -1,23 +1,56 @@
 "use client";
-import React, { useId, useState } from "react";
+import React, { useId, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useLoginForm } from "@/hooks/auth/useLoginForm";
+import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
+import toast from "react-hot-toast";
 
 export default function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter();
+  const form = useLoginForm();
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+
+  const loginMutation = useLoginMutation({
+    onSuccess: (data) => {
+      toast.success(`Xin chào ${data.user.name}! 🎉`);
+      switch (data.user.role) {
+        case "parent":
+          router.push("/parent/dashboard");
+          break;
+        case "kitchenstaff":
+          router.push("/kitchenstaff/dashboard");
+          break;
+        case "admin":
+          router.push("/admin/dashboard");
+          break;
+        default:
+          router.push("/");
+          break;
+      }
+    },
+    onError: () => {
+      toast.error("❌ Sai số điện thoại hoặc mật khẩu");
+      setTimeout(() => {
+        submitButtonRef.current?.focus();
+      }, 100);
+    },
+  });
+
   const phoneId = useId();
   const passwordId = useId();
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
+    const formData = form.getValues();
+    loginMutation.mutate(formData);
   };
 
   return (
@@ -28,6 +61,7 @@ export default function LoginForm({
       )}
       {...props}
     >
+      {/* Header */}
       <div className="flex flex-col items-center gap-2 text-center">
         <div className="text-4xl">🍱</div>
         <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent">
@@ -38,7 +72,9 @@ export default function LoginForm({
         </p>
       </div>
 
-      <div className="grid gap-4">
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="grid gap-4" noValidate>
+        {/* Phone */}
         <div className="relative w-full">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">
             🍎
@@ -46,19 +82,25 @@ export default function LoginForm({
           <Input
             id={phoneId}
             type="tel"
+            placeholder=" "
             required
+            autoComplete="tel"
+            {...form.register("phone")}
             className="peer h-12 lg:h-14 pl-10 pr-3 lg:pl-12 lg:pr-4 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm lg:text-base shadow-sm"
           />
           <Label
             htmlFor={phoneId}
-            className="absolute left-10 top-1/2 -translate-y-1/2 text-sm text-gray-500 px-2 transition-all
-            peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-400
-            peer-focus:top-0 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-orange-600 bg-white rounded-md cursor-text"
+            className="absolute left-10 px-2 bg-white transition-all
+    text-gray-500 cursor-text
+    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400
+    peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-orange-600
+    peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:-translate-y-1/2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:font-semibold peer-not-placeholder-shown:text-orange-600"
           >
             Số điện thoại
           </Label>
         </div>
 
+        {/* Password */}
         <div className="w-full relative flex flex-col gap-1">
           <div className="flex justify-end">
             <Link
@@ -68,7 +110,6 @@ export default function LoginForm({
               🔐 Quên mật khẩu?
             </Link>
           </div>
-
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">
               🥕
@@ -76,27 +117,33 @@ export default function LoginForm({
             <Input
               id={passwordId}
               type="password"
+              placeholder=" "
               required
+              autoComplete="current-password"
+              {...form.register("password")}
               className="peer h-12 lg:h-14 pl-10 pr-3 lg:pl-12 lg:pr-4 rounded-xl border-2 border-orange-200 focus:border-orange-400 bg-white text-sm lg:text-base shadow-sm"
             />
             <Label
               htmlFor={passwordId}
-              className="absolute left-10 top-1/2 -translate-y-1/2 text-sm text-gray-500 px-2 transition-all
-              peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-400
-              peer-focus:top-0 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-green-600 bg-white rounded-md cursor-text"
+              className="absolute left-10 px-2 bg-white transition-all
+    text-gray-500 cursor-text
+    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400
+    peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-orange-600
+    peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:-translate-y-1/2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:font-semibold peer-not-placeholder-shown:text-orange-600"
             >
               Mật khẩu
             </Label>
           </div>
         </div>
 
+        {/* Submit */}
         <Button
+          ref={submitButtonRef}
           type="submit"
-          disabled={isLoading}
-          onClick={handleSubmit}
-          className="h-12 w-full bg-gradient-to-r from-orange-400 via-yellow-500 to-green-500 hover:from-orange-500 hover:via-yellow-600 hover:to-green-600 text-white font-semibold text-sm rounded-xl shadow-md transition-all"
+          disabled={loginMutation.isPending}
+          className="h-12 w-full bg-gradient-to-r from-orange-400 via-yellow-500 to-green-500 hover:from-orange-500 hover:via-yellow-600 hover:to-green-600 text-white font-semibold text-sm rounded-xl shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isLoading ? "🍳 Đang đăng nhập..." : "Đăng nhập"}
+          {loginMutation.isPending ? "🍳 Đang đăng nhập..." : "Đăng nhập"}
         </Button>
 
         <div className="relative flex items-center">
@@ -125,7 +172,7 @@ export default function LoginForm({
             <span>Dùng GitHub</span>
           </div>
         </Button>
-      </div>
+      </form>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { useLoginMutation } from "./useLoginMutation";
-import { useRegisterMutation } from "./useRegisterMutation";
 import { useLogoutMutation } from "./useLogoutMutation";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@/types/auth";
@@ -21,7 +20,6 @@ export const useAuth = () => {
     },
   });
   const loginMutation = useLoginMutation();
-  const registerMutation = useRegisterMutation();
   const logoutMutation = useLogoutMutation();
 
   return {
@@ -31,15 +29,12 @@ export const useAuth = () => {
     error: userQuery.error,
 
     login: loginMutation.mutate,
-    register: registerMutation.mutate,
     logout: logoutMutation.mutate,
 
     isLoginLoading: loginMutation.isPending,
-    isRegisterLoading: registerMutation.isPending,
     isLogoutLoading: logoutMutation.isPending,
 
     loginError: loginMutation.error,
-    registerError: registerMutation.error,
 
     refetchUser: userQuery.refetch,
     invalidateUser: () => userQuery.refetch(),

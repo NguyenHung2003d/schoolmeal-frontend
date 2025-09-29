@@ -1,10 +1,10 @@
 "use client";
-import Slider from "@/sections/ProblemSolution";
+import Slider from "@/components/common/ProblemSolution";
 // import FoodBento from "@/sections/FoodBento";
-import HeroSection from "@/sections/HeroSection";
-import Features from "@/sections/Features";
-import ParentFeedbackSection from "@/sections/FeedBack";
-import Contact from "@/sections/Contact";
+import HeroSection from "@/components/common/HeroSection";
+import Features from "@/components/common/Features";
+import ParentFeedbackSection from "@/components/common/FeedBack";
+import Contact from "@/components/common/Contact";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";

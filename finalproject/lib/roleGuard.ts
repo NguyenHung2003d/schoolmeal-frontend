@@ -7,7 +7,7 @@ function decodeToken(token: string | undefined): User | null {
     const payload = JSON.parse(
       Buffer.from(token.split(".")[1], "base64").toString()
     );
-    return { id: payload.sub, role: payload.role as Role };
+    return { id: payload.sub, role: payload.role as Role, name: payload.name };
   } catch {
     return null;
   }

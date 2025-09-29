@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   forgotPasswordSchema,
   ForgotPasswordFormData,
-} from "@/schemas/authSchemas";
+} from "@/lib/definitions";
 
 export const useForgotPasswordForm = (
   options?: UseFormProps<ForgotPasswordFormData>

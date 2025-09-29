@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { LoadingProvider } from "@/context/LoadingContext";
-import RouteLoaderOverlay from "@/components/RouteLoaderOverlay";
+import RouteLoaderOverlay from "@/components/ui/RouteLoaderOverlay";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

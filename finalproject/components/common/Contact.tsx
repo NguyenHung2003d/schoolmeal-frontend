@@ -1,6 +1,5 @@
 "use client";
 import { Label } from "@/components/ui/label";
-import { useContactMutation } from "@/hooks/auth/useContactMutation";
 import { ContactFormData } from "@/types/auth";
 import {
   Building,
@@ -11,10 +10,10 @@ import {
   Send,
   User,
 } from "lucide-react";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useState, useTransition } from "react";
 
 const Contact = () => {
+  const [isPending, startTransition] = useTransition();
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -23,7 +22,6 @@ const Contact = () => {
     availableTime: "",
     message: "",
   });
-  const contactMutation = useContactMutation();
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -37,25 +35,6 @@ const Contact = () => {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      const result = await contactMutation.mutateAsync(formData);
-
-      if (result.success) {
-        setFormData({
-          name: "",
-          email: "",
-          phoneNumber: "",
-          schoolName: "",
-          availableTime: "",
-          message: "",
-        });
-
-        toast(result.message);
-      }
-    } catch (error) {
-      toast("Đã xảy ra lỗi. Vui lòng thử lại.");
-    }
   };
   const isFormValid =
     formData.name &&
@@ -257,10 +236,9 @@ const Contact = () => {
               {/* Nút gửi */}
               <button
                 type="submit"
-                disabled={contactMutation.isPending || !isFormValid}
                 className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed"
               >
-                {contactMutation.isPending ? (
+                {isPending ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     <span>Đang gửi...</span>
