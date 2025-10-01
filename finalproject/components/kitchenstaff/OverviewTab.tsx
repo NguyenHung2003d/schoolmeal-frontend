@@ -1,6 +1,14 @@
 "use client";
 
 import {
+  allergyAlerts,
+  dashboardStats,
+  lowStockItems,
+  menuItems,
+  recentUpdates,
+  upcomingMeals,
+} from "@/data/constants";
+import {
   Calendar,
   Utensils,
   Package,
@@ -16,117 +24,6 @@ import {
 } from "lucide-react";
 
 export default function OverviewTab() {
-  // Mock data for the dashboard
-  const dashboardStats = {
-    totalMeals: 342,
-    specialRequests: 18,
-    allergies: 24,
-    inventory: 86,
-  };
-
-  const upcomingMeals = [
-    {
-      time: "11:30 - 12:30",
-      type: "Bữa trưa",
-      registered: 342,
-      prepared: 120,
-      special: 18,
-      status: "Đang chuẩn bị",
-    },
-    {
-      time: "12:30 - 13:00",
-      type: "Tráng miệng",
-      registered: 298,
-      prepared: 0,
-      special: 12,
-      status: "Chưa chuẩn bị",
-    },
-  ];
-
-  const menuItems = [
-    {
-      id: 1,
-      name: "Cơm gà rau củ",
-      category: "Bữa trưa",
-      ingredients: ["Gạo lứt", "Thịt gà", "Cà rốt", "Bông cải xanh"],
-      allergies: [],
-      prepared: 120,
-      needed: 342,
-    },
-    {
-      id: 2,
-      name: "Sữa chua & hoa quả",
-      category: "Tráng miệng",
-      ingredients: ["Sữa chua", "Hoa quả tươi"],
-      allergies: ["Sữa"],
-      prepared: 0,
-      needed: 298,
-    },
-  ];
-
-  const lowStockItems = [
-    {
-      name: "Sữa tươi",
-      current: 12,
-      minimum: 20,
-      unit: "lít",
-    },
-    {
-      name: "Trứng gà",
-      current: 45,
-      minimum: 100,
-      unit: "quả",
-    },
-    {
-      name: "Rau xà lách",
-      current: 3,
-      minimum: 5,
-      unit: "kg",
-    },
-  ];
-
-  const allergyAlerts = [
-    {
-      student: "Nguyễn Minh Anh",
-      class: "3A",
-      allergies: ["Đậu phộng", "Hải sản"],
-      meal: "Bữa trưa",
-      dish: "Bún riêu cua",
-    },
-    {
-      student: "Trần Hoàng Nam",
-      class: "2B",
-      allergies: ["Gluten"],
-      meal: "Bữa sáng",
-      dish: "Bánh mì trứng",
-    },
-    {
-      student: "Lê Thu Hà",
-      class: "4C",
-      allergies: ["Sữa"],
-      meal: "Bữa phụ",
-      dish: "Sữa chua & hoa quả",
-    },
-  ];
-
-  const recentUpdates = [
-    {
-      time: "08:15",
-      message: "Đã hoàn thành chuẩn bị bữa sáng",
-      user: "Nguyễn Văn An",
-    },
-    {
-      time: "07:45",
-      message: "Cập nhật số lượng bánh mì trứng: 100/118",
-      user: "Trần Thị Bình",
-    },
-    {
-      time: "07:30",
-      message: "Phụ huynh hủy 3 suất ăn bữa trưa",
-      user: "Hệ thống",
-    },
-  ];
-
   return (
     <>
       {/* Stats overview */}

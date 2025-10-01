@@ -606,3 +606,698 @@ export const expiryAlerts = [
     daysLeft: 4,
   },
 ];
+
+export const feedbackItems = [
+  {
+    id: 1,
+    title: "Món ăn quá mặn",
+    description:
+      "Bữa trưa hôm nay có món canh chua quá mặn, nhiều học sinh không ăn được.",
+    date: "23/10/2023",
+    time: "13:45",
+    sender: {
+      name: "Nguyễn Thị Hương",
+      role: "Giáo viên lớp 2A",
+      avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
+    },
+    status: "pending",
+    severity: "high",
+    category: "food",
+    dish: "Canh chua cá lóc",
+    responses: [
+      {
+        id: 1,
+        text: "Cảm ơn cô đã phản hồi. Chúng tôi sẽ điều chỉnh lại lượng muối trong món canh chua.",
+        date: "23/10/2023",
+        time: "14:30",
+        user: {
+          name: "Nguyễn Thị Tâm",
+          role: "Quản lý bếp",
+          avatar: "",
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Dị ứng với món tráng miệng",
+    description:
+      "Học sinh Trần Minh Anh lớp 3B bị dị ứng với món pudding trứng hôm nay. Em có biểu hiện nổi mẩn đỏ.",
+    date: "22/10/2023",
+    time: "12:15",
+    sender: {
+      name: "Lê Thị Mai",
+      role: "Giáo viên lớp 3B",
+      avatar: "https://i.imgur.com/KWaVOLR.jpg",
+    },
+    status: "inProgress",
+    severity: "high",
+    category: "allergy",
+    dish: "Pudding trứng",
+    responses: [],
+  },
+  {
+    id: 3,
+    title: "Đề xuất thêm rau xanh",
+    description:
+      "Phụ huynh đề xuất tăng cường rau xanh trong bữa trưa để cân bằng dinh dưỡng cho học sinh.",
+    date: "21/10/2023",
+    time: "16:30",
+    sender: {
+      name: "Phạm Văn Tuấn",
+      role: "Phụ huynh học sinh",
+      avatar: "https://i.imgur.com/F8QXfXh.jpg",
+    },
+    status: "resolved",
+    severity: "medium",
+    category: "suggestion",
+    dish: "Chung",
+    responses: [
+      {
+        id: 1,
+        text: "Cảm ơn góp ý của phụ huynh. Chúng tôi sẽ điều chỉnh thực đơn để tăng cường rau xanh trong các bữa ăn sắp tới.",
+        date: "22/10/2023",
+        time: "08:45",
+        user: {
+          name: "Nguyễn Thị Tâm",
+          role: "Quản lý bếp",
+          avatar: "",
+        },
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Khen ngợi món mới",
+    description:
+      "Món cơm gà rau củ hôm nay rất ngon và được các học sinh yêu thích. Mong nhà trường duy trì món này.",
+    date: "20/10/2023",
+    time: "13:00",
+    sender: {
+      name: "Trần Văn Nam",
+      role: "Giáo viên lớp 4A",
+      avatar: "https://i.imgur.com/wgJDypg.jpg",
+    },
+    status: "resolved",
+    severity: "low",
+    category: "compliment",
+    dish: "Cơm gà rau củ",
+    responses: [
+      {
+        id: 1,
+        text: "Cảm ơn thầy đã phản hồi tích cực. Chúng tôi sẽ tiếp tục duy trì món ăn này trong thực đơn.",
+        date: "20/10/2023",
+        time: "15:20",
+        user: {
+          name: "Nguyễn Thị Tâm",
+          role: "Quản lý bếp",
+          avatar: "",
+        },
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "Thức ăn không đủ nóng",
+    description:
+      "Bữa trưa hôm nay thức ăn không đủ nóng, đặc biệt là món canh. Mong nhà bếp khắc phục.",
+    date: "19/10/2023",
+    time: "12:45",
+    sender: {
+      name: "Nguyễn Thị Lan",
+      role: "Giáo viên lớp 1C",
+      avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
+    },
+    status: "resolved",
+    severity: "medium",
+    category: "food",
+    dish: "Canh rau củ",
+    responses: [
+      {
+        id: 1,
+        text: "Cảm ơn cô đã phản hồi. Chúng tôi sẽ kiểm tra lại thiết bị giữ nhiệt và đảm bảo thức ăn luôn được phục vụ nóng.",
+        date: "19/10/2023",
+        time: "14:00",
+        user: {
+          name: "Nguyễn Thị Tâm",
+          role: "Quản lý bếp",
+          avatar: "",
+        },
+      },
+    ],
+  },
+];
+export const parentFeedbacks = [
+  {
+    id: 1,
+    parent: {
+      name: "Nguyễn Thị Hương",
+      avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
+      child: "Nguyễn Minh Anh",
+      class: "3A",
+    },
+    rating: 5,
+    comment:
+      "Con tôi rất thích món cơm gà rau củ và luôn xin thêm. Tôi đánh giá cao việc nhà trường cập nhật thực đơn đa dạng.",
+    date: "24/10/2023",
+    dish: "Cơm gà rau củ",
+    childFeedback: "Con rất thích món cơm gà, ăn hết suất và còn xin thêm!",
+  },
+  {
+    id: 2,
+    parent: {
+      name: "Trần Văn Minh",
+      avatar: "https://i.imgur.com/F8QXfXh.jpg",
+      child: "Trần Hoàng Nam",
+      class: "2B",
+    },
+    rating: 4,
+    comment:
+      "Thực đơn đa dạng và đầy đủ dinh dưỡng, con tôi đã tăng cân đều đặn từ khi sử dụng dịch vụ bán trú của trường.",
+    date: "23/10/2023",
+    dish: "Bún chả cá",
+    childFeedback: "Con thích nhất bữa phụ với các loại trái cây tươi.",
+  },
+  {
+    id: 3,
+    parent: {
+      name: "Lê Thị Mai",
+      avatar: "https://i.imgur.com/KWaVOLR.jpg",
+      child: "Lê Thu Hà",
+      class: "1A",
+    },
+    rating: 3,
+    comment:
+      "Món ăn khá ngon nhưng đôi khi hơi mặn đối với trẻ nhỏ. Mong nhà trường điều chỉnh lượng gia vị phù hợp hơn.",
+    date: "22/10/2023",
+    dish: "Bún riêu cua",
+    childFeedback: "Con đã bớt kén ăn hơn khi ở trường!",
+  },
+  {
+    id: 4,
+    parent: {
+      name: "Phạm Văn Tuấn",
+      avatar: "https://i.imgur.com/wgJDypg.jpg",
+      child: "Phạm Tuấn Kiệt",
+      class: "3A",
+    },
+    rating: 5,
+    comment:
+      "Tôi rất hài lòng với thực đơn và cách chăm sóc của nhà trường. Con tôi luôn hào hứng kể về bữa ăn ở trường.",
+    date: "21/10/2023",
+    dish: "Cơm sườn kho",
+    childFeedback: "Con thích nhất món sườn kho, rất ngon!",
+  },
+  {
+    id: 5,
+    parent: {
+      name: "Vũ Thị Hồng",
+      avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
+      child: "Vũ Hoàng Long",
+      class: "2B",
+    },
+    rating: 4,
+    comment:
+      "Đánh giá cao việc nhà trường quan tâm đến chế độ ăn chay cho con tôi. Mong có thêm nhiều món chay hơn nữa.",
+    date: "20/10/2023",
+    dish: "Món chay",
+    childFeedback: "Con rất thích món đậu phụ sốt cà chua!",
+  },
+];
+
+// Mock data for the menu items
+export const upcomingMenuItems = [
+  {
+    id: 1,
+    name: "Cơm gà rau củ",
+    category: "Bữa trưa",
+    date: "24/10/2023",
+    day: "Thứ Hai",
+    ingredients: ["Gạo lứt", "Thịt gà", "Cà rốt", "Bông cải xanh"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 450,
+      protein: 25,
+      carbs: 60,
+      fat: 8,
+    },
+    image: "https://i.imgur.com/wgJDypg.jpg",
+  },
+  {
+    id: 2,
+    name: "Bún chả cá",
+    category: "Bữa trưa",
+    date: "25/10/2023",
+    day: "Thứ Ba",
+    ingredients: ["Bún", "Chả cá", "Rau sống", "Nước mắm pha"],
+    allergies: ["Cá"],
+    nutritionalInfo: {
+      calories: 420,
+      protein: 22,
+      carbs: 55,
+      fat: 10,
+    },
+    image: "https://i.imgur.com/QNXAyTp.jpg",
+  },
+  {
+    id: 3,
+    name: "Cơm sườn kho",
+    category: "Bữa trưa",
+    date: "26/10/2023",
+    day: "Thứ Tư",
+    ingredients: ["Cơm trắng", "Sườn kho", "Canh rau ngót"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 520,
+      protein: 28,
+      carbs: 65,
+      fat: 15,
+    },
+    image: "https://i.imgur.com/t9oKhEo.jpg",
+  },
+  {
+    id: 4,
+    name: "Bún riêu cua",
+    category: "Bữa trưa",
+    date: "27/10/2023",
+    day: "Thứ Năm",
+    ingredients: ["Bún", "Riêu cua", "Đậu hũ", "Rau sống", "Giá đỗ"],
+    allergies: ["Hải sản"],
+    nutritionalInfo: {
+      calories: 450,
+      protein: 20,
+      carbs: 60,
+      fat: 12,
+    },
+    image: "https://i.imgur.com/Fd7LCKk.jpg",
+  },
+  {
+    id: 5,
+    name: "Cơm thịt kho trứng",
+    category: "Bữa trưa",
+    date: "28/10/2023",
+    day: "Thứ Sáu",
+    ingredients: ["Cơm trắng", "Thịt heo kho trứng", "Canh chua"],
+    allergies: ["Trứng"],
+    nutritionalInfo: {
+      calories: 550,
+      protein: 30,
+      carbs: 65,
+      fat: 15,
+    },
+    image: "https://i.imgur.com/JWxqcqR.jpg",
+  },
+];
+export const dessertItems = [
+  {
+    id: 6,
+    name: "Sữa chua & hoa quả",
+    category: "Tráng miệng",
+    date: "24/10/2023",
+    day: "Thứ Hai",
+    ingredients: ["Sữa chua không đường", "Hoa quả tươi theo mùa"],
+    allergies: ["Sữa"],
+    nutritionalInfo: {
+      calories: 150,
+      protein: 5,
+      carbs: 25,
+      fat: 3,
+    },
+    image: "https://i.imgur.com/K8gDgTf.jpg",
+  },
+  {
+    id: 7,
+    name: "Bánh flan caramel",
+    category: "Tráng miệng",
+    date: "25/10/2023",
+    day: "Thứ Ba",
+    ingredients: ["Trứng", "Sữa", "Đường", "Caramel"],
+    allergies: ["Trứng", "Sữa"],
+    nutritionalInfo: {
+      calories: 180,
+      protein: 5,
+      carbs: 30,
+      fat: 5,
+    },
+    image: "https://i.imgur.com/wHXtNAl.jpg",
+  },
+  {
+    id: 8,
+    name: "Chè đậu xanh",
+    category: "Tráng miệng",
+    date: "26/10/2023",
+    day: "Thứ Tư",
+    ingredients: ["Đậu xanh", "Đường", "Nước cốt dừa"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 200,
+      protein: 6,
+      carbs: 35,
+      fat: 4,
+    },
+    image: "https://i.imgur.com/oPXQN1f.jpg",
+  },
+  {
+    id: 9,
+    name: "Trái cây theo mùa",
+    category: "Tráng miệng",
+    date: "27/10/2023",
+    day: "Thứ Năm",
+    ingredients: ["Trái cây tươi theo mùa"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 120,
+      protein: 3,
+      carbs: 25,
+      fat: 1,
+    },
+    image: "https://i.imgur.com/5HJfYBQ.jpg",
+  },
+  {
+    id: 10,
+    name: "Sữa đậu nành",
+    category: "Tráng miệng",
+    date: "28/10/2023",
+    day: "Thứ Sáu",
+    ingredients: ["Đậu nành", "Đường"],
+    allergies: ["Đậu nành"],
+    nutritionalInfo: {
+      calories: 220,
+      protein: 8,
+      carbs: 30,
+      fat: 7,
+    },
+    image: "https://i.imgur.com/q2Fg0Uw.jpg",
+  },
+];
+export const pastMenuItems = [
+  {
+    id: 11,
+    name: "Phở gà",
+    category: "Bữa trưa",
+    date: "20/10/2023",
+    day: "Thứ Sáu",
+    ingredients: ["Bánh phở", "Thịt gà", "Hành ngò", "Nước dùng gà"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 450,
+      protein: 25,
+      carbs: 60,
+      fat: 8,
+    },
+    feedback: {
+      rating: 4.8,
+      comments: 15,
+      wastage: "Thấp",
+    },
+    image: "https://i.imgur.com/8RWKYSf.jpg",
+  },
+  {
+    id: 12,
+    name: "Cơm rang dưa bò",
+    category: "Bữa trưa",
+    date: "19/10/2023",
+    day: "Thứ Năm",
+    ingredients: ["Cơm", "Thịt bò", "Dưa chua", "Hành tây"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 480,
+      protein: 22,
+      carbs: 65,
+      fat: 12,
+    },
+    feedback: {
+      rating: 4.5,
+      comments: 10,
+      wastage: "Trung bình",
+    },
+    image: "https://i.imgur.com/JWxqcqR.jpg",
+  },
+];
+
+export const menuLibrary = [
+  {
+    id: 1,
+    name: "Thực đơn tuần 42/2023",
+    description: "Thực đơn cân bằng dinh dưỡng với các món ăn phổ biến",
+    dishes: 10,
+    rating: 4.8,
+    lastUsed: "10/10/2023",
+  },
+  {
+    id: 2,
+    name: "Thực đơn mùa hè",
+    description: "Thực đơn nhẹ nhàng, tươi mát cho mùa hè",
+    dishes: 12,
+    rating: 4.5,
+    lastUsed: "15/07/2023",
+  },
+  {
+    id: 3,
+    name: "Thực đơn đặc biệt",
+    description: "Thực đơn cho các dịp lễ đặc biệt",
+    dishes: 8,
+    rating: 4.7,
+    lastUsed: "02/09/2023",
+  },
+];
+// Mock data for food library
+export const foodLibrary = [
+  {
+    id: 1,
+    name: "Cơm gà rau củ",
+    category: "Bữa trưa",
+    ingredients: ["Gạo lứt", "Thịt gà", "Cà rốt", "Bông cải xanh"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 450,
+      protein: 25,
+      carbs: 60,
+      fat: 8,
+    },
+    image: "https://i.imgur.com/wgJDypg.jpg",
+  },
+  {
+    id: 2,
+    name: "Bún chả cá",
+    category: "Bữa trưa",
+    ingredients: ["Bún", "Chả cá", "Rau sống", "Nước mắm pha"],
+    allergies: ["Cá"],
+    nutritionalInfo: {
+      calories: 420,
+      protein: 22,
+      carbs: 55,
+      fat: 10,
+    },
+    image: "https://i.imgur.com/QNXAyTp.jpg",
+  },
+  {
+    id: 3,
+    name: "Cơm sườn kho",
+    category: "Bữa trưa",
+    ingredients: ["Cơm trắng", "Sườn kho", "Canh rau ngót"],
+    allergies: [],
+    nutritionalInfo: {
+      calories: 520,
+      protein: 28,
+      carbs: 65,
+      fat: 15,
+    },
+    image: "https://i.imgur.com/t9oKhEo.jpg",
+  },
+  {
+    id: 4,
+    name: "Bún riêu cua",
+    category: "Bữa trưa",
+    ingredients: ["Bún", "Riêu cua", "Đậu hũ", "Rau sống", "Giá đỗ"],
+    allergies: ["Hải sản"],
+    nutritionalInfo: {
+      calories: 450,
+      protein: 20,
+      carbs: 60,
+      fat: 12,
+    },
+    image: "https://i.imgur.com/Fd7LCKk.jpg",
+  },
+  {
+    id: 5,
+    name: "Sữa chua & hoa quả",
+    category: "Tráng miệng",
+    ingredients: ["Sữa chua không đường", "Hoa quả tươi theo mùa"],
+    allergies: ["Sữa"],
+    nutritionalInfo: {
+      calories: 150,
+      protein: 5,
+      carbs: 25,
+      fat: 3,
+    },
+    image: "https://i.imgur.com/K8gDgTf.jpg",
+  },
+  {
+    id: 6,
+    name: "Bánh flan caramel",
+    category: "Tráng miệng",
+    ingredients: ["Trứng", "Sữa", "Đường", "Caramel"],
+    allergies: ["Trứng", "Sữa"],
+    nutritionalInfo: {
+      calories: 180,
+      protein: 5,
+      carbs: 30,
+      fat: 5,
+    },
+    image: "https://i.imgur.com/wHXtNAl.jpg",
+  },
+];
+// Mock data for AI suggestions
+export const aiSuggestions = [
+  {
+    id: 1,
+    title: "Thực đơn cân bằng dinh dưỡng",
+    description:
+      "Thực đơn cân bằng với đầy đủ dinh dưỡng, phù hợp với học sinh tiểu học",
+    dishes: [
+      {
+        name: "Cơm gà rau củ",
+        day: "Thứ Hai",
+      },
+      {
+        name: "Bún chả cá",
+        day: "Thứ Ba",
+      },
+      {
+        name: "Cơm sườn kho",
+        day: "Thứ Tư",
+      },
+      {
+        name: "Bún riêu cua",
+        day: "Thứ Năm",
+      },
+      {
+        name: "Cơm thịt kho trứng",
+        day: "Thứ Sáu",
+      },
+    ],
+    desserts: [
+      {
+        name: "Sữa chua & hoa quả",
+        day: "Thứ Hai",
+      },
+      {
+        name: "Bánh flan caramel",
+        day: "Thứ Ba",
+      },
+      {
+        name: "Chè đậu xanh",
+        day: "Thứ Tư",
+      },
+      {
+        name: "Trái cây theo mùa",
+        day: "Thứ Năm",
+      },
+      {
+        name: "Sữa đậu nành",
+        day: "Thứ Sáu",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Thực đơn truyền thống Việt Nam",
+    description:
+      "Thực đơn với các món ăn truyền thống Việt Nam, giàu dinh dưỡng",
+    dishes: [
+      {
+        name: "Phở gà",
+        day: "Thứ Hai",
+      },
+      {
+        name: "Cơm tấm sườn",
+        day: "Thứ Ba",
+      },
+      {
+        name: "Bún bò Huế",
+        day: "Thứ Tư",
+      },
+      {
+        name: "Cơm gà Hải Nam",
+        day: "Thứ Năm",
+      },
+      {
+        name: "Bánh cuốn",
+        day: "Thứ Sáu",
+      },
+    ],
+    desserts: [
+      {
+        name: "Chè trôi nước",
+        day: "Thứ Hai",
+      },
+      {
+        name: "Bánh chuối hấp",
+        day: "Thứ Ba",
+      },
+      {
+        name: "Chè bắp",
+        day: "Thứ Tư",
+      },
+      {
+        name: "Sữa chua nếp cẩm",
+        day: "Thứ Năm",
+      },
+      {
+        name: "Hoa quả dầm",
+        day: "Thứ Sáu",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Thực đơn ít dầu mỡ",
+    description:
+      "Thực đơn giảm dầu mỡ, tập trung vào các món hấp, luộc và nướng",
+    dishes: [
+      {
+        name: "Cơm gà hấp lá sen",
+        day: "Thứ Hai",
+      },
+      {
+        name: "Bún thịt nướng",
+        day: "Thứ Ba",
+      },
+      {
+        name: "Cơm cá hồi sốt chanh dây",
+        day: "Thứ Tư",
+      },
+      {
+        name: "Miến xào rau củ",
+        day: "Thứ Năm",
+      },
+      {
+        name: "Cơm trộn Hàn Quốc",
+        day: "Thứ Sáu",
+      },
+    ],
+    desserts: [
+      {
+        name: "Salad hoa quả",
+        day: "Thứ Hai",
+      },
+      {
+        name: "Sữa chua mật ong",
+        day: "Thứ Ba",
+      },
+      {
+        name: "Sinh tố bơ",
+        day: "Thứ Tư",
+      },
+      {
+        name: "Dưa hấu",
+        day: "Thứ Năm",
+      },
+      {
+        name: "Pudding táo",
+        day: "Thứ Sáu",
+      },
+    ],
+  },
+];

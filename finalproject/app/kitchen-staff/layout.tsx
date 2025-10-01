@@ -14,6 +14,8 @@ import {
   Settings,
   LogOut,
   Users,
+  ShoppingCart,
+  MessageCircle,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -158,6 +160,23 @@ export default function KitchenStaffLayout({
                 </li>
                 <li>
                   <Link
+                    href="/kitchen-staff/purchase-plan"
+                    className={`flex items-center ${
+                      isSidebarOpen ? "justify-start" : "justify-center"
+                    } py-2 px-3 rounded-lg ${
+                      isActive("/kitchen-staff/purchase-plan")
+                        ? "bg-orange-50 text-orange-500 font-medium"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    <ShoppingCart size={20} />
+                    {isSidebarOpen && (
+                      <span className="ml-3">Kế hoạch mua sắm</span>
+                    )}
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/kitchen-staff/allergies"
                     className={`flex items-center ${
                       isSidebarOpen ? "justify-start" : "justify-center"
@@ -173,6 +192,28 @@ export default function KitchenStaffLayout({
                         <span className="ml-3">Dị ứng</span>
                         <span className="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
                           3
+                        </span>
+                      </>
+                    )}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/kitchen-staff/feedback"
+                    className={`flex items-center ${
+                      isSidebarOpen ? "justify-start" : "justify-center"
+                    } py-2 px-3 rounded-lg ${
+                      isActive("/kitchen-staff/feedback")
+                        ? "bg-orange-50 text-orange-500 font-medium"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    <MessageCircle size={20} />
+                    {isSidebarOpen && (
+                      <>
+                        <span className="ml-3">Phản hồi & Đánh giá</span>
+                        <span className="ml-auto bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full">
+                          2
                         </span>
                       </>
                     )}
