@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Merriweather } from "next/font/google";
 import { Providers } from "./providers";
+import { Suspense } from "react";
+import Loader from "./loading";
 
 const merriweather = Merriweather({
   subsets: ["latin"],
@@ -22,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="vi" suppressHydrationWarning>
       <body className={`${merriweather.variable}`} suppressHydrationWarning>
-        <Providers>{children}</Providers>
+        <Suspense fallback={<Loader />}>
+          <Providers>{children}</Providers>
+        </Suspense>
       </body>
     </html>
   );

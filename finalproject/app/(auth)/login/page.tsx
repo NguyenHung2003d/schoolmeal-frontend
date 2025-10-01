@@ -4,12 +4,12 @@ import LoginForm from "@/components/auth/login-form";
 export default function LoginPage() {
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-5 pt-10">
-      <div className="relative hidden lg:block lg:col-span-3 overflow-hidden h-full">
+      <div className="relative hidden lg:block lg:col-span-3 overflow-hidden">
         <Image
-          src="/anh_nen.jpg"
-          alt="Background"
+          src="/anh_login.jpg"
+          alt="anh_login"
           fill
-          className=" object-center"
+          className="object-cover w-full h-full"
         />
       </div>
 

@@ -2,11 +2,11 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ButtonRedirect from "@/components/ui/ButtonRedirect"
+import ButtonRedirect from "@/components/ui/ButtonRedirect";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function GlobalNotFound() {
+export default function NotFound() {
   return (
     <html lang="vi" className={inter.className}>
       <body
