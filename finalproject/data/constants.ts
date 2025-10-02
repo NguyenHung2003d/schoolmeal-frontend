@@ -825,7 +825,6 @@ export const parentFeedbacks = [
   },
 ];
 
-// Mock data for the menu items
 export const upcomingMenuItems = [
   {
     id: 1,
@@ -908,6 +907,7 @@ export const upcomingMenuItems = [
     image: "https://i.imgur.com/JWxqcqR.jpg",
   },
 ];
+
 export const dessertItems = [
   {
     id: 6,
@@ -1299,5 +1299,113 @@ export const aiSuggestions = [
         day: "Thứ Sáu",
       },
     ],
+  },
+];
+
+// Mock data for shopping list items
+export const shoppingItems = [
+  {
+    id: 1,
+    name: "Thịt gà",
+    category: "Thịt & Hải sản",
+    quantity: 10,
+    unit: "kg",
+    status: "pending",
+    urgency: "high",
+    note: "Chọn thịt gà tươi, không đông lạnh",
+    supplier: "Công ty Thực phẩm Sạch",
+    estimatedCost: 850000,
+  },
+  {
+    id: 2,
+    name: "Cà rốt",
+    category: "Rau củ",
+    quantity: 8,
+    unit: "kg",
+    status: "purchased",
+    urgency: "medium",
+    note: "",
+    supplier: "Nông trại Xanh",
+    estimatedCost: 120000,
+  },
+  {
+    id: 3,
+    name: "Sữa tươi",
+    category: "Sữa & Trứng",
+    quantity: 20,
+    unit: "lít",
+    status: "outOfStock",
+    urgency: "high",
+    note: "Cần tìm nhà cung cấp khác",
+    supplier: "Công ty Sữa Vinamilk",
+    estimatedCost: 400000,
+  },
+  {
+    id: 4,
+    name: "Trứng gà",
+    category: "Sữa & Trứng",
+    quantity: 100,
+    unit: "quả",
+    status: "pending",
+    urgency: "medium",
+    note: "",
+    supplier: "Trang trại Đồng Nai",
+    estimatedCost: 350000,
+  },
+  {
+    id: 5,
+    name: "Gạo",
+    category: "Nguyên liệu chính",
+    quantity: 50,
+    unit: "kg",
+    status: "pending",
+    urgency: "low",
+    note: "Gạo Jasmine hoặc tương tự",
+    supplier: "Công ty Gạo Miền Tây",
+    estimatedCost: 1250000,
+  },
+];
+// Mock data for previous shopping lists
+export const previousLists = [
+  {
+    id: 1,
+    date: "15/10/2023",
+    items: 12,
+    totalCost: "3,450,000 VND",
+    status: "completed",
+  },
+  {
+    id: 2,
+    date: "08/10/2023",
+    items: 15,
+    totalCost: "4,120,000 VND",
+    status: "completed",
+  },
+];
+// Mock data for replacement suggestions
+export const replacementSuggestions = [
+  {
+    id: 1,
+    name: "Sữa tươi TH True Milk",
+    supplier: "TH True Milk",
+    estimatedCost: 22000,
+    unit: "lít",
+    availability: "Có sẵn",
+  },
+  {
+    id: 2,
+    name: "Sữa tươi Mộc Châu",
+    supplier: "Mộc Châu Milk",
+    estimatedCost: 20000,
+    unit: "lít",
+    availability: "Có sẵn",
+  },
+  {
+    id: 3,
+    name: "Sữa tươi Dutch Lady",
+    supplier: "Dutch Lady",
+    estimatedCost: 21000,
+    unit: "lít",
+    availability: "1-2 ngày",
   },
 ];
