@@ -1,7 +1,68 @@
 import { ParentFeedbackData } from "@/data/constants";
 import { Star } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ParentFeedbackSection = () => {
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+  const headRef = useRef<HTMLDivElement[]>([]);
+  const startsRef = useRef<HTMLDivElement[]>([]);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(headRef.current, {
+        scrollTrigger: {
+          trigger: headRef.current,
+          start: "top 80%",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+      gsap.from(cardsRef.current, {
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 80%",
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+      startsRef.current.forEach((start) => {
+        if (!start) return;
+        const value = start.querySelector(".start-value");
+        if (!value) return;
+        gsap.from(value, {
+          scrollTrigger: {
+            trigger: start,
+            start: "top 85%",
+          },
+          textContent: 0,
+          duration: 1.5,
+          ease: "power1.out",
+          snap: {
+            textContent: 1,
+          },
+          onUpdate: function () {
+            const current = Math.ceil(this.target()[0].textContent);
+            const text = value.getAttribute("data-value") || "";
+            if (text.includes("%")) {
+              value.textContent = current + "%";
+            } else if (text.includes("+")) {
+              value.textContent = current + "+";
+            } else {
+              value.textContent = text;
+            }
+          },
+        });
+      });
+    });
+    return () => ctx.revert();
+  }, []);
   const StarRating = ({ stars }: { stars: number }) => (
     <div className="flex gap-1 mb-5">
       {[
@@ -12,7 +73,7 @@ const ParentFeedbackSection = () => {
               index < stars ? "text-yellow-400" : "text-gray-300"
             }`}
           >
-            <Star />
+            <Star fill={index < stars ? "currentColor" : "none"} />
           </span>
         )),
       ]}

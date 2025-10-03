@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import {
   Bell,
@@ -9,38 +10,7 @@ import {
   Users,
   School,
 } from "lucide-react";
-
-// ===== Kiểu dữ liệu =====
-type NotificationStatus = "sent" | "scheduled" | "draft";
-
-interface Notification {
-  id: number;
-  title: string;
-  content: string;
-  type: "immediate" | "periodic";
-  target: string;
-  schools: string[];
-  schedule: string;
-  status: NotificationStatus;
-  sent: number;
-  read: number;
-  createdDate: string;
-  updatedDate?: string;
-}
-
-interface FormData {
-  title: string;
-  content: string;
-  type: "immediate" | "periodic";
-  target: string;
-  schools: string[];
-  classes: string[];
-  scheduleType: "now" | "schedule";
-  scheduleDate: string;
-  scheduleTime: string;
-  repeatType: "none" | "daily" | "weekly" | "monthly";
-  file: File | null;
-}
+import { FormData, Notification, NotificationStatus } from "@/types";
 
 export default function NotificationManagement() {
   const [notifications, setNotifications] = useState<Notification[]>([

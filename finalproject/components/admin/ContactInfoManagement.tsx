@@ -8,7 +8,7 @@ import {
   Globe,
   Edit,
 } from "lucide-react";
-import { SchoolContact, SystemContact } from "@/types";
+import { EditMode, SchoolContact, SystemContact } from "@/types";
 
 export default function ContactInfoManagement() {
   const [contactInfo, setContactInfo] = useState<{
@@ -41,21 +41,19 @@ export default function ContactInfoManagement() {
     ],
   });
 
-  const [editMode, setEditMode] = useState<
-    "system" | `school-${number}` | null
-  >(null);
+  const [editMode, setEditMode] = useState<EditMode>(null);
   const [tempData, setTempData] = useState<
     SystemContact | SchoolContact | null
   >(null);
 
-  const startEdit = (type, data) => {
+  const startEdit = (type: EditMode, data: SystemContact | SchoolContact) => {
     setEditMode(type);
     setTempData({ ...data });
   };
 
   const cancelEdit = () => {
     setEditMode(null);
-    setTempData({});
+    setTempData(null);
   };
 
   const saveChanges = () => {
@@ -125,9 +123,12 @@ export default function ContactInfoManagement() {
                   />
                   <input
                     type="text"
-                    value={tempData.hotline}
+                    value={tempData?.hotline}
                     onChange={(e) =>
-                      setTempData({ ...tempData, hotline: e.target.value })
+                      setTempData({
+                        ...(tempData as SchoolContact),
+                        hotline: e.target.value,
+                      })
                     }
                     className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
                     placeholder="1900-xxxx"
@@ -146,9 +147,12 @@ export default function ContactInfoManagement() {
                   />
                   <input
                     type="text"
-                    value={tempData.zalo}
+                    value={tempData?.zalo}
                     onChange={(e) =>
-                      setTempData({ ...tempData, zalo: e.target.value })
+                      setTempData({
+                        ...(tempData as SchoolContact),
+                        zalo: e.target.value,
+                      })
                     }
                     className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
                     placeholder="0912-xxx-xxx"
@@ -167,9 +171,12 @@ export default function ContactInfoManagement() {
                   />
                   <input
                     type="email"
-                    value={tempData.email}
+                    value={tempData?.email}
                     onChange={(e) =>
-                      setTempData({ ...tempData, email: e.target.value })
+                      setTempData({
+                        ...(tempData as SchoolContact),
+                        email: e.target.value,
+                      })
                     }
                     className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
                     placeholder="support@example.com"
@@ -183,9 +190,12 @@ export default function ContactInfoManagement() {
                 </label>
                 <input
                   type="text"
-                  value={tempData.address}
+                  value={tempData?.address}
                   onChange={(e) =>
-                    setTempData({ ...tempData, address: e.target.value })
+                    setTempData({
+                      ...(tempData as SchoolContact),
+                      address: e.target.value,
+                    })
                   }
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
                   placeholder="Địa chỉ văn phòng"
@@ -287,9 +297,12 @@ export default function ContactInfoManagement() {
                       />
                       <input
                         type="text"
-                        value={tempData.hotline}
+                        value={tempData?.hotline}
                         onChange={(e) =>
-                          setTempData({ ...tempData, hotline: e.target.value })
+                          setTempData({
+                            ...(tempData as SystemContact),
+                            hotline: e.target.value,
+                          })
                         }
                         className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                         placeholder="028-xxxx-xxxx"
@@ -308,9 +321,12 @@ export default function ContactInfoManagement() {
                       />
                       <input
                         type="text"
-                        value={tempData.zalo}
+                        value={tempData?.zalo}
                         onChange={(e) =>
-                          setTempData({ ...tempData, zalo: e.target.value })
+                          setTempData({
+                            ...(tempData as SystemContact),
+                            zalo: e.target.value,
+                          })
                         }
                         className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                         placeholder="090-xxx-xxxx"
@@ -329,9 +345,12 @@ export default function ContactInfoManagement() {
                       />
                       <input
                         type="email"
-                        value={tempData.email}
+                        value={tempData?.email}
                         onChange={(e) =>
-                          setTempData({ ...tempData, email: e.target.value })
+                          setTempData({
+                            ...(tempData as SystemContact),
+                            email: e.target.value,
+                          })
                         }
                         className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                         placeholder="school@edu.vn"
@@ -345,9 +364,12 @@ export default function ContactInfoManagement() {
                     </label>
                     <input
                       type="text"
-                      value={tempData.address}
+                      value={tempData?.address}
                       onChange={(e) =>
-                        setTempData({ ...tempData, address: e.target.value })
+                        setTempData({
+                          ...(tempData as SystemContact),
+                          address: e.target.value,
+                        })
                       }
                       className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                       placeholder="Địa chỉ trường"

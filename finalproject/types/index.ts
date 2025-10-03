@@ -178,4 +178,34 @@ export type WeeklyMenuByDay = {
   };
 };
 
+export interface Notification {
+  id: number;
+  title: string;
+  content: string;
+  type: "immediate" | "periodic";
+  target: string;
+  schools: string[];
+  schedule: string;
+  status: NotificationStatus;
+  sent: number;
+  read: number;
+  createdDate: string;
+  updatedDate?: string;
+}
+
+export interface FormData {
+  title: string;
+  content: string;
+  type: "immediate" | "periodic";
+  target: string;
+  schools: string[];
+  classes: string[];
+  scheduleType: "now" | "schedule";
+  scheduleDate: string;
+  scheduleTime: string;
+  repeatType: "none" | "daily" | "weekly" | "monthly";
+  file: File | null;
+}
+
 export type NotificationStatus = "sent" | "scheduled" | "draft";
+export type EditMode = "system" | `school-${number}` | null;
