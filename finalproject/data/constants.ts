@@ -1,4 +1,5 @@
-import { ParentFeedback } from "@/types";
+import { MissionItem, ParentFeedback } from "@/types";
+import { Target, Heart, Award } from "lucide-react";
 
 export const images = [
   {
@@ -1408,4 +1409,39 @@ export const replacementSuggestions = [
     unit: "lít",
     availability: "1-2 ngày",
   },
+];
+
+export const missionData: MissionItem[] = [
+  {
+    icon: Target,
+    title: "Sứ mệnh",
+    description:
+      "Kết nối phụ huynh với cuộc sống học đường của con, mang đến sự an tâm và minh bạch trong việc chăm sóc dinh dưỡng",
+  },
+  {
+    icon: Heart,
+    title: "Giá trị cốt lõi",
+    description:
+      "Minh bạch, Tin cậy, Tiện lợi - Những giá trị chúng tôi hướng đến trong mỗi tính năng của EduMeal",
+  },
+  {
+    icon: Award,
+    title: "Tầm nhìn",
+    description:
+      "Trở thành nền tảng quản lý bữa ăn học đường hàng đầu, được tin dùng bởi hàng triệu phụ huynh",
+  },
+];
+
+export const teamMembers = [
+  { name: "Nguyễn Văn A", role: "CEO & Founder", avatar: "NVA" },
+  { name: "Trần Thị B", role: "CTO", avatar: "TTB" },
+  { name: "Lê Văn C", role: "Head of Product", avatar: "LVC" },
+  { name: "Phạm Thị D", role: "Head of Design", avatar: "PTD" },
+];
+
+export const statsData = [
+  { value: 50, label: "Trường học", suffix: "+" },
+  { value: 5000, label: "Phụ huynh", suffix: "+" },
+  { value: 10000, label: "Bữa ăn/ngày", suffix: "+" },
+  { value: 99, label: "Hài lòng", suffix: "%" },
 ];

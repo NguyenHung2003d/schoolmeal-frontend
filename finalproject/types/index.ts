@@ -1,3 +1,6 @@
+import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
+
 export interface BaseItem {
   image: string;
   description: string;
@@ -206,6 +209,12 @@ export interface FormData {
   repeatType: "none" | "daily" | "weekly" | "monthly";
   file: File | null;
 }
+
+export type MissionItem = {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+};
 
 export type NotificationStatus = "sent" | "scheduled" | "draft";
 export type EditMode = "system" | `school-${number}` | null;
