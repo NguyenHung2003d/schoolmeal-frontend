@@ -8,7 +8,6 @@ import {
   User,
 } from "lucide-react";
 
-// ===== Stats Cards =====
 function DashboardStats() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
@@ -53,7 +52,6 @@ function DashboardStats() {
   );
 }
 
-// ===== Chart Placeholder =====
 function DashboardChart() {
   return (
     <div className="bg-white border border-gray-100 rounded-lg shadow-sm">
@@ -73,7 +71,6 @@ function DashboardChart() {
   );
 }
 
-// ===== Recent Activities =====
 function RecentActivities() {
   const activities = [
     {

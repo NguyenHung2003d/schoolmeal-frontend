@@ -1,21 +1,76 @@
+"use client";
 import { ParentFeedbackData } from "@/data/constants";
 import { Star } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ParentFeedbackSection = () => {
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+  const statsRef = useRef<HTMLDivElement[]>([]);
+  useEffect(() => {
+    cardsRef.current.forEach((card, index) => {
+      if (!card) return;
+      gsap.fromTo(
+        card,
+        {
+          opacity: 0,
+          y: 100,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          delay: index * 0.2,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+          },
+        }
+      );
+    });
+    statsRef.current.forEach((el) => {
+      if (!el) return;
+      const finalValue = parseInt(el.dataset.value || "0");
+      gsap.fromTo(
+        { val: 0 },
+        { val: 0 },
+        {
+          val: finalValue,
+          duration: 2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+          },
+          onUpdate: function () {
+            el.innerText = Math.floor(
+              (this.targets()[0] as any).val
+            ).toLocaleString();
+          },
+        }
+      );
+    });
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
   const StarRating = ({ stars }: { stars: number }) => (
     <div className="flex gap-1 mb-5">
-      {[
-        ...Array(5).map((_, index) => (
-          <span
-            key={index}
-            className={`text-lg ${
-              index < stars ? "text-yellow-400" : "text-gray-300"
-            }`}
-          >
-            <Star />
-          </span>
-        )),
-      ]}
+      {Array.from({ length: 5 }).map((_, index) => (
+        <span
+          key={index}
+          className={`text-lg ${
+            index < stars ? "text-yellow-400" : "text-gray-300"
+          }`}
+        >
+          <Star size={18} />
+        </span>
+      ))}
     </div>
   );
   return (
@@ -31,50 +86,15 @@ const ParentFeedbackSection = () => {
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {ParentFeedbackData.map((testimonial, index) => (
-            <div
-              key={testimonial.id}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 relative group"
-            >
-              <div className="absolute -top-4 right-6 bg-orange-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
-                {testimonial.rating}
-              </div>
-
-              <StarRating stars={testimonial.stars} />
-
-              <div className="text-left mb-6 relative">
-                <span className="text-3xl text-orange-500 font-bold absolute -top-2 -left-2">
-                  "
-                </span>
-                <p className="text-gray-700 italic leading-relaxed pl-6">
-                  {testimonial.text}
+          {ParentFeedbackData.map((testimonial) => (
+            <div key={testimonial.id}>
+              <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
+                <p className="italic text-gray-700 mb-4">
+                  "{testimonial.text}"
                 </p>
-                <span className="text-3xl text-orange-500 font-bold float-right">
-                  "
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  {testimonial.author.avatar}
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-gray-800">
-                    {testimonial.author.name}
-                  </h4>
-                  <p className="text-sm text-gray-500">
-                    {testimonial.author.role}
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg">
-                <div className="flex items-center gap-2 text-orange-600 font-medium text-sm mb-2">
-                  <span>💡</span>
-                  Phản hồi từ bé:
-                </div>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  {testimonial.feedback}
+                <h4 className="font-semibold">{testimonial.author.name}</h4>
+                <p className="text-sm text-gray-500">
+                  {testimonial.author.role}
                 </p>
               </div>
             </div>
@@ -83,15 +103,39 @@ const ParentFeedbackSection = () => {
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">1000+</div>
+            <div
+              ref={(el) => {
+                if (el) statsRef.current[0] = el;
+              }}
+              data-value="1000"
+              className="text-3xl font-bold text-orange-500 mb-2"
+            >
+              0
+            </div>
             <div className="text-gray-600">Phụ huynh tin tưởng</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">99%</div>
+            <div
+              ref={(el) => {
+                el && (statsRef.current[1] = el);
+              }}
+              data-value="99"
+              className="text-3xl font-bold text-orange-500 mb-2"
+            >
+              0
+            </div>
             <div className="text-gray-600">Mức độ hài lòng</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">5★</div>
+            <div
+              ref={(el) => {
+                el && (statsRef.current[2] = el);
+              }}
+              data-value="5"
+              className="text-3xl font-bold text-orange-500 mb-2"
+            >
+              0
+            </div>
             <div className="text-gray-600">Đánh giá trung bình</div>
           </div>
         </div>
