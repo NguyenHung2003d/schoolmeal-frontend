@@ -1,5 +1,5 @@
-import { MenuTab } from "@/components/kitchenstaff/menu/MenuTab";
+import { redirect } from "next/navigation";
 
 export default function MenuPage() {
-  return <MenuTab />;
+  redirect("/kitchen-staff/menu/upcoming");
 }
