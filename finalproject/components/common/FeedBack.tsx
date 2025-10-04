@@ -4,81 +4,103 @@ import { Star } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { TextPlugin } from "gsap/TextPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 const ParentFeedbackSection = () => {
-  const cardsRef = useRef<HTMLDivElement[]>([]);
-  const statsRef = useRef<HTMLDivElement[]>([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<(HTMLDivElement | null)[]>([]);
   useEffect(() => {
-    cardsRef.current.forEach((card, index) => {
-      if (!card) return;
-      gsap.fromTo(
-        card,
-        {
-          opacity: 0,
-          y: 100,
-          scale: 0.9,
+    const ctx = gsap.context(() => {
+      gsap.from(headerRef.current, {
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: "top 80%",
         },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          delay: index * 0.2,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+
+      gsap.from(cardsRef.current, {
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 80%",
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+
+      statsRef.current.forEach((start) => {
+        if (!start) return;
+        const value = start.querySelector(".start-value");
+        if (!value) return;
+
+        const target = value.getAttribute("data-value") || "0";
+        const pureNumber = parseInt(target.replace(/\D/g, ""), 10);
+
+        gsap.fromTo(
+          value,
+          {
+            textContent: 0,
           },
-        }
-      );
+          {
+            textContent: pureNumber,
+            duration: 2,
+            ease: "power1.out",
+            snap: { textContent: 1 },
+            scrollTrigger: {
+              trigger: start,
+              start: "top 85%",
+            },
+            onUpdate: function () {
+              const current = Math.ceil(Number((value as any).textContent));
+              if (target.includes("%")) {
+                value.textContent = current + "%";
+              } else if (target.includes("+")) {
+                value.textContent = current + "+";
+              } else if (target.includes("★")) {
+                value.textContent = current + "★";
+              } else {
+                value.textContent = String(current);
+              }
+            },
+          }
+        );
+      });
     });
-    statsRef.current.forEach((el) => {
-      if (!el) return;
-      const finalValue = parseInt(el.dataset.value || "0");
-      gsap.fromTo(
-        { val: 0 },
-        { val: 0 },
-        {
-          val: finalValue,
-          duration: 2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-          },
-          onUpdate: function () {
-            el.innerText = Math.floor(
-              (this.targets()[0] as any).val
-            ).toLocaleString();
-          },
-        }
-      );
-    });
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
+    return () => ctx.revert();
   }, []);
+
   const StarRating = ({ stars }: { stars: number }) => (
     <div className="flex gap-1 mb-5">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <span
-          key={index}
-          className={`text-lg ${
-            index < stars ? "text-yellow-400" : "text-gray-300"
-          }`}
-        >
-          <Star size={18} />
-        </span>
-      ))}
+      {[
+        ...Array(5).map((_, index) => (
+          <span
+            key={index}
+            className={`text-lg ${
+              index < stars ? "text-yellow-400" : "text-gray-300"
+            }`}
+          >
+            <Star fill={index < stars ? "currentColor" : "none"} />
+          </span>
+        )),
+      ]}
     </div>
   );
   return (
     <div className="min-h-screen py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">
-          Phụ huynh nói gì về EduMeal
-        </h2>
+        <div ref={headerRef}>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">
+            Phụ huynh nói gì về EduMeal
+          </h2>
+        </div>
 
         <p className="text-lg text-gray-600 mb-16 max-w-2xl mx-auto leading-relaxed">
           Chia sẻ từ phụ huynh về trải nghiệm sử dụng EduMeal để theo dõi bữa ăn
@@ -86,11 +108,26 @@ const ParentFeedbackSection = () => {
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {ParentFeedbackData.map((testimonial) => (
-            <div key={testimonial.id}>
-              <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
-                <p className="italic text-gray-700 mb-4">
-                  "{testimonial.text}"
+          {ParentFeedbackData.map((testimonial, index) => (
+            <div
+              key={testimonial.id}
+              ref={(el) => {
+                cardsRef.current[index] = el;
+              }}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 relative group"
+            >
+              <div className="absolute -top-4 right-6 bg-orange-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                {testimonial.rating}
+              </div>
+
+              <StarRating stars={testimonial.stars} />
+
+              <div className="text-left mb-6 relative">
+                <span className="text-3xl text-orange-500 font-bold absolute -top-2 -left-2">
+                  "
+                </span>
+                <p className="text-gray-700 italic leading-relaxed pl-6">
+                  {testimonial.text}
                 </p>
                 <h4 className="font-semibold">{testimonial.author.name}</h4>
                 <p className="text-sm text-gray-500">
@@ -102,37 +139,43 @@ const ParentFeedbackSection = () => {
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center">
+          <div
+            className="text-center"
+            ref={(el) => {
+              statsRef.current[0] = el;
+            }}
+          >
             <div
-              ref={(el) => {
-                if (el) statsRef.current[0] = el;
-              }}
-              data-value="1000"
-              className="text-3xl font-bold text-orange-500 mb-2"
+              className="text-3xl font-bold text-orange-500 mb-2 start-value"
+              data-value="1000+"
             >
               0
             </div>
             <div className="text-gray-600">Phụ huynh tin tưởng</div>
           </div>
-          <div className="text-center">
+          <div
+            className="text-center"
+            ref={(el) => {
+              statsRef.current[1] = el;
+            }}
+          >
             <div
-              ref={(el) => {
-                el && (statsRef.current[1] = el);
-              }}
+              className="text-3xl font-bold text-orange-500 mb-2 start-value"
               data-value="99"
-              className="text-3xl font-bold text-orange-500 mb-2"
             >
               0
             </div>
             <div className="text-gray-600">Mức độ hài lòng</div>
           </div>
-          <div className="text-center">
+          <div
+            className="text-center"
+            ref={(el) => {
+              statsRef.current[2] = el;
+            }}
+          >
             <div
-              ref={(el) => {
-                el && (statsRef.current[2] = el);
-              }}
+              className="text-3xl font-bold text-orange-500 mb-2 start-value"
               data-value="5"
-              className="text-3xl font-bold text-orange-500 mb-2"
             >
               0
             </div>

@@ -1,189 +1,61 @@
-'use client'
+"use client";
 import { useState } from "react";
 import {
   School,
   Mail,
-  User,
-  Lock,
+  MapPin,
+  Phone,
   Search,
   Filter,
-  Ban,
-  CheckCircle,
+  MoreHorizontal,
+  Users,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
 } from "lucide-react";
+import { schools } from "@/data/constants";
 
 export default function SchoolManagement() {
-  const [showCreateForm, setShowCreateForm] = useState(false);
-  const [formData, setFormData] = useState({
-    schoolName: "",
-    email: "",
-  });
-
-  const [schools, setSchools] = useState([
-    {
-      id: 1,
-      schoolName: "Trường THCS Nguyễn Du",
-      email: "nguyendu@edu.vn",
-      manager: "Nguyễn Văn A",
-      students: 450,
-      status: "active",
-      createdDate: "15/09/2024",
-    },
-    {
-      id: 2,
-      schoolName: "Trường THPT Lê Quý Đôn",
-      email: "lequydon@edu.vn",
-      manager: "Trần Thị B",
-      students: 680,
-      status: "active",
-      createdDate: "20/08/2024",
-    },
-    {
-      id: 3,
-      schoolName: "Trường Tiểu học Trần Phú",
-      email: "tranphu@edu.vn",
-      manager: "Lê Văn C",
-      students: 320,
-      status: "locked",
-      createdDate: "10/07/2024",
-    },
-  ]);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const newSchool = {
-      id: schools.length + 1,
-      schoolName: formData.schoolName,
-      email: formData.email,
-      manager: "Chưa kích hoạt",
-      students: 0,
-      status: "pending",
-      createdDate: new Date().toLocaleDateString("vi-VN"),
-    };
-    setSchools([...schools, newSchool]);
-    setFormData({ schoolName: "", email: "" });
-    setShowCreateForm(false);
-    alert("Đã gửi email kích hoạt tài khoản đến " + formData.email);
-  };
-
-  const toggleStatus = (id: number) => {
-    setSchools(
-      schools.map((school) =>
-        school.id === id
-          ? {
-              ...school,
-              status: school.status === "active" ? "locked" : "active",
-            }
-          : school
-      )
-    );
-  };
-
-  const filteredSchools = schools.filter((school) => {
+  const filteredSchools = schools.filter((s) => {
     const matchesSearch =
-      school.schoolName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      school.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter =
-      filterStatus === "all" || school.status === filterStatus;
+      s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filterStatus === "all" || s.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
 
   return (
     <div>
+      {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Quản lý Trường học</h1>
-        <button
-          onClick={() => setShowCreateForm(true)}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
-        >
-          <School size={18} />
-          <span>Tạo tài khoản quản lý mới</span>
+        <div>
+          <h1 className="text-2xl font-bold">Quản lý trường học</h1>
+          <p className="text-gray-500 text-sm">
+            Quản lý danh sách các trường đang sử dụng dịch vụ của EduMeal
+          </p>
+        </div>
+        <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+          <Plus size={18} />
+          <span>Thêm trường mới</span>
         </button>
       </div>
 
-      {/* Create Form Modal */}
-      {showCreateForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">
-              Tạo tài khoản quản lý trường học
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Tên trường *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.schoolName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, schoolName: e.target.value })
-                  }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500"
-                  placeholder="VD: Trường THCS Nguyễn Du"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Email chính thức của trường *
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500"
-                  placeholder="example@edu.vn"
-                />
-              </div>
-              <div className="bg-blue-50 p-3 rounded-lg text-sm text-blue-700">
-                <p>
-                  📧 Hệ thống sẽ tự động tạo tài khoản và gửi email kích hoạt
-                  đến địa chỉ trên.
-                </p>
-              </div>
-              <div className="flex space-x-3">
-                <button
-                  type="submit"
-                  className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg"
-                >
-                  Tạo tài khoản
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowCreateForm(false)}
-                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 rounded-lg"
-                >
-                  Hủy
-                </button>
-              </div>
-            </form>
-          </div>
+      {/* Search + Filter */}
+      <div className="bg-white rounded-lg p-4 mb-6 shadow-sm flex flex-wrap gap-4 items-center justify-between">
+        <div className="flex-1 min-w-64 relative">
+          <Search size={18} className="absolute left-3 top-2.5 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Tìm kiếm trường học..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
+          />
         </div>
-      )}
 
-      {/* Search and Filter */}
-      <div className="bg-white rounded-lg p-4 mb-6 shadow-sm flex flex-wrap gap-4">
-        <div className="flex-1 min-w-64">
-          <div className="relative">
-            <Search
-              className="absolute left-3 top-2.5 text-gray-400"
-              size={18}
-            />
-            <input
-              type="text"
-              placeholder="Tìm kiếm theo tên trường hoặc email..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
-            />
-          </div>
-        </div>
         <div className="flex items-center space-x-2">
           <Filter size={18} className="text-gray-400" />
           <select
@@ -193,93 +65,83 @@ export default function SchoolManagement() {
           >
             <option value="all">Tất cả trạng thái</option>
             <option value="active">Đang hoạt động</option>
-            <option value="locked">Đã khóa</option>
-            <option value="pending">Chờ kích hoạt</option>
+            <option value="pending">Chờ xác nhận</option>
           </select>
         </div>
       </div>
 
-      {/* Schools Table */}
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-gray-50 border-b">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Tên trường
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Quản lý
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Học sinh
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Trạng thái
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Ngày tạo
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Thao tác
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y">
-            {filteredSchools.map((school) => (
-              <tr key={school.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4">
-                  <div className="flex items-center">
-                    <School size={18} className="text-orange-500 mr-2" />
-                    <span className="font-medium">{school.schoolName}</span>
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-600">
+      {/* Grid of cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {filteredSchools.map((school) => (
+          <div
+            key={school.id}
+            className="bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition p-5 relative"
+          >
+            {/* Status */}
+            <span
+              className={`absolute top-4 right-4 text-xs font-medium px-3 py-1 rounded-full ${
+                school.status === "active"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-yellow-100 text-yellow-700"
+              }`}
+            >
+              {school.status === "active" ? "Đang hoạt động" : "Chờ xác nhận"}
+            </span>
+
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="font-semibold text-lg text-gray-800">
+                  {school.name}
+                </h3>
+                <p className="text-sm text-gray-500 flex items-center mt-1">
+                  <MapPin size={14} className="mr-2 text-gray-400" />
+                  {school.address}
+                </p>
+                <p className="text-sm text-gray-500 flex items-center mt-1">
+                  <Phone size={14} className="mr-2 text-gray-400" />
+                  {school.phone}
+                </p>
+                <p className="text-sm text-gray-500 flex items-center mt-1">
+                  <Mail size={14} className="mr-2 text-gray-400" />
                   {school.email}
-                </td>
-                <td className="px-6 py-4 text-sm">{school.manager}</td>
-                <td className="px-6 py-4 text-sm">{school.students}</td>
-                <td className="px-6 py-4">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      school.status === "active"
-                        ? "bg-green-100 text-green-700"
-                        : school.status === "locked"
-                        ? "bg-red-100 text-red-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {school.status === "active"
-                      ? "Hoạt động"
-                      : school.status === "locked"
-                      ? "Đã khóa"
-                      : "Chờ kích hoạt"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-600">
-                  {school.createdDate}
-                </td>
-                <td className="px-6 py-4">
-                  <button
-                    onClick={() => toggleStatus(school.id)}
-                    disabled={school.status === "pending"}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium ${
-                      school.status === "active"
-                        ? "bg-red-100 text-red-700 hover:bg-red-200"
-                        : school.status === "locked"
-                        ? "bg-green-100 text-green-700 hover:bg-green-200"
-                        : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    }`}
-                  >
-                    {school.status === "active" ? "Khóa" : "Mở khóa"}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </p>
+              </div>
+              <button className="p-1 hover:bg-gray-100 rounded-md">
+                <MoreHorizontal size={18} className="text-gray-500" />
+              </button>
+            </div>
+
+            {/* Students */}
+            <div className="flex items-center justify-between mt-4">
+              <p className="text-sm flex items-center text-gray-600">
+                <Users size={16} className="mr-2 text-orange-500" />
+                <span className="font-medium">{school.students}</span> học sinh
+              </p>
+              <button className="text-orange-500 hover:text-orange-600 text-sm font-medium border border-orange-200 px-3 py-1 rounded-lg">
+                Chi tiết
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex items-center justify-between mt-6 text-sm text-gray-500">
+        <p>
+          Hiển thị {filteredSchools.length} / {schools.length} trường
+        </p>
+        <div className="flex items-center space-x-1">
+          <button className="p-2 rounded-md border hover:bg-gray-100">
+            <ChevronLeft size={16} />
+          </button>
+          <button className="p-2 rounded-md border bg-orange-500 text-white">
+            1
+          </button>
+          <button className="p-2 rounded-md border hover:bg-gray-100">2</button>
+          <button className="p-2 rounded-md border hover:bg-gray-100">
+            <ChevronRight size={16} />
+          </button>
+        </div>
       </div>
     </div>
   );

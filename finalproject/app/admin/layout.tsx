@@ -11,16 +11,11 @@ import {
   Menu,
   ChevronDown,
   User,
-  UserPen,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const pathname = usePathname();
   const isActive = (href: string) => pathname?.startsWith(href);
@@ -80,17 +75,6 @@ export default function AdminLayout({
           >
             <Users size={20} />
             {isSidebarOpen && <span className="ml-3">Tài khoản</span>}
-          </Link>
-          <Link
-            href="/admin/update-account"
-            className={`flex items-center py-3 rounded-lg ${
-              isActive("/admin/notifications")
-                ? "bg-orange-50 text-orange-500"
-                : "text-gray-600 hover:bg-gray-100"
-            }`}
-          >
-            <UserPen size={20} />
-            {isSidebarOpen && <span className="ml-3">Cập nhật thông tin trang web</span>}
           </Link>
           <Link
             href="/admin/notifications"

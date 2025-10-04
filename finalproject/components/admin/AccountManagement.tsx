@@ -260,27 +260,6 @@ export default function AccountManagement() {
         </table>
       </div>
 
-      {/* Lịch sử hành động */}
-      <div className="bg-white rounded-lg shadow p-4">
-        <h2 className="font-semibold mb-3">Lịch sử hành động</h2>
-        {actionHistory.length === 0 ? (
-          <p className="text-gray-500 text-sm">Chưa có hành động nào</p>
-        ) : (
-          <ul className="space-y-2 text-sm">
-            {actionHistory.map((h, idx) => (
-              <li key={idx} className="border rounded p-2 flex justify-between">
-                <div>
-                  <span className="font-medium">{h.admin}</span> đã{" "}
-                  <span className="text-orange-600">{h.action}</span> tài khoản{" "}
-                  <span className="font-medium">{h.accountName}</span>
-                </div>
-                <div className="text-gray-500">{h.time}</div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
       {/* Modal xác nhận */}
       {showConfirmModal && selectedAccount && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">

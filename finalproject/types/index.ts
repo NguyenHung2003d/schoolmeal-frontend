@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export interface BaseItem {
   image: string;
   description: string;
@@ -178,6 +180,70 @@ export type WeeklyMenuByDay = {
   };
 };
 
-export type NotificationStatus = "sent" | "scheduled" | "draft";
+export interface Notification {
+  id: number;
+  title: string;
+  content: string;
+  type: "immediate" | "periodic";
+  target: string;
+  schools: string[];
+  schedule: string;
+  status: NotificationStatus;
+  sent: number;
+  read: number;
+  createdDate: string;
+  updatedDate?: string;
+}
 
+export interface FormData {
+  title: string;
+  content: string;
+  type: "immediate" | "periodic";
+  target: string;
+  schools: string[];
+  classes: string[];
+  scheduleType: "now" | "schedule";
+  scheduleDate: string;
+  scheduleTime: string;
+  repeatType: "none" | "daily" | "weekly" | "monthly";
+  file: File | null;
+}
+
+export type MissionItem = {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+};
+
+export type NotificationStatus = "sent" | "scheduled" | "draft";
 export type EditMode = "system" | `school-${number}` | null;
+
+export interface HealthRecord {
+  date: string;
+  height: number;
+  weight: number;
+  bmi: number;
+}
+
+export type BMIStatus = "underweight" | "normal" | "overweight" | "obese";
+
+export interface Student {
+  id: number;
+  name: string;
+  avatar: string;
+  gender: string;
+  height: number;
+  weight: number;
+  bmi: number;
+  bmiStatus: BMIStatus;
+  lastUpdate: string;
+  history: HealthRecord[];
+}
+
+export type RecentActivity = {
+  icon: LucideIcon;
+  text: string;
+  time: string;
+  color: string;
+};
+export type RecentActivities = RecentActivity[];

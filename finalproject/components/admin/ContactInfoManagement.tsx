@@ -43,7 +43,6 @@ export default function ContactInfoManagement() {
   });
 
   const [editMode, setEditMode] = useState<EditMode>(null);
-
   const [tempData, setTempData] = useState<
     SystemContact | SchoolContact | null
   >(null);
@@ -125,10 +124,10 @@ export default function ContactInfoManagement() {
                   />
                   <input
                     type="text"
-                    value={tempData?.hotline ?? ""}
+                    value={tempData?.hotline}
                     onChange={(e) =>
                       setTempData({
-                        ...(tempData as SystemContact),
+                        ...(tempData as SchoolContact),
                         hotline: e.target.value,
                       })
                     }
@@ -152,7 +151,7 @@ export default function ContactInfoManagement() {
                     value={tempData?.zalo}
                     onChange={(e) =>
                       setTempData({
-                        ...(tempData as SystemContact),
+                        ...(tempData as SchoolContact),
                         zalo: e.target.value,
                       })
                     }
@@ -176,8 +175,8 @@ export default function ContactInfoManagement() {
                     value={tempData?.email}
                     onChange={(e) =>
                       setTempData({
-                        ...(tempData as SystemContact),
-                        zalo: e.target.value,
+                        ...(tempData as SchoolContact),
+                        email: e.target.value,
                       })
                     }
                     className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
@@ -195,8 +194,8 @@ export default function ContactInfoManagement() {
                   value={tempData?.address}
                   onChange={(e) =>
                     setTempData({
-                      ...(tempData as SystemContact),
-                      zalo: e.target.value,
+                      ...(tempData as SchoolContact),
+                      address: e.target.value,
                     })
                   }
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
@@ -302,8 +301,8 @@ export default function ContactInfoManagement() {
                         value={tempData?.hotline}
                         onChange={(e) =>
                           setTempData({
-                            ...(tempData as SchoolContact),
-                            zalo: e.target.value,
+                            ...(tempData as SystemContact),
+                            hotline: e.target.value,
                           })
                         }
                         className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -326,7 +325,7 @@ export default function ContactInfoManagement() {
                         value={tempData?.zalo}
                         onChange={(e) =>
                           setTempData({
-                            ...(tempData as SchoolContact),
+                            ...(tempData as SystemContact),
                             zalo: e.target.value,
                           })
                         }
@@ -350,8 +349,8 @@ export default function ContactInfoManagement() {
                         value={tempData?.email}
                         onChange={(e) =>
                           setTempData({
-                            ...(tempData as SchoolContact),
-                            zalo: e.target.value,
+                            ...(tempData as SystemContact),
+                            email: e.target.value,
                           })
                         }
                         className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -369,8 +368,8 @@ export default function ContactInfoManagement() {
                       value={tempData?.address}
                       onChange={(e) =>
                         setTempData({
-                          ...(tempData as SchoolContact),
-                          zalo: e.target.value,
+                          ...(tempData as SystemContact),
+                          address: e.target.value,
                         })
                       }
                       className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"

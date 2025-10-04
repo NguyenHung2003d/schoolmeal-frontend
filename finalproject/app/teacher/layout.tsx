@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import {
   Home,
@@ -7,17 +7,19 @@ import {
   Image,
   FileText,
   BarChart2,
-  LogOut,
-  Settings,
-  User,
   Bell,
+  AlertCircle,
+  Activity,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-interface TeacherLayoutProps {
+
+export default function TeacherLayout({
+  children,
+}: {
   children: React.ReactNode;
-}
-export function TeacherLayout({ children }: TeacherLayoutProps) {
+}) {
   const pathname = usePathname();
   const isActive = (href: string) => pathname.startsWith(href);
   return (
@@ -33,7 +35,11 @@ export function TeacherLayout({ children }: TeacherLayoutProps) {
             <li>
               <Link
                 href="/teacher"
-                className={`flex items-center px-4 py-3 rounded-lg ? 'bg-white text-orange-500' : 'hover:bg-orange-600'}`}
+                className={`flex items-center px-4 py-3 rounded-lg ${
+                  isActive("/teacher")
+                    ? "bg-white text-orange-500"
+                    : "hover:bg-orange-600"
+                }`}
               >
                 <Home size={20} className="mr-3" />
                 <span>Trang chủ</span>
@@ -41,54 +47,28 @@ export function TeacherLayout({ children }: TeacherLayoutProps) {
             </li>
             <li>
               <Link
-                href="/teacher/classes"
+                href="/teacher/class"
                 className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/classes")
+                  isActive("/teacher/class")
                     ? "bg-white text-orange-500"
                     : "hover:bg-orange-600"
                 }`}
               >
-                <BookOpen size={20} className="mr-3" />
-                <span>Tạo lớp học</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/teacher/meals"
-                className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/meals")
-                    ? "bg-white text-orange-500"
-                    : "hover:bg-orange-600"
-                }`}
-              >
-                <Calendar size={20} className="mr-3" />
-                <span>Lịch bữa ăn</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/teacher/attendance"
-                className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/attendance")
-                    ? "bg-white text-orange-500"
-                    : "hover:bg-orange-600"
-                }`}
-              >
-                <FileText size={20} className="mr-3" />
+                <Users size={20} className="mr-3" />
                 <span>Xem lớp học</span>
               </Link>
             </li>
             <li>
               <Link
-                href="/teacher/reports"
+                href="/teacher/health"
                 className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/reports")
+                  isActive("/teacher/health")
                     ? "bg-white text-orange-500"
                     : "hover:bg-orange-600"
                 }`}
               >
-                <BarChart2 size={20} className="mr-3" />
-                <span>Báo cáo bữa ăn</span>
+                <Activity size={20} className="mr-3" />
+                <span>Theo dõi sức khỏe</span>
               </Link>
             </li>
             <li>
@@ -102,6 +82,19 @@ export function TeacherLayout({ children }: TeacherLayoutProps) {
               >
                 <Image size={20} className="mr-3" />
                 <span>Quản lý ảnh</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/teacher/issues"
+                className={`flex items-center px-4 py-3 rounded-lg ${
+                  isActive("/teacher/issues")
+                    ? "bg-white text-orange-500"
+                    : "hover:bg-orange-600"
+                }`}
+              >
+                <AlertCircle size={20} className="mr-3" />
+                <span>Báo cáo vấn đề</span>
               </Link>
             </li>
           </ul>

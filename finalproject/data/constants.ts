@@ -1,4 +1,14 @@
-import { ParentFeedback } from "@/types";
+import { MissionItem, ParentFeedback, RecentActivities } from "@/types";
+import {
+  Target,
+  Heart,
+  Award,
+  UserPlus,
+  BookOpen,
+  Bell,
+  Users,
+  CheckCircle,
+} from "lucide-react";
 
 export const images = [
   {
@@ -248,6 +258,7 @@ export const menuItems = [
     needed: 298,
   },
 ];
+
 export const lowStockItems = [
   {
     name: "Sữa tươi",
@@ -268,6 +279,7 @@ export const lowStockItems = [
     unit: "kg",
   },
 ];
+
 export const recentUpdates = [
   {
     time: "08:15",
@@ -286,73 +298,170 @@ export const recentUpdates = [
   },
 ];
 
+export const issues = [
+  {
+    id: 1,
+    title: "Học sinh bị dị ứng với món ăn",
+    description:
+      "Học sinh Nguyễn Minh Anh bị dị ứng với món pudding trứng trong bữa phụ chiều nay.",
+    category: "food",
+    severity: "high",
+    student: "Nguyễn Minh Anh",
+    date: "23/10/2023",
+    time: "14:30",
+    status: "pending",
+    responses: [],
+  },
+  {
+    id: 2,
+    title: "Thiết bị trong lớp học bị hỏng",
+    description:
+      "Máy chiếu trong lớp học không hoạt động, cần được sửa chữa để phục vụ giảng dạy.",
+    category: "facility",
+    severity: "medium",
+    student: "",
+    date: "22/10/2023",
+    time: "09:15",
+    status: "inProgress",
+    responses: [
+      {
+        id: 1,
+        text: "Đã tiếp nhận thông tin, nhân viên kỹ thuật sẽ đến kiểm tra vào ngày mai.",
+        date: "22/10/2023",
+        time: "10:30",
+        user: {
+          name: "Nguyễn Văn Quản",
+          role: "Quản lý cơ sở vật chất",
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Học sinh cần hỗ trợ tâm lý",
+    description:
+      "Học sinh Lê Thu Hà có dấu hiệu tâm lý không ổn định, cần được tư vấn và hỗ trợ.",
+    category: "health",
+    severity: "medium",
+    student: "Lê Thu Hà",
+    date: "20/10/2023",
+    time: "15:45",
+    status: "resolved",
+    responses: [
+      {
+        id: 1,
+        text: "Đã tiếp nhận thông tin và sắp xếp buổi tư vấn với chuyên gia tâm lý vào ngày 21/10.",
+        date: "20/10/2023",
+        time: "16:30",
+        user: {
+          name: "Trần Thị Hương",
+          role: "Chuyên viên tâm lý",
+        },
+      },
+      {
+        id: 2,
+        text: "Buổi tư vấn đã diễn ra tốt đẹp, học sinh đã ổn định hơn. Sẽ tiếp tục theo dõi trong tuần tới.",
+        date: "21/10/2023",
+        time: "14:00",
+        user: {
+          name: "Trần Thị Hương",
+          role: "Chuyên viên tâm lý",
+        },
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Đề xuất thay đổi hoạt động ngoại khóa",
+    description:
+      "Đề xuất tổ chức thêm hoạt động trồng cây xanh cho học sinh để tăng cường ý thức bảo vệ môi trường.",
+    category: "activity",
+    severity: "low",
+    student: "",
+    date: "18/10/2023",
+    time: "11:20",
+    status: "resolved",
+    responses: [
+      {
+        id: 1,
+        text: "Cảm ơn cô đã đề xuất. Nhà trường sẽ xem xét và đưa vào kế hoạch hoạt động tháng tới.",
+        date: "19/10/2023",
+        time: "08:45",
+        user: {
+          name: "Nguyễn Hoàng",
+          role: "Quản lý trường",
+        },
+      },
+    ],
+  },
+];
+
 export const students = [
   {
     id: 1,
     name: "Nguyễn Minh Anh",
-    class: "3A",
-    registered: true,
+    avatar: "https://i.imgur.com/wgJDypg.jpg",
     present: true,
-    allergies: ["Sữa"],
-    specialRequests: "Không dùng sữa tươi, thay thế bằng sữa đậu nành",
-    image: "https://i.imgur.com/6YQ9Z3z.jpg",
+    gender: "Nữ",
+    birthdate: "15/08/2017",
+    parent: "Nguyễn Văn A",
+    phone: "0912345678",
+    note: "Dị ứng với sữa",
+    height: 115,
+    weight: 20.5,
+    bmi: 15.5,
+    bmiStatus: "normal",
+    lastUpdate: "15/10/2023",
+    history: [
+      { date: "15/10/2023", height: 115, weight: 20.5, bmi: 15.5 },
+      { date: "15/07/2023", height: 113, weight: 19.8, bmi: 15.5 },
+      { date: "15/04/2023", height: 111, weight: 19.0, bmi: 15.4 },
+      { date: "15/01/2023", height: 109, weight: 18.2, bmi: 15.3 },
+    ],
   },
   {
     id: 2,
     name: "Trần Hoàng Nam",
-    class: "2B",
-    registered: true,
+    avatar: "https://i.imgur.com/8RWKYSf.jpg",
     present: true,
-    allergies: ["Đậu phộng"],
-    specialRequests: "Không sử dụng đậu phộng trong món ăn",
-    image: "https://i.imgur.com/wgJDypg.jpg",
+    gender: "Nam",
+    birthdate: "20/05/2017",
+    parent: "Trần Văn B",
+    phone: "0923456789",
+    note: "Dị ứng với đậu phộng",
   },
   {
     id: 3,
     name: "Lê Thu Hà",
-    class: "1A",
-    registered: true,
+    avatar: "https://i.imgur.com/K8gDgTf.jpg",
     present: false,
-    allergies: [],
-    specialRequests: "Ăn kiêng đường",
-    image: "https://i.imgur.com/KWaVOLR.jpg",
+    gender: "Nữ",
+    birthdate: "10/03/2017",
+    parent: "Lê Văn C",
+    phone: "0934567890",
+    note: "Đang bị ốm",
   },
   {
     id: 4,
-    name: "Phạm Tuấn Kiệt",
-    class: "3A",
-    registered: true,
+    name: "Phạm Minh Đức",
+    avatar: "https://i.imgur.com/oPXQN1f.jpg",
     present: true,
-    allergies: ["Hải sản"],
-    specialRequests: "",
-    image: "https://i.imgur.com/F8QXfXh.jpg",
+    gender: "Nam",
+    birthdate: "05/11/2017",
+    parent: "Phạm Văn D",
+    phone: "0945678901",
+    note: "",
   },
   {
     id: 5,
-    name: "Ngô Thanh Mai",
-    class: "2B",
-    registered: true,
+    name: "Vũ Thị Mai",
+    avatar: "https://i.imgur.com/5HJfYBQ.jpg",
     present: true,
-    allergies: [],
-    specialRequests: "",
-    image: "https://i.imgur.com/6YQ9Z3z.jpg",
-  },
-];
-export const classes = [
-  {
-    name: "1A",
-    total: 28,
-    present: 25,
-  },
-  {
-    name: "2B",
-    total: 26,
-    present: 24,
-  },
-  {
-    name: "3A",
-    total: 21,
-    present: 19,
+    gender: "Nữ",
+    birthdate: "25/07/2017",
+    parent: "Vũ Văn E",
+    phone: "0956789012",
+    note: "",
   },
 ];
 export const mealSchedule = [
@@ -405,7 +514,7 @@ export const allergyAlerts = [
     date: "27/10/2023",
   },
 ];
-// Mock data for all allergies
+
 export const studentAllergies = [
   {
     id: 1,
@@ -445,7 +554,7 @@ export const studentAllergies = [
     image: "https://i.imgur.com/KWaVOLR.jpg",
   },
 ];
-// Mock data for dietary restrictions
+
 export const dietaryRestrictions = [
   {
     id: 1,
@@ -464,7 +573,7 @@ export const dietaryRestrictions = [
     image: "https://i.imgur.com/wgJDypg.jpg",
   },
 ];
-// Common allergens
+
 export const commonAllergens = [
   {
     name: "Sữa",
@@ -1407,5 +1516,165 @@ export const replacementSuggestions = [
     estimatedCost: 21000,
     unit: "lít",
     availability: "1-2 ngày",
+  },
+];
+
+export const missionData: MissionItem[] = [
+  {
+    icon: Target,
+    title: "Sứ mệnh",
+    description:
+      "Kết nối phụ huynh với cuộc sống học đường của con, mang đến sự an tâm và minh bạch trong việc chăm sóc dinh dưỡng",
+  },
+  {
+    icon: Heart,
+    title: "Giá trị cốt lõi",
+    description:
+      "Minh bạch, Tin cậy, Tiện lợi - Những giá trị chúng tôi hướng đến trong mỗi tính năng của EduMeal",
+  },
+  {
+    icon: Award,
+    title: "Tầm nhìn",
+    description:
+      "Trở thành nền tảng quản lý bữa ăn học đường hàng đầu, được tin dùng bởi hàng triệu phụ huynh",
+  },
+];
+
+export const teamMembers = [
+  { name: "Nguyễn Văn A", role: "CEO & Founder", avatar: "NVA" },
+  { name: "Trần Thị B", role: "CTO", avatar: "TTB" },
+  { name: "Lê Văn C", role: "Head of Product", avatar: "LVC" },
+  { name: "Phạm Thị D", role: "Head of Design", avatar: "PTD" },
+];
+
+export const statsData = [
+  { value: 50, label: "Trường học", suffix: "+" },
+  { value: 5000, label: "Phụ huynh", suffix: "+" },
+  { value: 10000, label: "Bữa ăn/ngày", suffix: "+" },
+  { value: 99, label: "Hài lòng", suffix: "%" },
+];
+
+export const schools = [
+  {
+    id: 1,
+    name: "Trường Tiểu học A",
+    address: "123 Đường Nguyễn Huệ, Quận 1, TP. HCM",
+    phone: "0123 456 789",
+    email: "tieuhoca@edumeal.vn",
+    students: 458,
+    status: "active",
+  },
+  {
+    id: 2,
+    name: "Trường Tiểu học B",
+    address: "456 Đường Lê Lợi, Quận 3, TP. HCM",
+    phone: "0123 456 790",
+    email: "tieuhocb@edumeal.vn",
+    students: 325,
+    status: "active",
+  },
+  {
+    id: 3,
+    name: "Trường Tiểu học Sunshine",
+    address: "789 Đường Phạm Ngũ Lão, Quận 5, TP. HCM",
+    phone: "0123 456 791",
+    email: "sunshine@edumeal.vn",
+    students: 512,
+    status: "active",
+  },
+  {
+    id: 4,
+    name: "Trường Tiểu học Star Kids",
+    address: "101 Đường Hai Bà Trưng, Quận 10, TP. HCM",
+    phone: "0123 456 792",
+    email: "starkids@edumeal.vn",
+    students: 275,
+    status: "pending",
+  },
+  {
+    id: 5,
+    name: "Trường Tiểu học Bright Future",
+    address: "202 Đường 3/2, Quận Bình Thạnh, TP. HCM",
+    phone: "0123 456 793",
+    email: "brightfuture@edumeal.vn",
+    students: 380,
+    status: "active",
+  },
+];
+
+export const stats = {
+  teachers: {
+    total: 24,
+    growth: 2,
+  },
+  students: {
+    total: 450,
+    growth: 5,
+  },
+  classes: {
+    total: 15,
+    growth: 0,
+  },
+  attendance: {
+    rate: 96,
+    growth: 1,
+  },
+};
+export const kitchenPurchases = [
+    {
+      id: 1,
+      date: "15/11/2023",
+      supplier: "Công ty Thực phẩm Sạch",
+      amount: 5800000,
+      status: "completed",
+      items: 24,
+    },
+    {
+      id: 2,
+      date: "10/11/2023",
+      supplier: "Chợ đầu mối Bình Điền",
+      amount: 3200000,
+      status: "completed",
+      items: 18,
+    },
+    {
+      id: 3,
+      date: "05/11/2023",
+      supplier: "Công ty TNHH Nông sản Việt",
+      amount: 4500000,
+      status: "pending",
+      items: 32,
+    },
+  ];
+export const recentActivities: RecentActivities = [
+  {
+    icon: UserPlus,
+    text: "Giáo viên Nguyễn Thị Lan được thêm vào hệ thống",
+    time: "2 phút trước",
+    color: "bg-blue-500",
+  },
+  {
+    icon: BookOpen,
+    text: "Lớp 3A được tạo và phân công giáo viên",
+    time: "1 giờ trước",
+    color: "bg-blue-500",
+  },
+  {
+    icon: Bell,
+    text: "Thông báo về lịch họp phụ huynh được gửi",
+    time: "3 giờ trước",
+    color: "bg-blue-500",
+  },
+  {
+    icon: Users,
+    text: "5 tài khoản phụ huynh mới được phê duyệt",
+    time: "5 giờ trước",
+    color: "bg-blue-500",
+  },
+  {
+    icon: CheckCircle,
+    text: "Báo cáo bữa ăn tháng 10 đã hoàn thành",
+    time: "1 ngày trước",
+    color: "bg-blue-500",
   },
 ];
