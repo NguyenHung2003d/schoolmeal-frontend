@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 
+// ============= BASE TYPES =============
 export interface BaseItem {
   image: string;
   description: string;
@@ -10,26 +11,128 @@ export interface NavigationItem {
   href: string;
 }
 
-export interface Features {
-  title: string;
-  desc: string;
-  image: string;
-  features?: string[];
-  badge?: string;
+// ============= NAVIGATION MENU (cho Parent Dashboard tabs) =============
+export type NavigationMenuItem = {
+  id: string;
+  icon: LucideIcon;
+  label: string;
+  color: string;
+};
+
+// ✅ SỬA: NavigationTabsProps dùng NavigationMenuItem[] thay vì MenuItem[]
+export interface NavigationTabsProps {
+  menuItems: NavigationMenuItem[]; // ✅ ĐÃ SỬA
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
 }
 
-export interface ParentFeedback {
-  id: number;
-  rating: number;
-  stars: number;
-  text: string;
-  author: {
-    name: string;
-    role: string;
-    avatar: string;
+// ============= FOOD MENU ITEM (cho món ăn) =============
+export type FoodMenuItem = {
+  id: string;
+  name: string;
+  image: string;
+  ingredients: string[];
+  allergies: string[];
+  date: string;
+  category?: string;
+  nutritionalInfo?: {
+    calories: number;
+    protein: number;
+    carbs: number;
   };
-  feedback: string;
+  feedback?: {
+    rating: number;
+    comments: number;
+    wastage: string;
+  };
+  day?: string;
+};
+
+export interface MenuItem {
+  day: string;
+  date: string;
+  morning: string;
+  lunch: string;
+  afternoon: string;
+  details?: {
+    morning: string[];
+    lunch: string[];
+    afternoon: string[];
+    nutrition?: {
+      calories: number;
+      protein: number;
+      carbs: number;
+      fat: number;
+    };
+  };
 }
+
+// ============= DISH (cho Kitchen Staff) =============
+export type Dish = {
+  id: number;
+  name: string;
+  category: string;
+  ingredients: string[];
+  allergies: string[];
+  nutritionalInfo: {
+    calories: number;
+    protein: number;
+    carbs: number;
+    fat: number;
+  };
+  image: string;
+};
+
+// ============= MENU TYPES =============
+export interface MenuDay {
+  date: string;
+  dayOfWeek: string;
+  meals: {
+    morning?: Meal;
+    lunch?: Meal;
+    afternoon?: Meal;
+  };
+  notes?: string;
+}
+
+export interface WeeklyMenu {
+  weekId: string;
+  period: string;
+  days: MenuDay[];
+}
+
+// ============= CHILD & PARENT =============
+export interface Child {
+  id: number;
+  name: string;
+  class: string;
+  avatar?: LucideIcon;
+  allergies: string[];
+}
+
+export interface ChildrenListProps {
+  children: Child[];
+  selectedChild: Child | null;
+  setSelectedChild: (child: Child) => void;
+  sidebarOpen: boolean;
+  setSidebarOpen: (open: boolean) => void;
+}
+
+export interface SectionProps {
+  selectedChild: Child | null;
+}
+
+export interface TabContentProps {
+  activeTab: string;
+  selectedChild: Child | null; // ✅ Thêm type cụ thể
+}
+
+export interface RegisterMealProps {
+  selectedChild: Child | null; // ✅ Thêm type cụ thể
+}
+
+// ============= NOTIFICATIONS =============
+export type NotificationStatus = "sent" | "scheduled" | "draft";
 
 export interface Notification {
   id: number;
@@ -60,6 +163,30 @@ export interface FormData {
   file: File | null;
 }
 
+// ============= HEALTH & BMI =============
+export type BMIStatus = "underweight" | "normal" | "overweight" | "obese";
+
+export interface HealthRecord {
+  date: string;
+  height: number;
+  weight: number;
+  bmi: number;
+}
+
+export interface Student {
+  id: number;
+  name: string;
+  avatar: string;
+  gender: string;
+  height: number;
+  weight: number;
+  bmi: number;
+  bmiStatus: BMIStatus;
+  lastUpdate: string;
+  history: HealthRecord[];
+}
+
+// ============= ANALYTICS & REPORTS =============
 export interface MealData {
   date: string;
   registered: number;
@@ -92,35 +219,16 @@ export interface Incident {
   severity: IncidentSeverity;
 }
 
+export interface Meal {
+  name: string;
+  dishes: string[]; // Danh sách các món ăn trong bữa
+  calories?: number; // Ví dụ: có thể thêm calo
+}
+
 export type ReportType = "meals" | "revenue" | "users" | "incidents";
 export type TimeRange = "week" | "month" | "quarter" | "year" | "custom";
 
-export interface LoadingContextType {
-  loading: boolean;
-  setLoading: (value: boolean) => void;
-}
-
-export type MenuItem = {
-  id: number;
-  name: string;
-  image: string;
-  ingredients: string[];
-  allergies: string[];
-  date: string;
-  category?: string;
-  nutritionalInfo?: {
-    calories: number;
-    protein: number;
-    carbs: number;
-  };
-  feedback?: {
-    rating: number;
-    comments: number;
-    wastage: string;
-  };
-  day?: string; // dùng cho upcoming/dessert
-};
-
+// ============= CONTACTS =============
 export interface SystemContact {
   hotline: string;
   zalo: string;
@@ -137,107 +245,40 @@ export interface SchoolContact {
   address: string;
 }
 
-export type Dish = {
-  id: number;
-  name: string;
-  category: string;
-  ingredients: string[];
-  allergies: string[];
-  nutritionalInfo: {
-    calories: number;
-    protein: number;
-    carbs: number;
-    fat: number;
-  };
+// ============= FEATURES & FEEDBACK =============
+export interface Features {
+  title: string;
+  desc: string;
   image: string;
-};
+  features?: string[];
+  badge?: string;
+}
 
-// Một ngày trong menu (dùng khi tạo thực đơn mới)
-export type DayMenu = {
-  main: Dish | null;
-  dessert: Dish | null;
-};
-
-// Thực đơn cả tuần cho trang tạo menu
-export type WeeklyMenu = {
-  name: string;
-  description: string;
-  weekStart: string;
-  weekEnd: string;
-  monday: DayMenu;
-  tuesday: DayMenu;
-  wednesday: DayMenu;
-  thursday: DayMenu;
-  friday: DayMenu;
-};
-
-// Dùng cho MenuTab (render thực đơn sắp tới)
-export type WeeklyMenuByDay = {
-  [day: string]: {
-    main: MenuItem | null;
-    dessert: MenuItem | null;
-    date: string;
-  };
-};
-
-export interface Notification {
+export interface ParentFeedback {
   id: number;
-  title: string;
-  content: string;
-  type: "immediate" | "periodic";
-  target: string;
-  schools: string[];
-  schedule: string;
-  status: NotificationStatus;
-  sent: number;
-  read: number;
-  createdDate: string;
-  updatedDate?: string;
+  rating: number;
+  stars: number;
+  text: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  feedback: string;
 }
 
-export interface FormData {
-  title: string;
-  content: string;
-  type: "immediate" | "periodic";
-  target: string;
-  schools: string[];
-  classes: string[];
-  scheduleType: "now" | "schedule";
-  scheduleDate: string;
-  scheduleTime: string;
-  repeatType: "none" | "daily" | "weekly" | "monthly";
-  file: File | null;
-}
-
+// ============= MISC =============
 export type MissionItem = {
   icon: LucideIcon;
   title: string;
   description: string;
 };
 
-export type NotificationStatus = "sent" | "scheduled" | "draft";
 export type EditMode = "system" | `school-${number}` | null;
 
-export interface HealthRecord {
-  date: string;
-  height: number;
-  weight: number;
-  bmi: number;
-}
-
-export type BMIStatus = "underweight" | "normal" | "overweight" | "obese";
-
-export interface Student {
-  id: number;
-  name: string;
-  avatar: string;
-  gender: string;
-  height: number;
-  weight: number;
-  bmi: number;
-  bmiStatus: BMIStatus;
-  lastUpdate: string;
-  history: HealthRecord[];
+export interface LoadingContextType {
+  loading: boolean;
+  setLoading: (value: boolean) => void;
 }
 
 export type RecentActivity = {
@@ -246,4 +287,5 @@ export type RecentActivity = {
   time: string;
   color: string;
 };
+
 export type RecentActivities = RecentActivity[];
