@@ -1,10 +1,11 @@
 import {
-  ClassItem,
-  ClassStudent,
+  Child,
+  MenuItem,
   MissionItem,
+  NavigationMenuItem,
   ParentFeedback,
   RecentActivities,
-  Student,
+  WeeklyMenu,
 } from "@/types";
 import {
   Target,
@@ -15,6 +16,14 @@ import {
   Bell,
   Users,
   CheckCircle,
+  Calendar,
+  User,
+  Activity,
+  FileText,
+  MessageSquare,
+  Receipt,
+  FileEdit,
+  UserRound,
 } from "lucide-react";
 
 export const images = [
@@ -245,24 +254,126 @@ export const upcomingMeals = [
   },
 ];
 
-export const menuItems = [
+export const children: Child[] = [
   {
     id: 1,
-    name: "Cơm gà rau củ",
-    category: "Bữa trưa",
-    ingredients: ["Gạo lứt", "Thịt gà", "Cà rốt", "Bông cải xanh"],
-    allergies: [],
-    prepared: 120,
-    needed: 342,
+    name: "Nguyễn Minh An",
+    class: "3A",
+    avatar: UserRound,
+    allergies: ["Đậu phộng", "Hải sản"],
   },
   {
     id: 2,
-    name: "Sữa chua & hoa quả",
-    category: "Tráng miệng",
-    ingredients: ["Sữa chua", "Hoa quả tươi"],
+    name: "Nguyễn Thu Hà",
+    class: "1B",
     allergies: ["Sữa"],
-    prepared: 0,
-    needed: 298,
+  },
+];
+
+export const menuDataWeeks = {
+  week1: [
+    {
+      day: "Thứ 2",
+      date: "30/09/2025",
+      details: {
+        morning: ["Cháo gà", "Sữa tươi"],
+        lunch: ["Cơm + cá sốt cà", "Canh bí đỏ"],
+        afternoon: ["Bánh flan", "Nước cam"],
+        nutrition: { calories: 550, protein: 25, carbs: 60, fat: 15 },
+      },
+    },
+    {
+      day: "Thứ 3",
+      date: "01/10/2025",
+      details: {
+        morning: ["Bún bò Huế", "Trà lúa mạch"],
+        lunch: ["Cơm + gà kho gừng", "Canh rau ngót"],
+        afternoon: ["Sữa chua", "Bánh quy"],
+        nutrition: { calories: 560, protein: 27, carbs: 58, fat: 14 },
+      },
+    },
+    {
+      day: "Thứ 4",
+      date: "02/10/2025",
+      details: {
+        morning: ["Mì xào bò", "Sữa đậu nành"],
+        lunch: ["Cơm + thịt heo chiên", "Canh cải xanh"],
+        afternoon: ["Trái cây", "Nước ép táo"],
+        nutrition: { calories: 540, protein: 24, carbs: 62, fat: 13 },
+      },
+    },
+    {
+      day: "Thứ 5",
+      date: "03/10/2025",
+      details: {
+        morning: ["Bánh cuốn", "Sữa tươi"],
+        lunch: ["Cơm + cá chiên", "Canh khổ qua nhồi thịt"],
+        afternoon: ["Rau câu", "Nước cam"],
+        nutrition: { calories: 570, protein: 26, carbs: 64, fat: 16 },
+      },
+    },
+    {
+      day: "Thứ 6",
+      date: "04/10/2025",
+      details: {
+        morning: ["Phở bò", "Sữa tươi"],
+        lunch: ["Cơm + thịt kho trứng", "Canh chua cá lóc"],
+        afternoon: ["Bánh bông lan", "Trà đào"],
+        nutrition: { calories: 590, protein: 28, carbs: 63, fat: 17 },
+      },
+    },
+  ],
+  week2: [
+    {
+      day: "Thứ 2",
+      date: "07/10/2025",
+      details: {
+        morning: ["Xôi đậu phộng", "Sữa tươi"],
+        lunch: ["Cơm + thịt bò xào", "Canh rau muống"],
+        afternoon: ["Bánh su kem", "Nước ép cam"],
+        nutrition: { calories: 560, protein: 26, carbs: 61, fat: 15 },
+      },
+    },
+    // ... các ngày tiếp theo tương tự
+  ],
+};
+
+export const menuItems: NavigationMenuItem[] = [
+  {
+    id: "register",
+    icon: Calendar,
+    label: "Đăng ký suất ăn",
+    color: "text-blue-600",
+  },
+  {
+    id: "profile",
+    icon: User,
+    label: "Cập nhật hồ sơ",
+    color: "text-green-600",
+  },
+  {
+    id: "health",
+    icon: Activity,
+    label: "Theo dõi sức khỏe",
+    color: "text-red-600",
+  },
+  {
+    id: "menu_and_feedback",
+    icon: FileText,
+    label: "Xem thực đơn và đánh giá",
+    color: "text-orange-600",
+  },
+  {
+    id: "invoice",
+    icon: Receipt,
+    label: "Xem hóa đơn",
+    color: "text-yellow-600",
+  },
+  {
+    id: "leave",
+    icon: FileEdit,
+    label: "Đơn xin nghỉ",
+    color: "text-pink-600",
   },
 ];
 
@@ -403,7 +514,208 @@ export const issues = [
   },
 ];
 
-export const students: Student[] = [
+export const menuData: MenuItem[] = [
+  {
+    day: "Thứ 2",
+    date: "30/09/2025",
+    morning: "Bánh mì trứng, Sữa tươi",
+    lunch: "Cơm, Thịt kho tàu, Canh rau",
+    afternoon: "Xôi đậu xanh, Nước ép trái cây",
+    details: {
+      morning: ["Bánh mì trứng (2 ổ)", "Sữa tươi (200ml)", "Chuối"],
+      lunch: [
+        "Cơm trắng (1 chén)",
+        "Thịt kho tàu (100g)",
+        "Canh rau ngót",
+        "Dưa leo",
+      ],
+      afternoon: ["Xôi đậu xanh (1 phần)", "Nước ép cam (150ml)"],
+      nutrition: {
+        calories: 1450,
+        protein: 45,
+        carbs: 185,
+        fat: 38,
+      },
+    },
+  },
+  {
+    day: "Thứ 3",
+    date: "01/10/2025",
+    morning: "Phở gà, Sữa đậu nành",
+    lunch: "Cơm, Cá kho, Rau xào",
+    afternoon: "Bánh bao, Trà sữa",
+    details: {
+      morning: ["Phở gà (1 tô)", "Sữa đậu nành (200ml)", "Táo"],
+      lunch: [
+        "Cơm trắng (1 chén)",
+        "Cá kho (80g)",
+        "Rau xào thập cẩm",
+        "Canh bí đỏ",
+      ],
+      afternoon: ["Bánh bao nhân thịt (1 cái)", "Trà sữa (150ml)"],
+      nutrition: {
+        calories: 1480,
+        protein: 48,
+        carbs: 190,
+        fat: 35,
+      },
+    },
+  },
+  {
+    day: "Thứ 4",
+    date: "02/10/2025",
+    morning: "Xôi gà, Sữa chua",
+    lunch: "Cơm, Sườn xào chua ngọt, Canh chua",
+    afternoon: "Chè đậu xanh, Nước cam",
+    details: {
+      morning: ["Xôi gà (1 phần)", "Sữa chua (1 hộp)", "Nho"],
+      lunch: [
+        "Cơm trắng (1 chén)",
+        "Sườn xào chua ngọt (100g)",
+        "Canh chua cá",
+        "Đậu que luộc",
+      ],
+      afternoon: ["Chè đậu xanh (1 chén)", "Nước cam ép (150ml)"],
+      nutrition: {
+        calories: 1520,
+        protein: 50,
+        carbs: 195,
+        fat: 40,
+      },
+    },
+  },
+  {
+    day: "Thứ 5",
+    date: "03/10/2025",
+    morning: "Bún bò, Sữa tươi",
+    lunch: "Cơm, Gà chiên mắm, Canh rau",
+    afternoon: "Bánh flan, Sinh tố bơ",
+    details: {
+      morning: ["Bún bò (1 tô)", "Sữa tươi (200ml)", "Xoài"],
+      lunch: [
+        "Cơm trắng (1 chén)",
+        "Gà chiên mắm (1 miếng)",
+        "Canh rau ngót",
+        "Cà rót",
+      ],
+      afternoon: ["Bánh flan (1 phần)", "Sinh tố bơ (150ml)"],
+      nutrition: {
+        calories: 1500,
+        protein: 52,
+        carbs: 188,
+        fat: 42,
+      },
+    },
+  },
+  {
+    day: "Thứ 6",
+    date: "04/10/2025",
+    morning: "Cháo thịt, Sữa đậu nành",
+    lunch: "Cơm, Cá rán, Rau luộc",
+    afternoon: "Bánh ngọt, Nước ép dứa",
+    details: {
+      morning: ["Cháo thịt (1 tô)", "Sữa đậu nành (200ml)", "Ổi"],
+      lunch: ["Cơm trắng (1 chén)", "Cá rán (100g)", "Rau luộc", "Canh bí đao"],
+      afternoon: ["Bánh ngọt (2 cái)", "Nước ép dứa (150ml)"],
+      nutrition: {
+        calories: 1440,
+        protein: 46,
+        carbs: 182,
+        fat: 36,
+      },
+    },
+  },
+];
+
+export const sampleMenus: WeeklyMenu[] = [
+  {
+    weekId: "week1",
+    period: "30/09 - 04/10/2025",
+    days: [
+      {
+        date: "30/09/2025",
+        dayOfWeek: "Thứ Hai",
+        meals: {
+          morning: { name: "Bữa sáng", dishes: ["Bánh mì trứng", "Sữa tươi"] },
+          lunch: {
+            name: "Bữa trưa",
+            dishes: ["Cơm", "Thịt kho tàu", "Canh rau cải"],
+          },
+          afternoon: {
+            name: "Bữa chiều",
+            dishes: ["Xôi đậu xanh", "Nước ép cam"],
+          },
+        },
+      },
+      {
+        date: "01/10/2025",
+        dayOfWeek: "Thứ Ba",
+        meals: {
+          morning: {
+            name: "Bữa sáng",
+            dishes: ["Bún riêu cua", "Sữa đậu nành"],
+          },
+          lunch: {
+            name: "Bữa trưa",
+            dishes: ["Cơm", "Cá chiên xù", "Canh bí đao"],
+          },
+          afternoon: {
+            name: "Bữa chiều",
+            dishes: ["Cháo thịt bằm", "Nước lọc"],
+          },
+        },
+      },
+      {
+        date: "02/10/2025",
+        dayOfWeek: "Thứ Tư",
+        meals: {
+          morning: { name: "Bữa sáng", dishes: ["Phở gà", "Sữa tươi"] },
+          lunch: {
+            name: "Bữa trưa",
+            dishes: ["Cơm", "Gà rang gừng", "Canh mồng tơi"],
+          },
+          afternoon: {
+            name: "Bữa chiều",
+            dishes: ["Bánh flan", "Nước ép dứa"],
+          },
+        },
+      },
+      {
+        date: "03/10/2025",
+        dayOfWeek: "Thứ Năm",
+        meals: {
+          morning: { name: "Bữa sáng", dishes: ["Bún bò Huế", "Trà sữa"] },
+          lunch: {
+            name: "Bữa trưa",
+            dishes: ["Cơm", "Tôm rim thịt", "Canh chua"],
+          },
+          afternoon: { name: "Bữa chiều", dishes: ["Bánh bao", "Nước cam"] },
+        },
+      },
+      {
+        date: "04/10/2025",
+        dayOfWeek: "Thứ Sáu",
+        meals: {
+          morning: {
+            name: "Bữa sáng",
+            dishes: ["Mì ý sốt bò bằm", "Sữa chua"],
+          },
+          lunch: {
+            name: "Bữa trưa",
+            dishes: ["Cơm", "Sườn nướng", "Canh khoai mỡ"],
+          },
+          afternoon: {
+            name: "Bữa chiều",
+            dishes: ["Bánh mì ngọt", "Sữa milo"],
+          },
+        },
+      },
+    ],
+  },
+  // Có thể thêm Tuần 2, Tuần 3...
+];
+
+export const students = [
   {
     id: 1,
     name: "Nguyễn Minh Anh",
@@ -2124,6 +2436,7 @@ export const shoppingItems = [
     estimatedCost: 1250000,
   },
 ];
+
 // Mock data for previous shopping lists
 export const previousLists = [
   {
@@ -2294,170 +2607,6 @@ export const kitchenPurchases = [
     amount: 4500000,
     status: "pending",
     items: 32,
-  },
-];
-
-export const parents = [
-  {
-    id: 1,
-    name: "Nguyễn Văn An",
-    email: "nguyenvanan@gmail.com",
-    phone: "0912345678",
-    children: [
-      {
-        name: "Nguyễn Minh Anh",
-        class: "3A",
-      },
-    ],
-    status: "active",
-    joinDate: "15/08/2022",
-    avatar: "https://i.imgur.com/F8QXfXh.jpg",
-  },
-  {
-    id: 2,
-    name: "Trần Thị Bình",
-    email: "tranthiminh@gmail.com",
-    phone: "0923456789",
-    children: [
-      {
-        name: "Trần Hoàng Nam",
-        class: "2B",
-      },
-      {
-        name: "Trần Thị Hoa",
-        class: "4A",
-      },
-    ],
-    status: "active",
-    joinDate: "10/09/2022",
-    avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
-  },
-  {
-    id: 3,
-    name: "Lê Văn Cường",
-    email: "levancuong@gmail.com",
-    phone: "0934567890",
-    children: [
-      {
-        name: "Lê Thu Hà",
-        class: "4C",
-      },
-    ],
-    status: "active",
-    joinDate: "05/10/2022",
-    avatar: "https://i.imgur.com/KWaVOLR.jpg",
-  },
-  {
-    id: 4,
-    name: "Phạm Thị Dung",
-    email: "phamthidung@gmail.com",
-    phone: "0945678901",
-    children: [
-      {
-        name: "Phạm Minh Đức",
-        class: "1A",
-      },
-    ],
-    status: "active",
-    joinDate: "20/07/2022",
-    avatar: "",
-  },
-  {
-    id: 5,
-    name: "Hoàng Văn Em",
-    email: "hoangvanem@gmail.com",
-    phone: "0956789012",
-    children: [
-      {
-        name: "Hoàng Thị Mai",
-        class: "3A",
-      },
-    ],
-    status: "pending",
-    joinDate: "15/11/2023",
-    avatar: "",
-  },
-];
-
-export const staffMembers = [
-  {
-    id: 1,
-    name: "Nguyễn Thị Lan",
-    email: "nguyenthilan@gmail.com",
-    phone: "0912345678",
-    role: "teacher",
-    subject: "Toán",
-    status: "active",
-    joinDate: "15/08/2022",
-    avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
-  },
-  {
-    id: 2,
-    name: "Trần Văn Minh",
-    email: "tranvanminh@gmail.com",
-    phone: "0923456789",
-    role: "teacher",
-    subject: "Tiếng Việt",
-    status: "active",
-    joinDate: "10/09/2022",
-    avatar: "https://i.imgur.com/F8QXfXh.jpg",
-  },
-  {
-    id: 3,
-    name: "Lê Thị Hương",
-    email: "lethihuong@gmail.com",
-    phone: "0934567890",
-    role: "teacher",
-    subject: "Tiếng Anh",
-    status: "active",
-    joinDate: "05/10/2022",
-    avatar: "https://i.imgur.com/KWaVOLR.jpg",
-  },
-  {
-    id: 4,
-    name: "Phạm Văn Đức",
-    email: "phamvanduc@gmail.com",
-    phone: "0945678901",
-    role: "teacher",
-    subject: "Khoa học",
-    status: "active",
-    joinDate: "20/07/2022",
-    avatar: "",
-  },
-  {
-    id: 5,
-    name: "Nguyễn Thị Thảo",
-    email: "nguyenthithao@gmail.com",
-    phone: "0956789012",
-    role: "kitchen",
-    subject: "",
-    status: "banned",
-    joinDate: "15/08/2022",
-    avatar: "",
-    banReason: "Vi phạm quy định vệ sinh an toàn thực phẩm",
-    banExpiry: "15/12/2023",
-  },
-  {
-    id: 6,
-    name: "Trần Văn Hùng",
-    email: "tranvanhung@gmail.com",
-    phone: "0967890123",
-    role: "support",
-    subject: "",
-    status: "active",
-    joinDate: "01/09/2022",
-    avatar: "",
-  },
-  {
-    id: 7,
-    name: "Lê Minh Tuấn",
-    email: "leminhtuan@gmail.com",
-    phone: "0978901234",
-    role: "teacher",
-    subject: "Thể dục",
-    status: "pending",
-    joinDate: "10/11/2023",
-    avatar: "",
   },
 ];
 export const recentActivities: RecentActivities = [

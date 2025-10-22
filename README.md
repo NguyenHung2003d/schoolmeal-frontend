@@ -157,8 +157,8 @@ dotnet run
 
 ```bash
 cd SMMS-SchoolMeal-FrontEnd
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 ### 4. Access Application
