@@ -206,15 +206,15 @@ export default function TeacherClassView() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-medium">
-                      {student.birthdate}
+                      {student.dob}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-semibold text-gray-900">
-                          {student.parent}
+                          {student.parent.name}
                         </div>
                         <div className="text-sm text-gray-500 font-mono">
-                          {student.phone}
+                          {student.parent.phone}
                         </div>
                       </div>
                     </td>
