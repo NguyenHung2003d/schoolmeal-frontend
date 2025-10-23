@@ -46,6 +46,15 @@ export type FoodMenuItem = {
     wastage: string;
   };
   day?: string;
+  prepared: number;
+  needed: number;
+};
+
+export type StockItem = {
+  name: string;
+  current: number;
+  minimum: number;
+  unit: string;
 };
 
 export interface MenuItem {
@@ -65,6 +74,26 @@ export interface MenuItem {
       fat: number;
     };
   };
+}
+
+export interface MealDetails {
+  morning: string[];
+  lunch: string[];
+  afternoon: string[];
+  nutrition: {
+    calories: number;
+    protein: number;
+    carbs: number;
+    fat: number;
+  };
+}
+
+export type WeekKey = "week1" | "week2";
+
+export interface DayMenu {
+  day: string;
+  date: string;
+  details: MealDetails;
 }
 
 // ============= DISH (cho Kitchen Staff) =============
@@ -88,9 +117,7 @@ export interface MenuDay {
   date: string;
   dayOfWeek: string;
   meals: {
-    morning?: Meal;
     lunch?: Meal;
-    afternoon?: Meal;
   };
   notes?: string;
 }
@@ -102,13 +129,38 @@ export interface WeeklyMenu {
 }
 
 // ============= CHILD & PARENT =============
-export interface Child {
+
+export type Child = {
   id: number;
   name: string;
   class: string;
-  avatar?: LucideIcon;
-  allergies: string[];
-}
+  avatar: LucideIcon;
+  birthdate: string;
+  gender: "Nam" | "Nữ";
+  bloodType:
+    | "A+"
+    | "A-"
+    | "B+"
+    | "B-"
+    | "AB+"
+    | "AB-"
+    | "O+"
+    | "O-"
+    | "Không biết";
+  allergies: string[]; // VD: ["Đậu phộng", "Sữa", "Khác: mít"]
+  healthNotes: string;
+  emergencyContact: string;
+};
+
+export type ParentInfo = {
+  fullName: string;
+  email: string;
+  phone: string;
+  address: string;
+  idNumber: string;
+  relationship: "Cha" | "Mẹ" | "Ông" | "Bà" | "Khác";
+  emergencyContact: string;
+};
 
 export interface ChildrenListProps {
   children: Child[];
@@ -178,12 +230,15 @@ export interface Student {
   name: string;
   avatar: string;
   gender: string;
-  height: number;
-  weight: number;
-  bmi: number;
-  bmiStatus: BMIStatus;
-  lastUpdate: string;
-  history: HealthRecord[];
+  birthdate: string;
+  class: string;
+  parent: {
+    name: string;
+    phone: string;
+    email: string;
+  };
+  status: "active" | "inactive";
+  note?: string;
 }
 
 // ============= ANALYTICS & REPORTS =============
@@ -221,8 +276,8 @@ export interface Incident {
 
 export interface Meal {
   name: string;
-  dishes: string[]; // Danh sách các món ăn trong bữa
-  calories?: number; // Ví dụ: có thể thêm calo
+  dishes: string[];
+  calories?: number;
 }
 
 export type ReportType = "meals" | "revenue" | "users" | "incidents";
@@ -289,15 +344,3 @@ export type RecentActivity = {
 };
 
 export type RecentActivities = RecentActivity[];
-
-export type ExportKey = keyof typeof exportContent;
-
-export interface ClassItem {
-  id: number;
-  name: string;
-  grade: number;
-  academicYear: string;
-  room: string;
-  teacher: string;
-  students: number;
-}

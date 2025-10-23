@@ -27,16 +27,16 @@ export default function TeacherLayout({
       {/* Sidebar */}
       <div className="w-64 bg-orange-500 text-white fixed h-full">
         <div className="p-4 border-b border-orange-400">
-          <h1 className="text-xl font-bold">Teacher Portal</h1>
+          <h1 className="text-xl font-bold">Warden Portal</h1>
           <p className="text-sm text-orange-200">Hệ thống quản lý học sinh</p>
         </div>
         <nav className="p-4">
           <ul className="space-y-1">
             <li>
               <Link
-                href="/teacher"
+                href="/wardens"
                 className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher")
+                  isActive("/wardens")
                     ? "bg-white text-orange-500"
                     : "hover:bg-orange-600"
                 }`}
@@ -47,9 +47,9 @@ export default function TeacherLayout({
             </li>
             <li>
               <Link
-                href="/teacher/class"
+                href="/wardens/classView"
                 className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/class")
+                  isActive("/wardens/class")
                     ? "bg-white text-orange-500"
                     : "hover:bg-orange-600"
                 }`}
@@ -60,9 +60,9 @@ export default function TeacherLayout({
             </li>
             <li>
               <Link
-                href="/teacher/health"
+                href="/wardens/health"
                 className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/health")
+                  isActive("/wardens/health")
                     ? "bg-white text-orange-500"
                     : "hover:bg-orange-600"
                 }`}
@@ -73,9 +73,9 @@ export default function TeacherLayout({
             </li>
             <li>
               <Link
-                href="/teacher/gallery"
+                href="/wardens/gallery"
                 className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/gallery")
+                  isActive("/wardens/gallery")
                     ? "bg-white text-orange-500"
                     : "hover:bg-orange-600"
                 }`}
@@ -86,9 +86,9 @@ export default function TeacherLayout({
             </li>
             <li>
               <Link
-                href="/teacher/issues"
+                href="/wardens/issues"
                 className={`flex items-center px-4 py-3 rounded-lg ${
-                  isActive("/teacher/issues")
+                  isActive("/wardens/issues")
                     ? "bg-white text-orange-500"
                     : "hover:bg-orange-600"
                 }`}
@@ -105,7 +105,7 @@ export default function TeacherLayout({
         {/* Header */}
         <header className="bg-white shadow-sm p-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-800">
-            Dashboard Giáo viên
+            Dashboard Quản sinh
           </h1>
           <div className="flex items-center space-x-4">
             <div className="relative">
@@ -120,7 +120,7 @@ export default function TeacherLayout({
               </div>
               <div>
                 <p className="font-medium text-sm">Cô Lan Anh</p>
-                <p className="text-xs text-gray-500">Giáo viên chủ nhiệm</p>
+                <p className="text-xs text-gray-500">Quản sinh lớp 1A</p>
               </div>
             </div>
           </div>

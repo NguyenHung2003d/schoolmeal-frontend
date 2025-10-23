@@ -69,7 +69,7 @@ export default function ManagerDashboardPage() {
           <div className="flex justify-between items-start">
             <div>
               <p className="text-sm font-medium text-gray-500 mb-1">
-                Giáo viên
+                Quản sinh
               </p>
               <h3 className="text-3xl font-bold text-gray-800">
                 {stats.teachers.total}
@@ -79,7 +79,7 @@ export default function ManagerDashboardPage() {
                   <TrendingUp size={14} className="mr-0.5" />{" "}
                   {stats.teachers.growth}
                 </span>
-                <span className="text-gray-500">giáo viên mới</span>
+                <span className="text-gray-500">Quản sinh mới</span>
               </p>
             </div>
             <div className="bg-blue-100 p-3 rounded-lg">
@@ -374,78 +374,6 @@ export default function ManagerDashboardPage() {
             <div className="text-sm text-gray-600">
               <span className="font-medium">Ngân sách còn lại:</span>{" "}
               {(6500000).toLocaleString("vi-VN")} VND
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Recent activities */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6">
-            <div className="p-6 border-b border-gray-100">
-              <h2 className="font-bold text-lg">Hoạt động gần đây</h2>
-            </div>
-            <div className="p-4">
-              <div className="space-y-4">
-                {recentActivities.map((activity, index) => {
-                  const Icon = activity.icon;
-                  return (
-                    <div key={index} className="flex items-start space-x-3">
-                      <div
-                        className={`${activity.color} p-1.5 rounded-md text-white flex-shrink-0`}
-                      >
-                        <Icon size={16} />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">{activity.text}</p>
-                        <p className="text-xs text-gray-500">{activity.time}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="mt-4 text-center">
-                <button className="text-blue-500 hover:text-blue-600 text-sm font-medium">
-                  Xem tất cả hoạt động
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Calendar or upcoming events */}
-        <div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="p-6 border-b border-gray-100">
-              <h2 className="font-bold text-lg">Sự kiện sắp tới</h2>
-            </div>
-            <div className="p-4">
-              <div className="space-y-3">
-                <div className="p-3 border-l-4 border-blue-500 bg-blue-50 rounded-r-lg">
-                  <p className="font-medium text-gray-800">Họp phụ huynh</p>
-                  <p className="text-xs text-gray-500">
-                    Ngày mai, 8:00 - 11:30
-                  </p>
-                </div>
-                <div className="p-3 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
-                  <p className="font-medium text-gray-800">
-                    Tập huấn giáo viên
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    15/11/2023, 14:00 - 17:00
-                  </p>
-                </div>
-                <div className="p-3 border-l-4 border-purple-500 bg-purple-50 rounded-r-lg">
-                  <p className="font-medium text-gray-800">Kiểm tra học kỳ</p>
-                  <p className="text-xs text-gray-500">
-                    20/11/2023 - 25/11/2023
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 text-center">
-                <button className="text-blue-500 hover:text-blue-600 text-sm font-medium">
-                  Xem tất cả sự kiện
-                </button>
-              </div>
             </div>
           </div>
         </div>

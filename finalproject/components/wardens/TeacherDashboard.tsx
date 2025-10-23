@@ -43,7 +43,7 @@ export function TeacherDashboard() {
       {/* Quick Access Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Link
-          href="/teacher/class"
+          href="/wardens/classView"
           className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
         >
           <div className="flex flex-col items-center text-center">
@@ -58,7 +58,7 @@ export function TeacherDashboard() {
         </Link>
 
         <Link
-          href="/teacher/health"
+          href="/wardens/health"
           className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
         >
           <div className="flex flex-col items-center text-center">
@@ -73,7 +73,7 @@ export function TeacherDashboard() {
         </Link>
 
         <Link
-          href="/teacher/gallery"
+          href="/wardens/gallery"
           className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
         >
           <div className="flex flex-col items-center text-center">
@@ -88,7 +88,7 @@ export function TeacherDashboard() {
         </Link>
 
         <Link
-          href="/teacher/issues"
+          href="/wardens/issues"
           className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
         >
           <div className="flex flex-col items-center text-center">
@@ -126,9 +126,9 @@ export function TeacherDashboard() {
           </div>
           <div className="mt-4 flex justify-end">
             <Link
-              href="/teacher/class"
+              href="/wardens/class"
               className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
-            >
+            >                                                               
               <FileText size={14} className="mr-1" />
               Xem chi tiết lớp học
             </Link>

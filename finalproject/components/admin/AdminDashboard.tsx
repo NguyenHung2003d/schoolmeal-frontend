@@ -13,6 +13,7 @@ import {
   AlertCircle,
   FilePlus,
 } from "lucide-react";
+import DashboardCharts from "./DashboardCharts";
 
 // === 1. Dashboard stats cards ===
 function DashboardStats() {
@@ -30,12 +31,6 @@ function DashboardStats() {
           value: "9,050",
           change: "+8% so với tháng trước",
           icon: <Users size={20} className="text-white" />,
-        },
-        {
-          label: "Suất ăn tháng này",
-          value: "178,500",
-          change: "+15% so với tháng trước",
-          icon: <Utensils size={20} className="text-white" />,
         },
         {
           label: "Doanh thu",
@@ -56,26 +51,6 @@ function DashboardStats() {
           </div>
         </div>
       ))}
-    </div>
-  );
-}
-
-// === 2. Biểu đồ ===
-function DashboardChart() {
-  return (
-    <div className="bg-white border border-gray-100 rounded-lg shadow-sm">
-      <div className="p-4 border-b border-gray-100 flex justify-between items-center">
-        <h2 className="font-bold">Biểu đồ suất ăn</h2>
-        <button className="text-xs bg-orange-500 text-white px-3 py-1 rounded-md hover:bg-orange-600 transition">
-          Xuất báo cáo
-        </button>
-      </div>
-      <div className="p-6 flex items-center justify-center bg-orange-50/50 h-64">
-        <div className="text-center text-gray-500 flex flex-col items-center">
-          <BarChart3 size={48} className="mb-2 opacity-30" />
-          <p>Biểu đồ thống kê suất ăn theo thời gian</p>
-        </div>
-      </div>
     </div>
   );
 }
@@ -161,10 +136,30 @@ function TasksAndActions() {
   ];
 
   const quickActions = [
-    { title: "Thêm trường", icon: <School size={20} />, color: "bg-orange-50", text: "text-orange-600" },
-    { title: "Thêm tài khoản", icon: <UserPlus size={20} />, color: "bg-blue-50", text: "text-blue-600" },
-    { title: "Gửi thông báo", icon: <Bell size={20} />, color: "bg-green-50", text: "text-green-600" },
-    { title: "Tạo báo cáo", icon: <FilePlus size={20} />, color: "bg-purple-50", text: "text-purple-600" },
+    {
+      title: "Thêm trường",
+      icon: <School size={20} />,
+      color: "bg-orange-50",
+      text: "text-orange-600",
+    },
+    {
+      title: "Thêm tài khoản",
+      icon: <UserPlus size={20} />,
+      color: "bg-blue-50",
+      text: "text-blue-600",
+    },
+    {
+      title: "Gửi thông báo",
+      icon: <Bell size={20} />,
+      color: "bg-green-50",
+      text: "text-green-600",
+    },
+    {
+      title: "Tạo báo cáo",
+      icon: <FilePlus size={20} />,
+      color: "bg-purple-50",
+      text: "text-purple-600",
+    },
   ];
 
   return (
@@ -230,7 +225,7 @@ export default function AdminDashboard() {
       {/* Chart + Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
-          <DashboardChart />
+          <DashboardCharts />
         </div>
         <div>
           <RecentActivities />

@@ -1,4 +1,4 @@
-import { TeacherHealthTracking } from "@/components/teacher/TeacherHealthTracking";
+import { TeacherHealthTracking } from "@/components/wardens/TeacherHealthTracking";
 
 export default function TeacherHealthTrackingPage(){
     return <TeacherHealthTracking/>

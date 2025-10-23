@@ -12,10 +12,11 @@ import { Button } from "@/components/ui/button";
 import { useSelectedChild } from "@/context/SelectedChildContext";
 import { menuDataWeeks } from "@/data/constants"; // Mỗi tuần chứa 5 ngày
 import { MessageSquare } from "lucide-react";
+import { WeekKey } from "@/types";
 
 export default function MenuAndFeedback() {
   const { selectedChild } = useSelectedChild();
-  const [activeWeek, setActiveWeek] = useState("week1");
+  const [activeWeek, setActiveWeek] = useState<WeekKey>("week1");
   const [selectedDay, setSelectedDay] = useState<any | null>(null);
   const [feedbackType, setFeedbackType] = useState("");
   const [feedbackContent, setFeedbackContent] = useState("");
@@ -50,7 +51,10 @@ export default function MenuAndFeedback() {
       <h2 className="text-2xl font-bold text-gray-800">Thực đơn & Phản hồi</h2>
 
       {/* Tabs chọn tuần */}
-      <Tabs defaultValue="week1" onValueChange={setActiveWeek}>
+      <Tabs
+        defaultValue="week1"
+        onValueChange={(value: string) => setActiveWeek(value as WeekKey)}
+      >
         <TabsList className="bg-orange-50">
           <TabsTrigger
             value="week1"
@@ -80,13 +84,7 @@ export default function MenuAndFeedback() {
               </h4>
               <div className="mt-3 space-y-1 text-sm">
                 <p>
-                  🌅 <strong>Bữa sáng:</strong> {day.details.morning[0]}
-                </p>
-                <p>
                   ☀️ <strong>Bữa trưa:</strong> {day.details.lunch[0]}
-                </p>
-                <p>
-                  🌙 <strong>Bữa chiều:</strong> {day.details.afternoon[0]}
                 </p>
               </div>
             </div>
@@ -125,46 +123,18 @@ export default function MenuAndFeedback() {
               <TabsContent value="details">
                 {selectedDay ? (
                   <div className="space-y-6">
-                    {["morning", "lunch", "afternoon"].map((meal, idx) => (
-                      <div key={idx}>
-                        <h4 className="font-semibold text-orange-600 mb-2">
-                          {meal === "morning"
-                            ? "🌅 Bữa sáng"
-                            : meal === "lunch"
-                            ? "☀️ Bữa trưa"
-                            : "🌙 Bữa chiều"}
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-700">
-                          {selectedDay.details?.[meal]?.map(
-                            (item: string, i: number) => (
-                              <li key={i}>{item}</li>
-                            )
-                          )}
-                        </ul>
-                      </div>
-                    ))}
-
-                    {selectedDay.details?.nutrition && (
-                      <div className="bg-orange-50 rounded-lg p-4">
-                        <h4 className="font-semibold text-orange-700 mb-2">
-                          Thông tin dinh dưỡng
-                        </h4>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                          {Object.entries(selectedDay.details.nutrition).map(
-                            ([key, value]) => (
-                              <div key={key}>
-                                <p className="text-xl font-bold text-orange-600">
-                                  {value}
-                                </p>
-                                <p className="text-sm capitalize text-gray-600">
-                                  {key}
-                                </p>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    )}
+                    <div>
+                      <h4 className="font-semibold text-orange-600 mb-2">
+                        ☀️ Bữa trưa
+                      </h4>
+                      <ul className="list-disc list-inside text-gray-700">
+                        {selectedDay.details?.lunch?.map(
+                          (item: string, i: number) => (
+                            <li key={i}>{item}</li>
+                          )
+                        )}
+                      </ul>
+                    </div>
                   </div>
                 ) : (
                   <p className="text-center text-gray-500">Không có dữ liệu!</p>

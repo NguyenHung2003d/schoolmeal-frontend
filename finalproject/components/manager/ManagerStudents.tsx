@@ -323,7 +323,7 @@ export default function ManagerStudents() {
                       </span>
                     </td>
                     <td className="py-3 px-4 text-sm text-gray-600">
-                      {student.dob}
+                      {student.birthdate}
                     </td>
                     <td className="py-3 px-4">
                       <div>

@@ -1,10 +1,15 @@
 import {
   Child,
+  DayMenu,
+  FoodMenuItem,
   MenuItem,
   MissionItem,
   NavigationMenuItem,
   ParentFeedback,
   RecentActivities,
+  StockItem,
+  Student,
+  WeekKey,
   WeeklyMenu,
 } from "@/types";
 import {
@@ -29,6 +34,33 @@ import {
 export const images = [
   {
     image: "/hero_section.png",
+  },
+];
+
+export const lowStockItems: StockItem[] = [
+  {
+    name: "Thịt heo",
+    current: 8,
+    minimum: 10,
+    unit: "kg",
+  },
+  {
+    name: "Trứng gà",
+    current: 25,
+    minimum: 50,
+    unit: "quả",
+  },
+  {
+    name: "Dầu ăn",
+    current: 4,
+    minimum: 5,
+    unit: "lít",
+  },
+  {
+    name: "Gạo",
+    current: 18,
+    minimum: 20,
+    unit: "kg",
   },
 ];
 
@@ -254,23 +286,45 @@ export const upcomingMeals = [
   },
 ];
 
-export const children: Child[] = [
+/** ================== Constants ================== */
+// Ô đen – danh sách mặc định theo yêu cầu
+export const ALLERGY_LIST = [
+  "Đậu phộng",
+  "Hải sản",
+  "Sữa",
+  "Trứng",
+  "Lúa mì",
+  "Đậu nành",
+] as const;
+
+export const classes = [
   {
     id: 1,
-    name: "Nguyễn Minh An",
-    class: "3A",
-    avatar: UserRound,
-    allergies: ["Đậu phộng", "Hải sản"],
+    name: "Lớp 1A",
+    students: 28,
+    present: 25,
+    schedule: "Sáng",
+    teacher: "Cô Lan Anh",
   },
   {
     id: 2,
-    name: "Nguyễn Thu Hà",
-    class: "1B",
-    allergies: ["Sữa"],
+    name: "Lớp 2B",
+    students: 26,
+    present: 24,
+    schedule: "Chiều",
+    teacher: "Cô Lan Anh",
+  },
+  {
+    id: 3,
+    name: "Lớp 3C",
+    students: 21,
+    present: 19,
+    schedule: "Cả ngày",
+    teacher: "Cô Lan Anh",
   },
 ];
 
-export const menuDataWeeks = {
+export const menuDataWeeks: Record<WeekKey, DayMenu[]> = {
   week1: [
     {
       day: "Thứ 2",
@@ -338,6 +392,29 @@ export const menuDataWeeks = {
   ],
 };
 
+export const foodData: FoodMenuItem[] = [
+  {
+    id: "pho-bo",
+    name: "Phở Bò",
+    image: "/images/pho-bo.jpg",
+    ingredients: ["Bánh phở", "Thịt bò", "Hành lá", "Nước hầm xương"],
+    allergies: [], // Bắt buộc phải có, dù là mảng rỗng
+    date: "2025-10-24",
+    prepared: 120,
+    needed: 150,
+  },
+  {
+    id: "com-ga",
+    name: "Cơm Gà Xối Mỡ",
+    image: "/images/com-ga.jpg",
+    ingredients: ["Cơm", "Thịt gà", "Dưa leo", "Nước mắm"],
+    allergies: ["Hải sản"], // Ví dụ có dị ứng
+    date: "2025-10-24",
+    prepared: 145,
+    needed: 150,
+  },
+];
+
 export const menuItems: NavigationMenuItem[] = [
   {
     id: "register",
@@ -374,27 +451,6 @@ export const menuItems: NavigationMenuItem[] = [
     icon: FileEdit,
     label: "Đơn xin nghỉ",
     color: "text-pink-600",
-  },
-];
-
-export const lowStockItems = [
-  {
-    name: "Sữa tươi",
-    current: 12,
-    minimum: 20,
-    unit: "lít",
-  },
-  {
-    name: "Trứng gà",
-    current: 45,
-    minimum: 100,
-    unit: "quả",
-  },
-  {
-    name: "Rau xà lách",
-    current: 3,
-    minimum: 5,
-    unit: "kg",
   },
 ];
 
@@ -511,6 +567,170 @@ export const issues = [
         },
       },
     ],
+  },
+];
+
+export const parents = [
+  {
+    id: 1,
+    name: "Nguyễn Văn An",
+    email: "nguyenvanan@gmail.com",
+    phone: "0912345678",
+    children: [
+      {
+        name: "Nguyễn Minh Anh",
+        class: "3A",
+      },
+    ],
+    status: "active",
+    joinDate: "15/08/2022",
+    avatar: "https://i.imgur.com/F8QXfXh.jpg",
+  },
+  {
+    id: 2,
+    name: "Trần Thị Bình",
+    email: "tranthiminh@gmail.com",
+    phone: "0923456789",
+    children: [
+      {
+        name: "Trần Hoàng Nam",
+        class: "2B",
+      },
+      {
+        name: "Trần Thị Hoa",
+        class: "4A",
+      },
+    ],
+    status: "active",
+    joinDate: "10/09/2022",
+    avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
+  },
+  {
+    id: 3,
+    name: "Lê Văn Cường",
+    email: "levancuong@gmail.com",
+    phone: "0934567890",
+    children: [
+      {
+        name: "Lê Thu Hà",
+        class: "4C",
+      },
+    ],
+    status: "active",
+    joinDate: "05/10/2022",
+    avatar: "https://i.imgur.com/KWaVOLR.jpg",
+  },
+  {
+    id: 4,
+    name: "Phạm Thị Dung",
+    email: "phamthidung@gmail.com",
+    phone: "0945678901",
+    children: [
+      {
+        name: "Phạm Minh Đức",
+        class: "1A",
+      },
+    ],
+    status: "active",
+    joinDate: "20/07/2022",
+    avatar: "",
+  },
+  {
+    id: 5,
+    name: "Hoàng Văn Em",
+    email: "hoangvanem@gmail.com",
+    phone: "0956789012",
+    children: [
+      {
+        name: "Hoàng Thị Mai",
+        class: "3A",
+      },
+    ],
+    status: "pending",
+    joinDate: "15/11/2023",
+    avatar: "",
+  },
+];
+
+export const staffMembers = [
+  {
+    id: 1,
+    name: "Nguyễn Thị Lan",
+    email: "nguyenthilan@gmail.com",
+    phone: "0912345678",
+    role: "teacher",
+    subject: "Toán",
+    status: "active",
+    joinDate: "15/08/2022",
+    avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
+  },
+  {
+    id: 2,
+    name: "Trần Văn Minh",
+    email: "tranvanminh@gmail.com",
+    phone: "0923456789",
+    role: "teacher",
+    subject: "Tiếng Việt",
+    status: "active",
+    joinDate: "10/09/2022",
+    avatar: "https://i.imgur.com/F8QXfXh.jpg",
+  },
+  {
+    id: 3,
+    name: "Lê Thị Hương",
+    email: "lethihuong@gmail.com",
+    phone: "0934567890",
+    role: "teacher",
+    subject: "Tiếng Anh",
+    status: "active",
+    joinDate: "05/10/2022",
+    avatar: "https://i.imgur.com/KWaVOLR.jpg",
+  },
+  {
+    id: 4,
+    name: "Phạm Văn Đức",
+    email: "phamvanduc@gmail.com",
+    phone: "0945678901",
+    role: "teacher",
+    subject: "Khoa học",
+    status: "active",
+    joinDate: "20/07/2022",
+    avatar: "",
+  },
+  {
+    id: 5,
+    name: "Nguyễn Thị Thảo",
+    email: "nguyenthithao@gmail.com",
+    phone: "0956789012",
+    role: "kitchen",
+    subject: "",
+    status: "banned",
+    joinDate: "15/08/2022",
+    avatar: "",
+    banReason: "Vi phạm quy định vệ sinh an toàn thực phẩm",
+    banExpiry: "15/12/2023",
+  },
+  {
+    id: 6,
+    name: "Trần Văn Hùng",
+    email: "tranvanhung@gmail.com",
+    phone: "0967890123",
+    role: "support",
+    subject: "",
+    status: "active",
+    joinDate: "01/09/2022",
+    avatar: "",
+  },
+  {
+    id: 7,
+    name: "Lê Minh Tuấn",
+    email: "leminhtuan@gmail.com",
+    phone: "0978901234",
+    role: "teacher",
+    subject: "Thể dục",
+    status: "pending",
+    joinDate: "10/11/2023",
+    avatar: "",
   },
 ];
 
@@ -636,14 +856,9 @@ export const sampleMenus: WeeklyMenu[] = [
         date: "30/09/2025",
         dayOfWeek: "Thứ Hai",
         meals: {
-          morning: { name: "Bữa sáng", dishes: ["Bánh mì trứng", "Sữa tươi"] },
           lunch: {
             name: "Bữa trưa",
             dishes: ["Cơm", "Thịt kho tàu", "Canh rau cải"],
-          },
-          afternoon: {
-            name: "Bữa chiều",
-            dishes: ["Xôi đậu xanh", "Nước ép cam"],
           },
         },
       },
@@ -651,17 +866,9 @@ export const sampleMenus: WeeklyMenu[] = [
         date: "01/10/2025",
         dayOfWeek: "Thứ Ba",
         meals: {
-          morning: {
-            name: "Bữa sáng",
-            dishes: ["Bún riêu cua", "Sữa đậu nành"],
-          },
           lunch: {
             name: "Bữa trưa",
             dishes: ["Cơm", "Cá chiên xù", "Canh bí đao"],
-          },
-          afternoon: {
-            name: "Bữa chiều",
-            dishes: ["Cháo thịt bằm", "Nước lọc"],
           },
         },
       },
@@ -669,14 +876,9 @@ export const sampleMenus: WeeklyMenu[] = [
         date: "02/10/2025",
         dayOfWeek: "Thứ Tư",
         meals: {
-          morning: { name: "Bữa sáng", dishes: ["Phở gà", "Sữa tươi"] },
           lunch: {
             name: "Bữa trưa",
             dishes: ["Cơm", "Gà rang gừng", "Canh mồng tơi"],
-          },
-          afternoon: {
-            name: "Bữa chiều",
-            dishes: ["Bánh flan", "Nước ép dứa"],
           },
         },
       },
@@ -684,297 +886,77 @@ export const sampleMenus: WeeklyMenu[] = [
         date: "03/10/2025",
         dayOfWeek: "Thứ Năm",
         meals: {
-          morning: { name: "Bữa sáng", dishes: ["Bún bò Huế", "Trà sữa"] },
           lunch: {
             name: "Bữa trưa",
             dishes: ["Cơm", "Tôm rim thịt", "Canh chua"],
           },
-          afternoon: { name: "Bữa chiều", dishes: ["Bánh bao", "Nước cam"] },
         },
       },
       {
         date: "04/10/2025",
         dayOfWeek: "Thứ Sáu",
         meals: {
-          morning: {
-            name: "Bữa sáng",
-            dishes: ["Mì ý sốt bò bằm", "Sữa chua"],
-          },
           lunch: {
             name: "Bữa trưa",
             dishes: ["Cơm", "Sườn nướng", "Canh khoai mỡ"],
-          },
-          afternoon: {
-            name: "Bữa chiều",
-            dishes: ["Bánh mì ngọt", "Sữa milo"],
           },
         },
       },
     ],
   },
-  // Có thể thêm Tuần 2, Tuần 3...
 ];
 
-export const students = [
+export const notifications = [
   {
     id: 1,
-    name: "Nguyễn Minh Anh",
-    avatar: "https://i.imgur.com/wgJDypg.jpg",
-    gender: "Nữ",
-    height: 115,
-    weight: 20.5,
-    class: "3A",
-    status: "active",
-    dob: "15/08/2017",
-    bmi: 15.5,
-    bmiStatus: "normal",
-    lastUpdate: "15/10/2023",
-    present: true,
-    note: "Đang tham gia CLB múa",
-    parent: {
-      name: "Nguyễn Văn A",
-      email: "phuhuynhA@example.com",
-      phone: "0912345678",
-      hasAccount: true,
-    },
-    history: [
-      { date: "15/10/2023", height: 115, weight: 20.5, bmi: 15.5 },
-      { date: "15/07/2023", height: 113, weight: 19.8, bmi: 15.5 },
-      { date: "15/04/2023", height: 111, weight: 19.0, bmi: 15.4 },
-      { date: "15/01/2023", height: 109, weight: 18.2, bmi: 15.3 },
-    ],
+    title: "Thông báo lịch họp phụ huynh học kỳ I",
+    content:
+      "Trường sẽ tổ chức họp phụ huynh vào ngày 15/11/2023 từ 8:00 đến 11:30.",
+    type: "announcement",
+    recipients: "parents",
+    sentTo: 450,
+    read: 380,
+    date: "10/11/2023",
+    time: "09:30",
+    status: "sent",
   },
   {
     id: 2,
-    name: "Trần Hoàng Nam",
-    avatar: "https://i.imgur.com/8RWKYSf.jpg",
-    gender: "Nam",
-    height: 118,
-    weight: 21.2,
-    class: "3A",
-    status: "active",
-    dob: "20/05/2017",
-    bmi: 15.2,
-    bmiStatus: "normal",
-    lastUpdate: "15/10/2023",
-    present: false,
-    note: "Nghỉ học do ốm",
-    parent: {
-      name: "Trần Văn B",
-      email: "phuhuynhB@example.com",
-      phone: "0923456789",
-      hasAccount: false,
-    },
-    history: [
-      { date: "15/10/2023", height: 118, weight: 21.2, bmi: 15.2 },
-      { date: "15/07/2023", height: 116, weight: 20.5, bmi: 15.2 },
-      { date: "15/04/2023", height: 114, weight: 19.7, bmi: 15.1 },
-    ],
+    title: "Thông báo lịch thi học kỳ I",
+    content: "Lịch thi học kỳ I sẽ diễn ra từ ngày 20/12/2023 đến 25/12/2023.",
+    type: "academic",
+    recipients: "all",
+    sentTo: 480,
+    read: 420,
+    date: "05/11/2023",
+    time: "14:15",
+    status: "sent",
   },
   {
     id: 3,
-    name: "Lê Thu Hà",
-    class: "3A",
-    status: "active",
-    avatar: "https://i.imgur.com/K8gDgTf.jpg",
-    gender: "Nữ",
-    height: 112,
-    weight: 19.0,
-    dob: "10/03/2017",
-    bmi: 15.1,
-    bmiStatus: "normal",
-    lastUpdate: "12/10/2023",
-    present: true,
-    note: "",
-    parent: {
-      name: "Lê Văn C",
-      email: "phuhuynhC@example.com",
-      phone: "0934567890",
-      hasAccount: true,
-    },
-    history: [
-      { date: "12/10/2023", height: 112, weight: 19.0, bmi: 15.1 },
-      { date: "12/07/2023", height: 110, weight: 18.4, bmi: 15.2 },
-      { date: "12/04/2023", height: 108, weight: 17.9, bmi: 15.3 },
-    ],
+    title: "Thông báo nghỉ lễ 20/11",
+    content:
+      "Trường sẽ nghỉ lễ ngày Nhà giáo Việt Nam 20/11 và học sinh sẽ quay lại trường vào ngày 21/11.",
+    type: "announcement",
+    recipients: "all",
+    sentTo: 480,
+    read: 450,
+    date: "15/11/2023",
+    time: "10:00",
+    status: "scheduled",
   },
   {
     id: 4,
-    name: "Phạm Minh Đức",
-    avatar: "https://i.imgur.com/oPXQN1f.jpg",
-    gender: "Nam",
-    height: 119,
-    status: "active",
-    weight: 22.0,
-    class: "3A",
-    dob: "05/11/2017",
-    bmi: 15.5,
-    bmiStatus: "normal",
-    lastUpdate: "18/10/2023",
-    present: true,
-    note: "",
-    parent: {
-      name: "Phạm Văn D",
-      email: "phuhuynhD@example.com",
-      phone: "0945678901",
-      hasAccount: false,
-    },
-    history: [
-      { date: "18/10/2023", height: 119, weight: 22.0, bmi: 15.5 },
-      { date: "18/07/2023", height: 117, weight: 21.4, bmi: 15.6 },
-      { date: "18/04/2023", height: 115, weight: 20.7, bmi: 15.6 },
-    ],
-  },
-  {
-    id: 5,
-    name: "Vũ Thị Mai",
-    class: "3A",
-    avatar: "https://i.imgur.com/5HJfYBQ.jpg",
-    gender: "Nữ",
-    height: 114,
-    status: "active",
-    weight: 19.5,
-    dob: "25/07/2017",
-    bmi: 15.0,
-    bmiStatus: "normal",
-    lastUpdate: "20/10/2023",
-    present: true,
-    note: "",
-    parent: {
-      name: "Vũ Văn E",
-      email: "phuhuynhE@example.com",
-      phone: "0956789012",
-      hasAccount: true,
-    },
-    history: [
-      { date: "20/10/2023", height: 114, weight: 19.5, bmi: 15.0 },
-      { date: "20/07/2023", height: 112, weight: 18.9, bmi: 15.1 },
-      { date: "20/04/2023", height: 110, weight: 18.2, bmi: 15.0 },
-    ],
-  },
-  {
-    id: 6,
-    name: "Đặng Gia Bảo",
-    avatar: "https://i.imgur.com/LgdQb4S.jpg",
-    gender: "Nam",
-    height: 120,
-    weight: 23.1,
-    status: "active",
-    dob: "01/09/2017",
-    bmi: 16.0,
-    bmiStatus: "overweight",
-    class: "3A",
-    lastUpdate: "22/10/2023",
-    present: false,
-    note: "Nghỉ học do gia đình bận việc",
-    parent: {
-      name: "Đặng Văn F",
-      email: "phuhuynhF@example.com",
-      phone: "0967890123",
-      hasAccount: false,
-    },
-    history: [
-      { date: "22/10/2023", height: 120, weight: 23.1, bmi: 16.0 },
-      { date: "22/07/2023", height: 118, weight: 22.3, bmi: 16.0 },
-      { date: "22/04/2023", height: 116, weight: 21.4, bmi: 15.9 },
-    ],
-  },
-  {
-    id: 7,
-    name: "Bùi Khánh Ngọc",
-    avatar: "https://i.imgur.com/VQKcQbR.jpg",
-    gender: "Nữ",
-    height: 113,
-    weight: 18.7,
-    class: "3A",
-    status: "active",
-    dob: "10/02/2017",
-    bmi: 14.7,
-    bmiStatus: "underweight",
-    lastUpdate: "19/10/2023",
-    present: true,
-    note: "Cần theo dõi cân nặng",
-    parent: {
-      name: "Bùi Văn G",
-      email: "phuhuynhG@example.com",
-      phone: "0978901234",
-      hasAccount: true,
-    },
-    history: [
-      { date: "19/10/2023", height: 113, weight: 18.7, bmi: 14.7 },
-      { date: "19/07/2023", height: 111, weight: 18.0, bmi: 14.6 },
-      { date: "19/04/2023", height: 109, weight: 17.3, bmi: 14.6 },
-    ],
-  },
-  {
-    id: 8,
-    name: "Ngô Nhật Minh",
-    avatar: "https://i.imgur.com/jG6PhPw.jpg",
-    gender: "Nam",
-    height: 117,
-    weight: 21.8,
-    dob: "08/04/2017",
-    class: "3A",
-    status: "active",
-    bmi: 15.9,
-    bmiStatus: "normal",
-    lastUpdate: "16/10/2023",
-    present: true,
-    note: "",
-    parent: {
-      name: "Ngô Văn H",
-      email: "phuhuynhH@example.com",
-      phone: "0989012345",
-      hasAccount: true,
-    },
-    history: [
-      { date: "16/10/2023", height: 117, weight: 21.8, bmi: 15.9 },
-      { date: "16/07/2023", height: 115, weight: 21.1, bmi: 15.9 },
-      { date: "16/04/2023", height: 113, weight: 20.3, bmi: 15.8 },
-    ],
-  },
-];
-
-
-export const classes: ClassItem[] = [
-  {
-    id: 1,
-    name: "1A",
-    grade: 1,
-    academicYear: "2023-2024",
-    room: "101",
-    teacher: "Nguyễn Văn A",
-    students: 25,
-  },
-  {
-    id: 2,
-    name: "1B",
-    grade: 1,
-
-    academicYear: "2023-2024",
-    room: "102",
-    teacher: "Trần Thị B",
-    students: 24,
-  },
-  {
-    id: 3,
-    name: "2A",
-    grade: 2,
-
-    academicYear: "2023-2024",
-    room: "201",
-    teacher: "Lê Văn C",
-    students: 26,
-  },
-  {
-    id: 4,
-    name: "2B",
-    grade: 2,
-
-    academicYear: "2023-2024",
-    room: "202",
-    teacher: "Phạm Thị D",
-    students: 27,
+    title: "Thông báo về hoạt động ngoại khóa",
+    content:
+      "Trường sẽ tổ chức hoạt động ngoại khóa tham quan Bảo tàng Lịch sử vào ngày 25/11/2023.",
+    type: "event",
+    recipients: "class",
+    sentTo: 60,
+    read: 45,
+    date: "12/11/2023",
+    time: "16:30",
+    status: "sent",
   },
 ];
 
@@ -1040,104 +1022,7 @@ export const bills = [
     responsible: "Trần Thị Hoa",
   },
 ];
-export const invoices = [
-    {
-      id: "INV-001",
-      type: "tuition",
-      amount: 2500000,
-      student: "Nguyễn Minh Anh",
-      class: "3A",
-      parent: "Nguyễn Văn An",
-      parentEmail: "nguyenvanan@gmail.com",
-      dueDate: "15/11/2023",
-      status: "paid",
-      paidDate: "10/11/2023",
-      paidMethod: "bank",
-      items: [
-        {
-          description: "Học phí tháng 11/2023",
-          amount: 2500000,
-        },
-      ],
-    },
-    {
-      id: "INV-002",
-      type: "meal",
-      amount: 750000,
-      student: "Trần Hoàng Nam",
-      class: "2B",
-      parent: "Trần Thị Bình",
-      parentEmail: "tranthiminh@gmail.com",
-      dueDate: "15/11/2023",
-      status: "paid",
-      paidDate: "12/11/2023",
-      paidMethod: "cash",
-      items: [
-        {
-          description: "Tiền ăn tháng 11/2023",
-          amount: 750000,
-        },
-      ],
-    },
-    {
-      id: "INV-003",
-      type: "tuition",
-      amount: 2500000,
-      student: "Lê Thu Hà",
-      class: "4C",
-      parent: "Lê Văn Cường",
-      parentEmail: "levancuong@gmail.com",
-      dueDate: "15/11/2023",
-      status: "pending",
-      paidDate: "",
-      paidMethod: "",
-      items: [
-        {
-          description: "Học phí tháng 11/2023",
-          amount: 2500000,
-        },
-      ],
-    },
-    {
-      id: "INV-004",
-      type: "activity",
-      amount: 350000,
-      student: "Phạm Minh Đức",
-      class: "1A",
-      parent: "Phạm Thị Dung",
-      parentEmail: "phamthidung@gmail.com",
-      dueDate: "20/11/2023",
-      status: "overdue",
-      paidDate: "",
-      paidMethod: "",
-      items: [
-        {
-          description: "Phí hoạt động ngoại khóa tháng 11/2023",
-          amount: 350000,
-        },
-      ],
-    },
-    {
-      id: "INV-005",
-      type: "tuition",
-      amount: 2500000,
-      student: "Hoàng Thị Mai",
-      class: "3A",
-      parent: "Hoàng Văn Em",
-      parentEmail: "hoangvanem@gmail.com",
-      dueDate: "15/11/2023",
-      status: "paid",
-      paidDate: "05/11/2023",
-      paidMethod: "bank",
-      items: [
-        {
-          description: "Học phí tháng 11/2023",
-          amount: 2500000,
-        },
-      ],
-    },
-  ];
-// Mock shopping expenses data
+
 export const shoppingExpenses = [
   {
     id: "EXP-001",
@@ -1177,255 +1062,120 @@ export const shoppingExpenses = [
   },
 ];
 
-export const notifications = [
+export const invoices = [{
+    id: 'INV-001',
+    type: 'tuition',
+    amount: 2500000,
+    student: 'Nguyễn Minh Anh',
+    class: '3A',
+    parent: 'Nguyễn Văn An',
+    parentEmail: 'nguyenvanan@gmail.com',
+    dueDate: '15/11/2023',
+    status: 'paid',
+    paidDate: '10/11/2023',
+    paidMethod: 'bank',
+    items: [{
+      description: 'Học phí tháng 11/2023',
+      amount: 2500000
+    }]
+  }, {
+    id: 'INV-002',
+    type: 'meal',
+    amount: 750000,
+    student: 'Trần Hoàng Nam',
+    class: '2B',
+    parent: 'Trần Thị Bình',
+    parentEmail: 'tranthiminh@gmail.com',
+    dueDate: '15/11/2023',
+    status: 'paid',
+    paidDate: '12/11/2023',
+    paidMethod: 'cash',
+    items: [{
+      description: 'Tiền ăn tháng 11/2023',
+      amount: 750000
+    }]
+  }, {
+    id: 'INV-003',
+    type: 'tuition',
+    amount: 2500000,
+    student: 'Lê Thu Hà',
+    class: '4C',
+    parent: 'Lê Văn Cường',
+    parentEmail: 'levancuong@gmail.com',
+    dueDate: '15/11/2023',
+    status: 'pending',
+    paidDate: '',
+    paidMethod: '',
+    items: [{
+      description: 'Học phí tháng 11/2023',
+      amount: 2500000
+    }]
+  }, {
+    id: 'INV-004',
+    type: 'activity',
+    amount: 350000,
+    student: 'Phạm Minh Đức',
+    class: '1A',
+    parent: 'Phạm Thị Dung',
+    parentEmail: 'phamthidung@gmail.com',
+    dueDate: '20/11/2023',
+    status: 'overdue',
+    paidDate: '',
+    paidMethod: '',
+    items: [{
+      description: 'Phí hoạt động ngoại khóa tháng 11/2023',
+      amount: 350000
+    }]
+  }, {
+    id: 'INV-005',
+    type: 'tuition',
+    amount: 2500000,
+    student: 'Hoàng Thị Mai',
+    class: '3A',
+    parent: 'Hoàng Văn Em',
+    parentEmail: 'hoangvanem@gmail.com',
+    dueDate: '15/11/2023',
+    status: 'paid',
+    paidDate: '05/11/2023',
+    paidMethod: 'bank',
+    items: [{
+      description: 'Học phí tháng 11/2023',
+      amount: 2500000
+    }]
+  }];
+
+export const students: Student[] = [
   {
     id: 1,
-    title: "Thông báo lịch họp phụ huynh học kỳ I",
-    content:
-      "Trường sẽ tổ chức họp phụ huynh vào ngày 15/11/2023 từ 8:00 đến 11:30.",
-    type: "announcement",
-    recipients: "parents",
-    sentTo: 450,
-    read: 380,
-    date: "10/11/2023",
-    time: "09:30",
-    status: "sent",
+    name: "Nguyễn Minh Anh",
+    avatar: "https://i.imgur.com/wgJDypg.jpg",
+    gender: "Nữ",
+    birthdate: "2017-08-15",
+    class: "1A",
+    parent: {
+      name: "Nguyễn Văn A",
+      phone: "0912345678",
+      email: "parentA@gmail.com",
+    },
+    status: "active",
+    note: "Dị ứng với sữa",
   },
   {
     id: 2,
-    title: "Thông báo lịch thi học kỳ I",
-    content: "Lịch thi học kỳ I sẽ diễn ra từ ngày 20/12/2023 đến 25/12/2023.",
-    type: "academic",
-    recipients: "all",
-    sentTo: 480,
-    read: 420,
-    date: "05/11/2023",
-    time: "14:15",
-    status: "sent",
-  },
-  {
-    id: 3,
-    title: "Thông báo nghỉ lễ 20/11",
-    content:
-      "Trường sẽ nghỉ lễ ngày Nhà giáo Việt Nam 20/11 và học sinh sẽ quay lại trường vào ngày 21/11.",
-    type: "announcement",
-    recipients: "all",
-    sentTo: 480,
-    read: 450,
-    date: "15/11/2023",
-    time: "10:00",
-    status: "scheduled",
-  },
-  {
-    id: 4,
-    title: "Thông báo về hoạt động ngoại khóa",
-    content:
-      "Trường sẽ tổ chức hoạt động ngoại khóa tham quan Bảo tàng Lịch sử vào ngày 25/11/2023.",
-    type: "event",
-    recipients: "class",
-    sentTo: 60,
-    read: 45,
-    date: "12/11/2023",
-    time: "16:30",
-    status: "sent",
+    name: "Trần Hoàng Nam",
+    avatar: "https://i.imgur.com/8RWKYSf.jpg",
+    gender: "Nam",
+    birthdate: "2017-05-20",
+    class: "1A",
+    parent: {
+      name: "Trần Văn B",
+      phone: "0923456789",
+      email: "parentB@gmail.com",
+    },
+    status: "active",
   },
 ];
 
-export const teachers = [
-  {
-    id: 1,
-    name: "Nguyễn Thị Lan",
-    subject: "Toán",
-    experience: "5 năm",
-    avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
-  },
-  {
-    id: 2,
-    name: "Trần Văn Minh",
-    subject: "Tiếng Việt",
-    experience: "8 năm",
-    avatar: "https://i.imgur.com/F8QXfXh.jpg",
-  },
-  {
-    id: 3,
-    name: "Lê Thị Hương",
-    subject: "Tiếng Anh",
-    experience: "6 năm",
-    avatar: "https://i.imgur.com/KWaVOLR.jpg",
-  },
-  {
-    id: 4,
-    name: "Phạm Văn Đức",
-    subject: "Khoa học",
-    experience: "4 năm",
-    avatar: "",
-  },
-  {
-    id: 5,
-    name: "Hoàng Thị Mai",
-    subject: "Âm nhạc",
-    experience: "3 năm",
-    avatar: "https://i.imgur.com/6YQ9Z3z.jpg",
-  },
-  {
-    id: 6,
-    name: "Vũ Thị Hà",
-    subject: "Mỹ thuật",
-    experience: "7 năm",
-    avatar: "",
-  },
-  {
-    id: 7,
-    name: "Đặng Văn Tùng",
-    subject: "Thể dục",
-    experience: "9 năm",
-    avatar: "",
-  },
-  {
-    id: 8,
-    name: "Nguyễn Thị Thảo",
-    subject: "Lịch sử",
-    experience: "4 năm",
-    avatar: "",
-  },
-];
-
-export const studentsData: Record<string, ClassStudent[]> = {
-  "1A": [
-    {
-      id: 1,
-      name: "Nguyễn Minh Anh",
-      gender: "Nữ",
-      dob: "15/08/2017",
-      parent: {
-        name: "Nguyễn Văn An",
-        phone: "0912345678",
-        email: "nguyenvanan@gmail.com",
-        hasAccount: true,
-        username: "nguyenvanan",
-        password: "abc123456",
-        passwordChanged: false,
-        linkedStudents: [1],
-      },
-    },
-    {
-      id: 2,
-      name: "Trần Hoàng Nam",
-      gender: "Nam",
-      dob: "20/05/2017",
-      parent: {
-        name: "Trần Thị Bình",
-        phone: "0923456789",
-        email: "tranthiminh@gmail.com",
-        hasAccount: false,
-      },
-    },
-    {
-      id: 3,
-      name: "Phạm Minh Đức",
-      gender: "Nam",
-      dob: "05/11/2017",
-      parent: {
-        name: "Phạm Thị Dung",
-        phone: "0945678901",
-        email: "phamthidung@gmail.com",
-        hasAccount: true,
-        username: "phamthidung",
-        password: "dung123456",
-        passwordChanged: true,
-        linkedStudents: [3],
-      },
-    },
-    {
-      id: 4,
-      name: "Vũ Hoài An",
-      gender: "Nữ",
-      dob: "12/03/2017",
-      parent: {
-        name: "Vũ Minh Tuấn",
-        phone: "0987654321",
-        email: "vuminhtuan@gmail.com",
-        hasAccount: true,
-        username: "vuminhtuan",
-        password: "tuan123456",
-        passwordChanged: true,
-        linkedStudents: [8], // Has account linked to another student
-      },
-    },
-  ],
-  "2B": [
-    {
-      id: 4,
-      name: "Lê Thu Hà",
-      gender: "Nữ",
-      dob: "10/03/2016",
-      parent: {
-        name: "Lê Văn Cường",
-        phone: "0934567890",
-        email: "levancuong@gmail.com",
-        hasAccount: false,
-      },
-    },
-    {
-      id: 5,
-      name: "Hoàng Thị Mai",
-      gender: "Nữ",
-      dob: "25/07/2016",
-      parent: {
-        name: "Hoàng Văn Em",
-        phone: "0956789012",
-        email: "hoangvanem@gmail.com",
-        hasAccount: true,
-        username: "hoangvanem",
-        password: "em123456",
-        passwordChanged: true,
-        linkedStudents: [5],
-      },
-    },
-  ],
-  "3A": [
-    {
-      id: 6,
-      name: "Vũ Hoàng Long",
-      gender: "Nam",
-      dob: "12/04/2015",
-      parent: {
-        name: "Vũ Thị Lan",
-        phone: "0967890123",
-        email: "vuthilan@gmail.com",
-        hasAccount: false,
-      },
-    },
-    {
-      id: 7,
-      name: "Đỗ Thị Hương",
-      gender: "Nữ",
-      dob: "08/09/2015",
-      parent: {
-        name: "Đỗ Văn Minh",
-        phone: "0978901234",
-        email: "dovanminh@gmail.com",
-        hasAccount: false,
-      },
-    },
-    {
-      id: 8,
-      name: "Trần Minh Quân",
-      gender: "Nam",
-      dob: "22/06/2015",
-      parent: {
-        name: "Vũ Minh Tuấn",
-        phone: "0987654321",
-        email: "vuminhtuan@gmail.com",
-        hasAccount: true,
-        username: "vuminhtuan",
-        password: "tuan123456",
-        passwordChanged: true,
-        linkedStudents: [8], // Same parent as Vũ Hoài An
-      },
-    },
-  ],
-};
 export const mealSchedule = [
   {
     time: "11:30 - 12:00",
@@ -2132,6 +1882,7 @@ export const menuLibrary = [
     lastUsed: "02/09/2023",
   },
 ];
+
 // Mock data for food library
 export const foodLibrary = [
   {
@@ -2219,6 +1970,7 @@ export const foodLibrary = [
     image: "https://i.imgur.com/wHXtNAl.jpg",
   },
 ];
+
 // Mock data for AI suggestions
 export const aiSuggestions = [
   {

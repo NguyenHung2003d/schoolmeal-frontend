@@ -7,7 +7,7 @@ export default function ClassesOverview({
   selectedClass,
   onSelectClass,
 }: {
-  classes: { name: string; total: number; present: number }[];
+  classes: { name: string; students: number; present: number }[];
   selectedClass: string;
   onSelectClass: (name: string) => void;
 }) {
@@ -36,19 +36,19 @@ export default function ClassesOverview({
               <div className="font-medium">Lớp {classItem.name}</div>
               <span
                 className={`text-xs px-2 py-1 rounded-full ${
-                  classItem.present === classItem.total
+                  classItem.present === classItem.students
                     ? "bg-green-100 text-green-800"
                     : "bg-blue-100 text-blue-800"
                 }`}
               >
-                {classItem.present}/{classItem.total}
+                {classItem.present}/{classItem.students}
               </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
               <div
                 className="h-2 bg-orange-500 rounded-full"
                 style={{
-                  width: `${(classItem.present / classItem.total) * 100}%`,
+                  width: `${(classItem.present / classItem.students) * 100}%`,
                 }}
               ></div>
             </div>

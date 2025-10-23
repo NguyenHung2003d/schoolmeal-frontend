@@ -7,7 +7,6 @@ import {
   Utensils,
   Package,
   AlertCircle,
-  Plus,
   Search,
   Menu,
   Home,
@@ -19,7 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react"; // Thêm useEffect và useRef
 
 export default function KitchenStaffLayout({
   children,
@@ -27,9 +26,27 @@ export default function KitchenStaffLayout({
   children: React.ReactNode;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const pathname = usePathname();
+  const accountMenuRef = useRef<HTMLDivElement>(null); // Ref cho menu tài khoản
 
   const isActive = (href: string) => pathname?.startsWith(href);
+
+  // Tự động đóng menu khi click ra ngoài
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        accountMenuRef.current &&
+        !accountMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsAccountMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [accountMenuRef]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -37,7 +54,7 @@ export default function KitchenStaffLayout({
       <aside
         className={`${
           isSidebarOpen ? "w-64" : "w-20"
-        } bg-white shadow-lg fixed h-full transition-all duration-300 z-30`}
+        } bg-white shadow-lg fixed h-full transition-all duration-300 z-30 flex flex-col`}
       >
         <div className="p-4 flex items-center justify-between border-b border-gray-100">
           <div
@@ -56,11 +73,12 @@ export default function KitchenStaffLayout({
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="text-gray-500 hover:text-orange-500 transition-colors"
           >
-            {isSidebarOpen ? <Menu size={20} /> : <Menu size={20} />}
+            <Menu size={20} />
           </button>
         </div>
-        <div className="py-4">
+        <div className="flex-grow py-4 overflow-y-auto">
           <nav className="px-2">
+            {/* TỔNG QUAN */}
             <div className={`mb-4 ${isSidebarOpen ? "px-4" : "px-0"}`}>
               <p
                 className={`text-xs font-medium text-gray-400 mb-2 ${
@@ -76,7 +94,8 @@ export default function KitchenStaffLayout({
                     className={`flex items-center ${
                       isSidebarOpen ? "justify-start" : "justify-center"
                     } py-2 px-3 rounded-lg ${
-                      isActive("/kitchen-staff")
+                      isActive("/kitchen-staff") &&
+                      !pathname.includes("/kitchen-staff/")
                         ? "bg-orange-50 text-orange-500 font-medium"
                         : "text-gray-600 hover:bg-gray-100"
                     }`}
@@ -85,23 +104,9 @@ export default function KitchenStaffLayout({
                     {isSidebarOpen && <span className="ml-3">Trang chủ</span>}
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/kitchen-staff/reports"
-                    className={`flex items-center ${
-                      isSidebarOpen ? "justify-start" : "justify-center"
-                    } py-2 px-3 rounded-lg ${
-                      isActive("/kitchen-staff/reports")
-                        ? "bg-orange-50 text-orange-500 font-medium"
-                        : "text-gray-600 hover:bg-gray-100"
-                    }`}
-                  >
-                    <BarChart3 size={20} />
-                    {isSidebarOpen && <span className="ml-3">Thống kê</span>}
-                  </Link>
-                </li>
               </ul>
             </div>
+            {/* QUẢN LÝ */}
             <div className={`mb-4 ${isSidebarOpen ? "px-4" : "px-0"}`}>
               <p
                 className={`text-xs font-medium text-gray-400 mb-2 ${
@@ -191,7 +196,7 @@ export default function KitchenStaffLayout({
                       <>
                         <span className="ml-3">Dị ứng</span>
                         <span className="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                          3
+                          1
                         </span>
                       </>
                     )}
@@ -212,64 +217,17 @@ export default function KitchenStaffLayout({
                     {isSidebarOpen && (
                       <>
                         <span className="ml-3">Phản hồi & Đánh giá</span>
-                        <span className="ml-auto bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full">
-                          2
-                        </span>
                       </>
                     )}
                   </Link>
                 </li>
               </ul>
             </div>
-            <div className={`mb-4 ${isSidebarOpen ? "px-4" : "px-0"}`}>
-              <p
-                className={`text-xs font-medium text-gray-400 mb-2 ${
-                  !isSidebarOpen && "text-center"
-                }`}
-              >
-                {isSidebarOpen ? "HỆ THỐNG" : ""}
-              </p>
-              <ul className="space-y-1">
-                <li>
-                  <a
-                    href="#"
-                    className={`flex items-center ${
-                      isSidebarOpen ? "justify-start" : "justify-center"
-                    } py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-100`}
-                  >
-                    <Settings size={20} />
-                    {isSidebarOpen && <span className="ml-3">Cài đặt</span>}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className={`flex items-center ${
-                      isSidebarOpen ? "justify-start" : "justify-center"
-                    } py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-100`}
-                  >
-                    <LogOut size={20} />
-                    {isSidebarOpen && <span className="ml-3">Đăng xuất</span>}
-                  </a>
-                </li>
-              </ul>
-            </div>
           </nav>
         </div>
-        {isSidebarOpen && (
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100">
-            <div className="flex items-center">
-              <div className="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center">
-                <span className="font-medium text-orange-600">NT</span>
-              </div>
-              <div className="ml-3">
-                <p className="font-medium text-sm">Nguyễn Thị Tâm</p>
-                <p className="text-xs text-gray-500">Quản lý bếp</p>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* --- PHẦN TÀI KHOẢN ĐÃ ĐƯỢC DỜI ĐI --- */}
       </aside>
+
       {/* Main content */}
       <div
         className={`flex-1 ${
@@ -293,10 +251,8 @@ export default function KitchenStaffLayout({
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="relative">
-                <div className="bg-gray-100 rounded-lg p-2 text-gray-600 hover:bg-gray-200 cursor-pointer">
-                  <Search size={20} />
-                </div>
+              <div className="bg-gray-100 rounded-lg p-2 text-gray-600 hover:bg-gray-200 cursor-pointer">
+                <Search size={20} />
               </div>
               <div className="relative">
                 <div className="bg-gray-100 rounded-lg p-2 text-gray-600 hover:bg-gray-200 cursor-pointer">
@@ -306,14 +262,51 @@ export default function KitchenStaffLayout({
                   </span>
                 </div>
               </div>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg flex items-center transition-colors">
-                <Plus size={18} className="mr-2" />
-                <span>Thêm mới</span>
-              </button>
+
+              {/* --- PHẦN TÀI KHOẢN ĐÃ CHUYỂN VÀO ĐÂY --- */}
+              <div className="relative" ref={accountMenuRef}>
+                <button
+                  onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
+                  className="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                >
+                  <span className="font-medium text-orange-600">NT</span>
+                </button>
+
+                {isAccountMenuOpen && (
+                  <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 z-10">
+                    <div className="p-2 border-b">
+                      <p className="font-medium text-sm text-gray-800">
+                        Nguyễn Thị Tâm
+                      </p>
+                      <p className="text-xs text-gray-500">Quản lý bếp</p>
+                    </div>
+                    <ul className="p-1">
+                      <li>
+                        <a
+                          href="#"
+                          className="flex items-center w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md"
+                        >
+                          <Settings size={16} className="mr-2" />
+                          Cài đặt
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="flex items-center w-full text-left px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-md"
+                        >
+                          <LogOut size={16} className="mr-2" />
+                          Đăng xuất
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </header>
-        {children}
+        <main className="p-6">{children}</main>
       </div>
     </div>
   );

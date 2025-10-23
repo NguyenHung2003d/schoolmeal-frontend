@@ -92,13 +92,15 @@ export default function StudentsTable({
                   )}
                 </td>
                 <td className="px-6 py-4">
-                  {student.allergies.length > 0 ? (
+                  {student.allergies?.length > 0 ? (
                     <div className="flex items-center text-red-600">
                       <AlertCircle size={14} className="mr-1" />
                       <span>{student.allergies.join(", ")}</span>
                     </div>
                   ) : (
-                    <span className="text-sm text-gray-500">Không</span>
+                    <span className="text-sm text-gray-500">
+                      {student.note || "Không"}
+                    </span>
                   )}
                 </td>
                 <td className="px-6 py-4">

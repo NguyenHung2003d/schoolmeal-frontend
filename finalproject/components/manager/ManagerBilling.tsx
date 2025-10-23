@@ -47,7 +47,6 @@ import { Bar, Pie } from "react-chartjs-2";
 import { bills, shoppingExpenses } from "@/data/constants";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { ExpenseMap } from "@/types";
 // Register ChartJS components
 ChartJS.register(
   CategoryScale,

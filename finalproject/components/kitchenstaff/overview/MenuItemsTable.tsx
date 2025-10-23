@@ -1,6 +1,6 @@
 "use client";
 
-import { menuItems } from "@/data/constants";
+import { foodData } from "@/data/constants";
 import { ArrowUpRight, AlertTriangle, Eye, Pencil } from "lucide-react";
 
 export default function MenuItemsTable() {
@@ -37,7 +37,7 @@ export default function MenuItemsTable() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {menuItems.map((item) => (
+            {foodData.map((item) => (
               <tr key={item.id} className="hover:bg-gray-50">
                 <td className="py-4 px-6">
                   <div className="font-medium">{item.name}</div>

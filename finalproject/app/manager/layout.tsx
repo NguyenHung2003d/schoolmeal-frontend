@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import {
   Building,
@@ -26,9 +26,14 @@ import {
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export default function ManagerLayout({ children }: { children: React.ReactNode }) {
+export default function ManagerLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
+  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
   const pathname = usePathname();
   const isActive = (href: string) => pathname.startsWith(href);
   return (
@@ -113,39 +118,68 @@ export default function ManagerLayout({ children }: { children: React.ReactNode 
             </p>
             <ul className="space-y-1">
               <li>
-                <Link
-                  href="/manager/staff"
-                  className={`flex items-center ${
-                    isSidebarOpen ? "justify-start px-4" : "justify-center"
+                <button
+                  onClick={() =>
+                    setIsAccountDropdownOpen(!isAccountDropdownOpen)
+                  }
+                  className={`flex items-center w-full ${
+                    isSidebarOpen ? "justify-between px-4" : "justify-center"
                   } py-3 rounded-lg ${
-                    isActive("/manager/staff")
+                    pathname.startsWith("/manager/staff") ||
+                    pathname.startsWith("/manager/parents")
                       ? "bg-blue-50 text-blue-500"
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
-                  <UserPlus size={20} />
+                  <div className="flex items-center">
+                    <Users size={20} />
+                    {isSidebarOpen && (
+                      <span className="ml-3">Quản lý tài khoản</span>
+                    )}
+                  </div>
                   {isSidebarOpen && (
-                    <span className="ml-3">Tài khoản nhân viên</span>
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform ${
+                        isAccountDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
                   )}
-                </Link>
+                </button>
+
+                {/* Dropdown con */}
+                {isAccountDropdownOpen && isSidebarOpen && (
+                  <ul className="ml-8 mt-2 space-y-1">
+                    <li>
+                      <Link
+                        href="/manager/staff"
+                        className={`flex items-center px-3 py-2 text-sm rounded-lg ${
+                          pathname.startsWith("/manager/staff")
+                            ? "bg-blue-50 text-blue-500"
+                            : "text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        <UserPlus size={16} className="mr-2" />
+                        Tài khoản nhân viên
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/manager/parents"
+                        className={`flex items-center px-3 py-2 text-sm rounded-lg ${
+                          pathname.startsWith("/manager/parents")
+                            ? "bg-blue-50 text-blue-500"
+                            : "text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        <Users size={16} className="mr-2" />
+                        Tài khoản phụ huynh
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </li>
-              <li>
-                <Link
-                  href="/manager/parents"
-                  className={`flex items-center ${
-                    isSidebarOpen ? "justify-start px-4" : "justify-center"
-                  } py-3 rounded-lg ${
-                    isActive("/manager/parents")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
-                  }`}
-                >
-                  <Users size={20} />
-                  {isSidebarOpen && (
-                    <span className="ml-3">Tài khoản phụ huynh</span>
-                  )}
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/manager/students"
@@ -267,30 +301,6 @@ export default function ManagerLayout({ children }: { children: React.ReactNode 
               </li>
             </ul>
           </div>
-          <div className="mt-8 pt-4 border-t border-gray-100">
-            <Link
-              href="/manager/settings"
-              className={`flex items-center ${
-                isSidebarOpen ? "justify-start px-4" : "justify-center"
-              } py-3 rounded-lg ${
-                isActive("/manager/settings")
-                  ? "bg-blue-50 text-blue-500"
-                  : "text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              <Settings size={20} />
-              {isSidebarOpen && <span className="ml-3">Cài đặt</span>}
-            </Link>
-            <Link
-              href="/"
-              className={`flex items-center ${
-                isSidebarOpen ? "justify-start px-4" : "justify-center"
-              } py-3 rounded-lg text-gray-600 hover:bg-gray-100`}
-            >
-              <LogOut size={20} />
-              {isSidebarOpen && <span className="ml-3">Đăng xuất</span>}
-            </Link>
-          </div>
         </nav>
       </div>
       {/* Main content */}
@@ -302,6 +312,7 @@ export default function ManagerLayout({ children }: { children: React.ReactNode 
         {/* Header */}
         <header className="bg-white shadow-sm sticky top-0 z-20">
           <div className="px-6 py-4 flex justify-between items-center">
+            {/* Search Input */}
             <div className="flex-1">
               <div className="relative max-w-md">
                 <input
@@ -315,53 +326,70 @@ export default function ManagerLayout({ children }: { children: React.ReactNode 
                 />
               </div>
             </div>
+
+            {/* Notification + User Icon */}
             <div className="flex items-center space-x-4">
-              <div className="relative">
-                <div className="bg-gray-100 rounded-lg p-2 text-gray-600 hover:bg-gray-200 cursor-pointer">
-                  <Bell size={20} />
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    3
-                  </span>
-                </div>
+              {/* Notifications */}
+              <div className="relative bg-gray-100 rounded-lg p-2 text-gray-600 hover:bg-gray-200 cursor-pointer">
+                <Bell size={20} />
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  3
+                </span>
               </div>
-              <div className="flex items-center space-x-2 cursor-pointer group relative">
-                <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span className="font-medium text-blue-600">NH</span>
-                </div>
-                <div className="hidden md:block">
-                  <p className="font-medium text-sm">Nguyễn Hoàng</p>
-                  <p className="text-xs text-gray-500">Trường Tiểu học A</p>
-                </div>
-                <ChevronDown
-                  size={16}
-                  className="text-gray-500 hidden md:block"
-                />
-                {/* Dropdown menu */}
-                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 invisible group-hover:visible z-10">
-                  <div className="py-1">
-                    <a
-                      href="#"
+
+              {/* User Icon + Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowAccountMenu((prev) => !prev)}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
+                  <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <span className="font-medium text-blue-600">NH</span>
+                  </div>
+                  {isSidebarOpen && (
+                    <>
+                      <div className="hidden md:block text-left">
+                        <p className="font-medium text-sm">Nguyễn Hoàng</p>
+                        <p className="text-xs text-gray-500">
+                          Trường Tiểu học A
+                        </p>
+                      </div>
+                      <ChevronDown
+                        size={16}
+                        className="text-gray-500 hidden md:block"
+                      />
+                    </>
+                  )}
+                </button>
+
+                {/* Dropdown Menu */}
+                {showAccountMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50">
+                    <Link
+                      href="/manager/account"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-500"
                     >
                       <User size={16} className="mr-2" />
                       Thông tin cá nhân
-                    </a>
-                    <a
-                      href="#"
+                    </Link>
+                    <Link
+                      href="/manager/settings"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-500"
                     >
                       <Settings size={16} className="mr-2" />
                       Cài đặt
-                    </a>
-                    <a
-                      href="#"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-500"
+                    </Link>
+                    <button
+                      onClick={() => {
+                        /* Logic đăng xuất */
+                      }}
+                      className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                     >
                       <LogOut size={16} className="mr-2" />
                       Đăng xuất
-                    </a>
+                    </button>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

@@ -74,8 +74,6 @@ export default function StatisticalReports() {
     );
   };
 
-  const COLORS = ["#f97316", "#3b82f6", "#10b981", "#f59e0b"];
-
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -110,7 +108,6 @@ export default function StatisticalReports() {
               onChange={(e) => setReportType(e.target.value)}
               className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500"
             >
-              <option value="meals">Suất ăn</option>
               <option value="revenue">Doanh thu</option>
               <option value="users">Người dùng</option>
               <option value="incidents">Sự cố</option>
@@ -169,96 +166,6 @@ export default function StatisticalReports() {
           </div>
         </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-        <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-5 text-white">
-          <div className="flex justify-between items-start mb-3">
-            <div>
-              <p className="text-sm opacity-90">Tổng suất ăn</p>
-              <h3 className="text-3xl font-bold mt-1">178,500</h3>
-              <p className="text-sm mt-2 opacity-90">+15% so với tháng trước</p>
-            </div>
-            <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-              <Utensils size={24} />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-5 text-white">
-          <div className="flex justify-between items-start mb-3">
-            <div>
-              <p className="text-sm opacity-90">Doanh thu</p>
-              <h3 className="text-3xl font-bold mt-1">580M</h3>
-              <p className="text-sm mt-2 opacity-90">+22% so với tháng trước</p>
-            </div>
-            <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-              <TrendingUp size={24} />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-5 text-white">
-          <div className="flex justify-between items-start mb-3">
-            <div>
-              <p className="text-sm opacity-90">Tổng người dùng</p>
-              <h3 className="text-3xl font-bold mt-1">16,210</h3>
-              <p className="text-sm mt-2 opacity-90">+7% so với tháng trước</p>
-            </div>
-            <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-              <Users size={24} />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-lg p-5 text-white">
-          <div className="flex justify-between items-start mb-3">
-            <div>
-              <p className="text-sm opacity-90">Sự cố</p>
-              <h3 className="text-3xl font-bold mt-1">68</h3>
-              <p className="text-sm mt-2 opacity-90">-10% so với tháng trước</p>
-            </div>
-            <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-              <AlertTriangle size={24} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {reportType === "meals" && (
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h3 className="font-bold mb-4">Thống kê suất ăn theo ngày</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={mealData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="registered"
-                stroke="#3b82f6"
-                name="Đã đăng ký"
-                strokeWidth={2}
-              />
-              <Line
-                type="monotone"
-                dataKey="actual"
-                stroke="#10b981"
-                name="Thực tế"
-                strokeWidth={2}
-              />
-              <Line
-                type="monotone"
-                dataKey="missed"
-                stroke="#ef4444"
-                name="Bỏ bữa"
-                strokeWidth={2}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      )}
 
       {reportType === "revenue" && (
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
@@ -397,19 +304,6 @@ export default function StatisticalReports() {
               </span>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="mt-6 bg-blue-50 p-4 rounded-lg flex items-start space-x-3">
-        <FileText size={20} className="text-blue-600 mt-0.5" />
-        <div>
-          <p className="font-medium text-blue-900">Ghi chú về báo cáo</p>
-          <p className="text-sm text-blue-700 mt-1">
-            Báo cáo được tự động cập nhật theo thời gian thực. Dữ liệu có thể
-            xuất ra định dạng Excel hoặc PDF để gửi cho Sở Giáo dục, Ban giám
-            hiệu hoặc lưu trữ. Báo cáo bao gồm tất cả các chỉ số quan trọng về
-            hoạt động bữa ăn học đường trong hệ thống.
-          </p>
         </div>
       </div>
     </div>

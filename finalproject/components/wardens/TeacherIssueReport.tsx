@@ -36,7 +36,7 @@ export default function TeacherIssueReport() {
     return true;
   });
 
-  const getCategoryLabel = (category) => {
+  const getCategoryLabel = (category: any) => {
     switch (category) {
       case "food":
         return "Thức ăn";
@@ -51,7 +51,7 @@ export default function TeacherIssueReport() {
     }
   };
 
-  const getCategoryColor = (category) => {
+  const getCategoryColor = (category: any) => {
     switch (category) {
       case "food":
         return "bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 border border-orange-200";
@@ -66,20 +66,7 @@ export default function TeacherIssueReport() {
     }
   };
 
-  const getSeverityColor = (severity) => {
-    switch (severity) {
-      case "high":
-        return "bg-gradient-to-r from-red-50 to-red-100 text-red-700 border border-red-200";
-      case "medium":
-        return "bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 border border-amber-200";
-      case "low":
-        return "bg-gradient-to-r from-green-50 to-green-100 text-green-700 border border-green-200";
-      default:
-        return "bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border border-gray-200";
-    }
-  };
-
-  const getStatusLabel = (status) => {
+  const getStatusLabel = (status: any) => {
     switch (status) {
       case "pending":
         return "Chờ xử lý";
@@ -92,7 +79,7 @@ export default function TeacherIssueReport() {
     }
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: any) => {
     switch (status) {
       case "pending":
         return "bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-lg shadow-amber-500/30";
@@ -105,8 +92,9 @@ export default function TeacherIssueReport() {
     }
   };
 
-  const handleCreateIssue = (e) => {
+  const handleCreateIssue = (e: any) => {
     e.preventDefault();
+    // Reset form
     setShowCreateModal(false);
     setIssueTitle("");
     setIssueDescription("");
@@ -258,19 +246,32 @@ export default function TeacherIssueReport() {
                 />
               </div>
               <div className="flex items-center space-x-3">
-                <select className="bg-white border-2 border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 hover:border-gray-300 cursor-pointer">
-                  <option value="all">Tất cả phân loại</option>
-                  <option value="food">Thức ăn</option>
-                  <option value="facility">Cơ sở vật chất</option>
-                  <option value="health">Sức khỏe</option>
-                  <option value="activity">Hoạt động</option>
-                </select>
-                <select className="bg-white border-2 border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 hover:border-gray-300 cursor-pointer">
-                  <option value="newest">Mới nhất</option>
-                  <option value="oldest">Cũ nhất</option>
-                  <option value="priority">Ưu tiên cao</option>
-                </select>
-                <button className="p-3 text-gray-500 hover:text-orange-500 hover:bg-orange-50 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-orange-200">
+                <div className="relative">
+                  <select className="appearance-none bg-white border-2 border-gray-200 rounded-xl pl-4 pr-10 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 hover:border-orange-300 hover:shadow-md cursor-pointer">
+                    <option value="all">Tất cả phân loại</option>
+                    <option value="food">🍽️ Thức ăn</option>
+                    <option value="facility">🏫 Cơ sở vật chất</option>
+                    <option value="health">❤️ Sức khỏe</option>
+                    <option value="activity">🎨 Hoạt động</option>
+                  </select>
+                  <ChevronDown
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                    size={18}
+                  />
+                </div>
+                <div className="relative">
+                  <select className="appearance-none bg-white border-2 border-gray-200 rounded-xl pl-4 pr-10 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 hover:border-orange-300 hover:shadow-md cursor-pointer">
+                    {/* === THAY ĐỔI: Thêm Emoji === */}
+                    <option value="newest">🕒 Mới nhất</option>
+                    <option value="oldest">🕤 Cũ nhất</option>
+                    <option value="priority">🔥 Ưu tiên cao</option>
+                  </select>
+                  <ChevronDown
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                    size={18}
+                  />
+                </div>
+                <button className="p-3 text-gray-500 hover:text-orange-500 hover:bg-orange-50 rounded-xl transition-all duration-300 border-2 border-gray-200 hover:border-orange-300 hover:shadow-md">
                   <Filter size={20} />
                 </button>
               </div>
@@ -399,14 +400,17 @@ export default function TeacherIssueReport() {
                 </button>
               </div>
               <form onSubmit={handleCreateIssue}>
-                <div className="p-6 space-y-5 max-h-[60vh] overflow-y-auto">
+                {/* === THAY ĐỔI: Thêm class scrollbar === */}
+                <div className="p-6 space-y-5 max-h-[60vh] overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-track-gray-100 scrollbar-thumb-gray-300">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    {/* === THAY ĐỔI: Sửa style Label === */}
+                    <label className="block text-sm font-medium text-gray-800 mb-2">
                       Tiêu đề
                     </label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300"
+                      // === THAY ĐỔI: Thêm bg-gray-50, hover:bg-gray-100, transition-colors ===
+                      className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors duration-300 hover:bg-gray-100"
                       placeholder="Nhập tiêu đề vấn đề"
                       value={issueTitle}
                       onChange={(e) => setIssueTitle(e.target.value)}
@@ -414,11 +418,13 @@ export default function TeacherIssueReport() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    {/* === THAY ĐỔI: Sửa style Label === */}
+                    <label className="block text-sm font-medium text-gray-800 mb-2">
                       Mô tả
                     </label>
                     <textarea
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 resize-none"
+                      // === THAY ĐỔI: Thêm bg-gray-50, hover:bg-gray-100, transition-colors ===
+                      className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors duration-300 resize-none hover:bg-gray-100"
                       rows={4}
                       placeholder="Mô tả chi tiết vấn đề"
                       value={issueDescription}
@@ -427,12 +433,15 @@ export default function TeacherIssueReport() {
                     ></textarea>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    {/* === THAY ĐỔI: Thêm div relative === */}
+                    <div className="relative">
+                      {/* === THAY ĐỔI: Sửa style Label === */}
+                      <label className="block text-sm font-medium text-gray-800 mb-2">
                         Phân loại
                       </label>
                       <select
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 cursor-pointer"
+                        // === THAY ĐỔI: Thêm appearance-none, bg-white, pl-4 pr-10, hover:bg-gray-100 ===
+                        className="w-full pl-4 pr-10 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors duration-300 cursor-pointer appearance-none hover:bg-gray-100"
                         value={issueCategory}
                         onChange={(e) => setIssueCategory(e.target.value)}
                         required
@@ -444,13 +453,21 @@ export default function TeacherIssueReport() {
                         <option value="activity">🎨 Hoạt động</option>
                         <option value="other">📋 Khác</option>
                       </select>
+                      {/* === THAY ĐỔI: Thêm icon ChevronDown === */}
+                      <ChevronDown
+                        className="absolute right-4 top-1/2 mt-3 text-gray-400 pointer-events-none"
+                        size={20}
+                      />
                     </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    {/* === THAY ĐỔI: Thêm div relative === */}
+                    <div className="relative">
+                      {/* === THAY ĐỔI: Sửa style Label === */}
+                      <label className="block text-sm font-medium text-gray-800 mb-2">
                         Mức độ ưu tiên
                       </label>
                       <select
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 cursor-pointer"
+                        // === THAY ĐỔI: Thêm appearance-none, bg-white, pl-4 pr-10, hover:bg-gray-100 ===
+                        className="w-full pl-4 pr-10 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors duration-300 cursor-pointer appearance-none hover:bg-gray-100"
                         value={issueSeverity}
                         onChange={(e) => setIssueSeverity(e.target.value)}
                         required
@@ -459,14 +476,22 @@ export default function TeacherIssueReport() {
                         <option value="medium">🟡 Trung bình</option>
                         <option value="high">🔴 Cao</option>
                       </select>
+                      {/* === THAY ĐỔI: Thêm icon ChevronDown === */}
+                      <ChevronDown
+                        className="absolute right-4 top-1/2 mt-3 text-gray-400 pointer-events-none"
+                        size={20}
+                      />
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  {/* === THAY ĐỔI: Thêm div relative === */}
+                  <div className="relative">
+                    {/* === THAY ĐỔI: Sửa style Label === */}
+                    <label className="block text-sm font-medium text-gray-800 mb-2">
                       Liên quan đến học sinh (nếu có)
                     </label>
                     <select
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 cursor-pointer"
+                      // === THAY ĐỔI: Thêm appearance-none, bg-white, pl-4 pr-10, hover:bg-gray-100 ===
+                      className="w-full pl-4 pr-10 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors duration-300 cursor-pointer appearance-none hover:bg-gray-100"
                       value={issueStudent}
                       onChange={(e) => setIssueStudent(e.target.value)}
                     >
@@ -479,6 +504,11 @@ export default function TeacherIssueReport() {
                       <option value="Phạm Minh Đức">Phạm Minh Đức</option>
                       <option value="Vũ Thị Mai">Vũ Thị Mai</option>
                     </select>
+                    {/* === THAY ĐỔI: Thêm icon ChevronDown === */}
+                    <ChevronDown
+                      className="absolute right-4 top-1/2 mt-3 text-gray-400 pointer-events-none"
+                      size={20}
+                    />
                   </div>
                 </div>
                 <div className="p-6 border-t border-gray-200 flex justify-end space-x-3 bg-gray-50">

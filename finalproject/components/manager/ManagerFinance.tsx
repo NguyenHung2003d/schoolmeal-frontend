@@ -189,7 +189,7 @@ export function ManagerFinance() {
                     type="checkbox"
                     id="include-chart"
                     className="mr-2"
-                    checked
+                    defaultChecked
                   />
                   <label htmlFor="include-chart" className="text-sm">
                     Biểu đồ
@@ -200,7 +200,7 @@ export function ManagerFinance() {
                     type="checkbox"
                     id="include-details"
                     className="mr-2"
-                    checked
+                    defaultChecked
                   />
                   <label htmlFor="include-details" className="text-sm">
                     Chi tiết giao dịch
@@ -211,7 +211,8 @@ export function ManagerFinance() {
                     type="checkbox"
                     id="include-summary"
                     className="mr-2"
-                    checked
+                    
+                    defaultChecked 
                   />
                   <label htmlFor="include-summary" className="text-sm">
                     Tóm tắt

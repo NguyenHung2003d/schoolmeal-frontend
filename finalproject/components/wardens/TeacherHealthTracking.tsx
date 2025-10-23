@@ -189,30 +189,6 @@ export function TeacherHealthTracking() {
     setShowBMITrend(true);
   };
 
-  const handleHeightChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEditHeight(e.target.value);
-    if (e.target.value && editWeight) calculateBMI();
-  };
-
-  const handleWeightChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEditWeight(e.target.value);
-    if (e.target.value && editHeight) calculateBMI();
-  };
-
-  const calculateBMI = () => {
-    if (!editHeight || !editWeight) return;
-    const h = parseFloat(editHeight) / 100;
-    const w = parseFloat(editWeight);
-    const bmi = w / (h * h);
-    setEditBMI(bmi.toFixed(1));
-  };
-
-  const handleSaveChanges = () => {
-    alert("Cập nhật thành công!");
-    setSelectedStudent(null);
-  };
-
-  const handleCloseModal = () => setSelectedStudent(null);
   const handleCloseTrendModal = () => {
     setShowBMITrend(false);
     setSelectedStudentForTrend(null);
@@ -262,27 +238,88 @@ export function TeacherHealthTracking() {
           </h2>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
+          <table className="w-full max-w-5xl divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase w-1/5">
                   Học sinh
                 </th>
-                <th className="px-6 py-3">Chiều cao</th>
-                <th className="px-6 py-3">Cân nặng</th>
-                <th className="px-6 py-3">BMI</th>
-                <th className="px-6 py-3">Trạng thái</th>
-                <th className="px-6 py-3">Thao tác</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase w-1/6">
+                  Chiều cao
+                </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase w-1/6">
+                  Cân nặng
+                </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase w-1/6">
+                  BMI
+                </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase w-1/6">
+                  Trạng thái
+                </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase w-1/6">
+                  Thao tác
+                </th>
               </tr>
             </thead>
             <tbody>
               {students.map((s) => (
                 <tr key={s.id} className="hover:bg-gray-50">
                   <td className="px-6 py-3 font-medium">{s.name}</td>
-                  <td className="px-6 py-3">{s.height} cm</td>
-                  <td className="px-6 py-3">{s.weight} kg</td>
-                  <td className="px-6 py-3">{s.bmi.toFixed(1)}</td>
                   <td className="px-6 py-3">
+                    <div className="flex items-center justify-center gap-2">
+                      <Ruler
+                        size={16}
+                        className="text-gray-400 flex-shrink-0"
+                        style={{ width: "30%" }}
+                      />
+                      <span
+                        className="text-sm text-gray-600"
+                        style={{ width: "30%" }}
+                      >
+                        Chiều cao
+                      </span>
+                      <span className="font-medium" style={{ width: "40%" }}>
+                        {s.height} cm
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-3">
+                    <div className="flex items-center justify-center gap-2">
+                      <Weight
+                        size={16}
+                        className="text-gray-400 flex-shrink-0"
+                        style={{ width: "30%" }}
+                      />
+                      <span
+                        className="text-sm text-gray-600"
+                        style={{ width: "30%" }}
+                      >
+                        Cân nặng
+                      </span>
+                      <span className="font-medium" style={{ width: "40%" }}>
+                        {s.weight} kg
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-3">
+                    <div className="flex items-center justify-center gap-2">
+                      <Activity
+                        size={16}
+                        className="text-gray-400 flex-shrink-0"
+                        style={{ width: "30%" }}
+                      />
+                      <span
+                        className="text-sm text-gray-600"
+                        style={{ width: "30%" }}
+                      >
+                        BMI
+                      </span>
+                      <span className="font-medium" style={{ width: "40%" }}>
+                        {s.bmi.toFixed(1)}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-3 text-center">
                     <span
                       className={`px-2 py-1 text-xs font-semibold rounded-full ${getBMIStatusColor(
                         s.bmiStatus
@@ -291,19 +328,21 @@ export function TeacherHealthTracking() {
                       {getBMIStatusText(s.bmiStatus)}
                     </span>
                   </td>
-                  <td className="px-6 py-3 flex gap-2">
-                    <button
-                      onClick={() => handleEditStudent(s)}
-                      className="text-blue-600 hover:underline"
-                    >
-                      Sửa
-                    </button>
-                    <button
-                      onClick={(e) => handleViewBMITrend(s, e)}
-                      className="text-green-600 hover:underline"
-                    >
-                      Biểu đồ
-                    </button>
+                  <td className="px-6 py-3">
+                    <div className="flex gap-2 justify-center">
+                      <button
+                        onClick={() => handleEditStudent(s)}
+                        className="text-blue-600 hover:underline text-sm"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        onClick={(e) => handleViewBMITrend(s, e)}
+                        className="text-green-600 hover:underline text-sm"
+                      >
+                        Biểu đồ
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -333,26 +372,3 @@ export function TeacherHealthTracking() {
     </div>
   );
 }
-
-// Helper component
-const InfoIcon: React.FC<{ size?: number; className?: string }> = ({
-  size = 24,
-  className,
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="12" y1="16" x2="12" y2="12"></line>
-    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-  </svg>
-);

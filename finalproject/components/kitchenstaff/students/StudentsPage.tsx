@@ -12,9 +12,10 @@ export default function KitchenStaffStudentsPage() {
   const [selectedClass, setSelectedClass] = useState("all");
   const totalStudents = students.length;
   const presentStudents = students.filter((s) => s.present).length;
-  const specialRequests = students.filter(
-    (s) => s.allergies.length > 0 || s.specialRequests.trim() !== ""
-  ).length;
+  const specialRequests =
+    students?.filter(
+      (s) => s.note?.trim() !== "" 
+    )?.length ?? 0;
 
   return (
     <div className="p-6">

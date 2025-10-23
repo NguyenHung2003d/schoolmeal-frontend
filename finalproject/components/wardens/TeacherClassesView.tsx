@@ -36,16 +36,6 @@ export default function TeacherClassView() {
               Quản lý và theo dõi học sinh trong lớp
             </p>
           </div>
-          <div className="flex space-x-3">
-            <Button variant="outline" className="gap-2">
-              <Calendar size={18} />
-              Lịch học
-            </Button>
-            <Button className="gap-2">
-              <UserCheck size={18} />
-              Điểm danh
-            </Button>
-          </div>
         </div>
 
         {/* Filters */}
@@ -111,20 +101,6 @@ export default function TeacherClassView() {
               </div>
               <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
                 <UserCheck size={32} className="text-white" />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl shadow-lg shadow-orange-200 p-6 text-white transform transition-all hover:scale-105 hover:shadow-xl">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-orange-100 text-sm font-medium mb-1">
-                  Thời gian học
-                </p>
-                <p className="text-3xl font-bold">Buổi sáng</p>
-              </div>
-              <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
-                <Clock size={32} className="text-white" />
               </div>
             </div>
           </div>
@@ -206,15 +182,15 @@ export default function TeacherClassView() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-medium">
-                      {student.dob}
+                      {student.bmi}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-semibold text-gray-900">
-                          {student.parent.name}
+                          {student.parent}
                         </div>
                         <div className="text-sm text-gray-500 font-mono">
-                          {student.parent.phone}
+                          {student.parent}
                         </div>
                       </div>
                     </td>
