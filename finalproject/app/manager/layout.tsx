@@ -34,34 +34,38 @@ export default function ManagerLayout({
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname()
+
   const isActive = (href: string) => pathname.startsWith(href);
+
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
       {/* Sidebar */}
       <div
         className={`${
           isSidebarOpen ? "w-64" : "w-20"
         } bg-white shadow-lg fixed h-full transition-all duration-300 z-30`}
       >
-        <div className="p-4 flex items-center justify-between border-b border-gray-100">
+        <div className="p-4 flex items-center justify-between border-b border-orange-100 bg-gradient-to-r from-orange-500 to-amber-500">
           <div
             className={`flex items-center ${
               !isSidebarOpen && "justify-center w-full"
             }`}
           >
-            <div className="h-8 w-8 rounded-md bg-blue-500 flex items-center justify-center">
-              <Building size={18} className="text-white" />
+            <div className="h-8 w-8 rounded-md bg-white flex items-center justify-center shadow-md">
+              <Building size={18} className="text-orange-500" />
             </div>
             {isSidebarOpen && (
-              <span className="font-bold text-xl ml-3">Manager Portal</span>
+              <span className="font-bold text-xl ml-3 text-white">
+                Manager Portal
+              </span>
             )}
           </div>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-gray-500 hover:text-blue-500 transition-colors"
+            className="text-white hover:text-orange-100 transition-colors"
           >
-            {isSidebarOpen ? <Menu size={20} /> : <Menu size={20} />}
+            <Menu size={20} />
           </button>
         </div>
         <nav className="p-4">
@@ -77,12 +81,12 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <Home size={20} />
@@ -92,12 +96,12 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager/statistics"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager/statistics")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <BarChart3 size={20} />
@@ -127,8 +131,8 @@ export default function ManagerLayout({
                   } py-3 rounded-lg ${
                     pathname.startsWith("/manager/staff") ||
                     pathname.startsWith("/manager/parents")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <div className="flex items-center">
@@ -153,10 +157,10 @@ export default function ManagerLayout({
                     <li>
                       <Link
                         href="/manager/staff"
-                        className={`flex items-center px-3 py-2 text-sm rounded-lg ${
+                        className={`flex items-center w-full px-3 py-2 text-sm rounded-lg ${
                           pathname.startsWith("/manager/staff")
-                            ? "bg-blue-50 text-blue-500"
-                            : "text-gray-600 hover:bg-gray-100"
+                            ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600"
+                            : "text-gray-600 hover:bg-orange-50"
                         }`}
                       >
                         <UserPlus size={16} className="mr-2" />
@@ -166,10 +170,10 @@ export default function ManagerLayout({
                     <li>
                       <Link
                         href="/manager/parents"
-                        className={`flex items-center px-3 py-2 text-sm rounded-lg ${
+                        className={`flex items-center w-full px-3 py-2 text-sm rounded-lg ${
                           pathname.startsWith("/manager/parents")
-                            ? "bg-blue-50 text-blue-500"
-                            : "text-gray-600 hover:bg-gray-100"
+                            ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600"
+                            : "text-gray-600 hover:bg-orange-50"
                         }`}
                       >
                         <Users size={16} className="mr-2" />
@@ -183,12 +187,12 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager/students"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager/students")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <Upload size={20} />
@@ -209,12 +213,12 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager/classes"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager/classes")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <BookOpen size={20} />
@@ -226,12 +230,12 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager/notifications"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager/notifications")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <Bell size={20} />
@@ -252,12 +256,12 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager/billing"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager/billing")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <DollarSign size={20} />
@@ -269,14 +273,15 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager/invoices"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager/invoices")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
+                  <FileText size={20} />
                   {isSidebarOpen && (
                     <span className="ml-3">Báo cáo hóa đơn</span>
                   )}
@@ -285,12 +290,12 @@ export default function ManagerLayout({
               <li>
                 <Link
                   href="/manager/finance"
-                  className={`flex items-center ${
+                  className={`flex items-center w-full ${
                     isSidebarOpen ? "justify-start px-4" : "justify-center"
                   } py-3 rounded-lg ${
                     isActive("/manager/finance")
-                      ? "bg-blue-50 text-blue-500"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-600 shadow-sm"
+                      : "text-gray-600 hover:bg-orange-50"
                   }`}
                 >
                   <Download size={20} />
@@ -310,7 +315,7 @@ export default function ManagerLayout({
         } transition-all duration-300`}
       >
         {/* Header */}
-        <header className="bg-white shadow-sm sticky top-0 z-20">
+        <header className="bg-white shadow-sm sticky top-0 z-20 border-b border-orange-100">
           <div className="px-6 py-4 flex justify-between items-center">
             {/* Search Input */}
             <div className="flex-1">
@@ -318,10 +323,10 @@ export default function ManagerLayout({
                 <input
                   type="text"
                   placeholder="Tìm kiếm..."
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 border border-orange-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                 />
                 <Search
-                  className="absolute left-3 top-2.5 text-gray-400"
+                  className="absolute left-3 top-2.5 text-orange-400"
                   size={18}
                 />
               </div>
@@ -330,9 +335,9 @@ export default function ManagerLayout({
             {/* Notification + User Icon */}
             <div className="flex items-center space-x-4">
               {/* Notifications */}
-              <div className="relative bg-gray-100 rounded-lg p-2 text-gray-600 hover:bg-gray-200 cursor-pointer">
+              <div className="relative bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg p-2 text-orange-600 hover:from-orange-100 hover:to-amber-100 cursor-pointer transition-all">
                 <Bell size={20} />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-md">
                   3
                 </span>
               </div>
@@ -343,8 +348,8 @@ export default function ManagerLayout({
                   onClick={() => setShowAccountMenu((prev) => !prev)}
                   className="flex items-center space-x-2 cursor-pointer"
                 >
-                  <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <span className="font-medium text-blue-600">NH</span>
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center shadow-sm">
+                    <span className="font-medium text-orange-600">NH</span>
                   </div>
                   {isSidebarOpen && (
                     <>
@@ -364,17 +369,17 @@ export default function ManagerLayout({
 
                 {/* Dropdown Menu */}
                 {showAccountMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-orange-100 z-50">
                     <Link
                       href="/manager/account"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-500"
+                      className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600"
                     >
                       <User size={16} className="mr-2" />
                       Thông tin cá nhân
                     </Link>
                     <Link
                       href="/manager/settings"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-500"
+                      className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600"
                     >
                       <Settings size={16} className="mr-2" />
                       Cài đặt
@@ -395,7 +400,7 @@ export default function ManagerLayout({
           </div>
         </header>
         {/* Main content */}
-        <main>{children}</main>
+        <main className="p-6">{children}</main>
       </div>
     </div>
   );

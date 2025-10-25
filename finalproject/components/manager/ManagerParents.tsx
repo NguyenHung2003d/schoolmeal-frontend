@@ -1,396 +1,227 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { Info, Search, Filter, Edit, Trash, UserPlus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
-  Search,
-  Filter,
-  Edit,
-  Trash,
-  UserPlus,
-  Upload,
-  X,
-  Info,
-  ChevronRight,
-  AlertCircle,
-} from "lucide-react";
-import { Button } from "../ui/button";
-import { ClassItem, Student } from "@/types";
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { classes, parents, students } from "@/data/constants";
+import Link from "next/link";
 
-export default function ManagerParents() {
+export default function ManagerParentsPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [showAddModal, setShowAddModal] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("all");
-  const [selectedStudents, setSelectedStudents] = useState<Student[]>([]);
-  const [showClassStudentsModal, setShowClassStudentsModal] = useState(false);
-  const [currentClass, setCurrentClass] = useState<ClassItem | null>(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
-  // Lọc phụ huynh
-  const filteredParents = parents.filter(
-    (parent) =>
-      (parent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const filteredParents = useMemo(() => {
+    return parents.filter((parent: any) => {
+      const matchSearch =
+        parent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         parent.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        parent.children.some((child: any) =>
-          child.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )) &&
-      (selectedStatus === "all" || parent.status === selectedStatus)
-  );
+        parent.children?.some((c: any) =>
+          c.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      const matchStatus =
+        selectedStatus === "all" || parent.status === selectedStatus;
+      return matchSearch && matchStatus;
+    });
+  }, [searchQuery, selectedStatus]);
 
-  // Style trạng thái
   const getStatusStyle = (status: string) => {
     switch (status) {
       case "active":
-        return { text: "Hoạt động", className: "bg-green-100 text-green-800" };
+        return "bg-green-100 text-green-800";
       case "pending":
-        return {
-          text: "Chờ xác nhận",
-          className: "bg-yellow-100 text-yellow-800",
-        };
+        return "bg-yellow-100 text-yellow-800";
       case "inactive":
-        return {
-          text: "Không hoạt động",
-          className: "bg-red-100 text-red-800",
-        };
+        return "bg-red-100 text-red-800";
       default:
-        return { text: status, className: "bg-gray-100 text-gray-800" };
+        return "bg-gray-100 text-gray-800";
     }
-  };
-
-  // Thêm học sinh
-  const handleAddStudent = () => {
-    const select = document.getElementById(
-      "student-select"
-    ) as HTMLSelectElement;
-    if (select?.value) {
-      const studentId = parseInt(select.value);
-      const student = (students as Student[]).find((s) => s.id === studentId);
-      if (student && !selectedStudents.some((s) => s.id === studentId)) {
-        setSelectedStudents([...selectedStudents, student]);
-      }
-    }
-  };
-
-  // Xóa học sinh
-  const handleRemoveStudent = (studentId: number) => {
-    setSelectedStudents(selectedStudents.filter((s) => s.id !== studentId));
-  };
-
-  // Tạo tài khoản phụ huynh
-  const handleCreateAccount = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("Tài khoản phụ huynh đã được tạo thành công!");
-    setShowAddModal(false);
-    setSelectedStudents([]);
-  };
-
-  // Mở danh sách học sinh theo lớp
-  const handleOpenClassStudents = (classItem: ClassItem) => {
-    setCurrentClass(classItem);
-    setShowClassStudentsModal(true);
-  };
-
-  // Tạo tài khoản cho tất cả phụ huynh trong lớp
-  const handleCreateAllAccounts = () => {
-    if (!currentClass) return;
-    alert(
-      `Đang tạo tài khoản cho tất cả phụ huynh của lớp ${currentClass.name}...`
-    );
-    setTimeout(() => setShowClassStudentsModal(false), 1500);
-  };
-
-  // Lấy học sinh theo lớp
-  const getClassStudents = (className: string): Student[] => {
-    return students.filter((student: Student) => student.class === className);
-  };
-
-  // Đếm phụ huynh chưa có tài khoản
-  const countParentsWithoutAccounts = (className: string) => {
-    const classStudents = getClassStudents(className);
-    return classStudents.filter((s) => !s.parent.hasAccount).length;
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">
             Quản lý tài khoản phụ huynh
           </h1>
           <p className="text-gray-600">
-            Tạo và quản lý tài khoản cho phụ huynh học sinh
+            Tạo và quản lý tài khoản phụ huynh toàn trường
           </p>
         </div>
-        <div className="flex space-x-2">
-          <Button variant="outline" className="flex items-center">
-            <Upload size={16} className="mr-2" />
-            Nhập Excel
-          </Button>
-          <Button
-            onClick={() => setShowAddModal(true)}
-            className="flex items-center"
-          >
-            <UserPlus size={16} className="mr-2" />
-            Tạo tài khoản phụ huynh
-          </Button>
-        </div>
+        <Button
+          onClick={() => setShowCreateModal(true)}
+          className="flex items-center"
+        >
+          <UserPlus size={16} className="mr-2" />
+          Tạo tài khoản phụ huynh
+        </Button>
       </div>
-
+      {/* Tạo tài khoản theo lớp */}
+      <div className="bg-white p-4 border rounded-lg shadow-sm">
+        <h2 className="text-lg font-medium mb-4">Tạo tài khoản theo lớp</h2>
+        <table className="w-full text-sm">
+          <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
+            <tr>
+              <th className="px-4 py-2 text-left">Lớp</th>
+              <th className="px-4 py-2 text-left">
+                Phụ huynh chưa có tài khoản
+              </th>
+              <th className="px-4 py-2 text-left">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            {classes.map((classItem: any) => {
+              const pending = students.filter(
+                (s: any) => s.class === classItem.name && !s.parent.hasAccount
+              ).length;
+              return (
+                <tr key={classItem.id} className="border-t hover:bg-gray-50">
+                  <td className="px-4 py-2 font-medium">
+                    Lớp {classItem.name}
+                  </td>
+                  <td className="px-4 py-2">
+                    {pending > 0 ? (
+                      <span className="text-red-600 font-semibold">
+                        {pending} phụ huynh chưa có
+                      </span>
+                    ) : (
+                      <span className="text-green-600">Tất cả đã có</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-2 flex gap-2">
+                    <Link
+                      href={`/manager/parents/class/${classItem.id}?tab=excel`}
+                    >
+                      Nhập Excel
+                    </Link>
+                    <Link href={`/manager/parents/class/${classItem.id}`}>
+                      Quản lý lớp
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       {/* Banner */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-start">
+      <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg flex items-start">
         <Info size={20} className="text-blue-500 mr-3 mt-0.5" />
         <div>
           <h3 className="font-medium text-blue-800 mb-1">
             Về tài khoản phụ huynh
           </h3>
           <p className="text-sm text-blue-700">
-            Tài khoản phụ huynh cho phép theo dõi thông tin học tập, bữa ăn và
-            hoạt động của con em. Mỗi tài khoản có thể quản lý nhiều học sinh và
-            nhận email khi được tạo.
+            Tài khoản này cho phép phụ huynh theo dõi thông tin học tập, thực
+            đơn và hoạt động của học sinh.
           </p>
         </div>
       </div>
+      <Dialog open={showCreateModal} onOpenChange={setShowCreateModal}>
+        <DialogContent className="p-0">
+          <CreateParentModal onClose={() => setShowCreateModal(false)} />
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
+function CreateParentModal({ onClose }: { onClose: () => void }) {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
+  const availableStudents = useMemo(
+    () => students.filter((s: any) => !s.parent?.hasAccount),
+    []
+  );
 
-      {/* Tạo theo lớp */}
-      <div className="mb-6">
-        <h2 className="text-lg font-medium mb-4">Tạo tài khoản theo lớp</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {classes.map((classItem: ClassItem) => {
-            const pending = countParentsWithoutAccounts(classItem.name);
-            return (
+  const addStudent = (stu: any) => {
+    if (!selectedStudents.some((x) => x.id === stu.id))
+      setSelectedStudents([...selectedStudents, stu]);
+  };
+
+  const removeStudent = (id: number) =>
+    setSelectedStudents(selectedStudents.filter((s) => s.id !== id));
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(`Tạo tài khoản cho: ${fullName}`);
+    onClose();
+  };
+
+  return (
+    <div className="p-6">
+      <h2 className="text-xl font-bold mb-2">Tạo tài khoản phụ huynh</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          placeholder="Họ và tên"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          required
+        />
+        <Input
+          placeholder="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          placeholder="Số điện thoại"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+        <div>
+          <p className="text-sm font-medium mb-1">Chọn học sinh liên kết</p>
+          <div className="max-h-32 overflow-y-auto border rounded p-2">
+            {availableStudents.map((s: any) => (
               <div
-                key={classItem.id}
-                className={`border rounded-lg p-4 cursor-pointer hover:border-blue-300 hover:shadow-sm transition-all ${
-                  pending > 0 ? "bg-red-50" : "bg-white"
-                }`}
-                onClick={() => handleOpenClassStudents(classItem)}
+                key={s.id}
+                className="flex justify-between items-center p-1 hover:bg-gray-50 cursor-pointer"
+                onClick={() => addStudent(s)}
               >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-lg font-medium">
-                      Lớp {classItem.name}
-                    </h3>
-                  </div>
-                  <div className="p-2 rounded-full bg-blue-50">
-                    <ChevronRight size={16} className="text-blue-500" />
-                  </div>
-                </div>
-                {pending > 0 && (
-                  <div className="mt-3 flex items-center text-red-500 text-sm">
-                    <AlertCircle size={14} className="mr-1" />
-                    <span>{pending} phụ huynh chưa có tài khoản</span>
-                  </div>
-                )}
+                <span>
+                  {s.name} - Lớp {s.class}
+                </span>
               </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Bộ lọc + bảng */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 mb-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div className="relative flex-grow max-w-md">
-            <input
-              type="text"
-              placeholder="Tìm kiếm phụ huynh hoặc học sinh..."
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Search
-              className="absolute left-3 top-2.5 text-gray-400"
-              size={18}
-            />
+            ))}
           </div>
-          <div className="flex items-center space-x-2">
-            <Filter size={16} className="text-gray-500" />
-            <select
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500"
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
-            >
-              <option value="all">Tất cả trạng thái</option>
-              <option value="active">Hoạt động</option>
-              <option value="pending">Chờ xác nhận</option>
-              <option value="inactive">Không hoạt động</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Bảng phụ huynh */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-gray-50 text-left">
-                <th className="py-3 px-4 text-xs font-medium text-gray-500 uppercase">
-                  Phụ huynh
-                </th>
-                <th className="py-3 px-4 text-xs font-medium text-gray-500 uppercase">
-                  Liên hệ
-                </th>
-                <th className="py-3 px-4 text-xs font-medium text-gray-500 uppercase">
-                  Học sinh
-                </th>
-                <th className="py-3 px-4 text-xs font-medium text-gray-500 uppercase">
-                  Ngày tham gia
-                </th>
-                <th className="py-3 px-4 text-xs font-medium text-gray-500 uppercase">
-                  Trạng thái
-                </th>
-                <th className="py-3 px-4 text-xs font-medium text-gray-500 uppercase">
-                  Thao tác
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {filteredParents.map((parent: any) => {
-                const statusStyle = getStatusStyle(parent.status);
-                return (
-                  <tr key={parent.id} className="hover:bg-gray-50">
-                    <td className="py-3 px-4">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-medium">
-                          {parent.name.charAt(0)}
-                        </div>
-                        <div className="ml-3">
-                          <p className="font-medium text-gray-800">
-                            {parent.name}
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="text-sm text-gray-600">
-                        {parent.email}
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        {parent.phone}
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      {parent.children.map((c: any, i: number) => (
-                        <div key={i} className="text-sm text-gray-600">
-                          {c.name} - Lớp {c.class}
-                        </div>
-                      ))}
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-600">
-                      {parent.joinDate}
-                    </td>
-                    <td className="py-3 px-4">
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${statusStyle.className}`}
-                      >
-                        {statusStyle.text}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center space-x-2">
-                        <button className="p-1 text-blue-500 hover:bg-blue-50 rounded">
-                          <Edit size={18} />
-                        </button>
-                        <button className="p-1 text-red-500 hover:bg-red-50 rounded">
-                          <Trash size={18} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Modal lớp */}
-      {showClassStudentsModal && currentClass && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
-            <div className="p-6 border-b flex justify-between items-center">
-              <h2 className="text-xl font-bold">
-                Danh sách học sinh lớp {currentClass.name}
-              </h2>
-              <button
-                onClick={() => setShowClassStudentsModal(false)}
-                className="text-gray-400 hover:text-gray-600"
+          <div className="flex flex-wrap gap-2 mt-2">
+            {selectedStudents.map((s: any) => (
+              <span
+                key={s.id}
+                className="px-2 py-1 bg-gray-200 rounded-full text-xs"
               >
-                <X size={20} />
-              </button>
-            </div>
-
-            {/* Nội dung */}
-            <div className="overflow-y-auto flex-1 p-6">
-              {(() => {
-                const classStudents = getClassStudents(currentClass.name);
-                return classStudents.length > 0 ? (
-                  <div>
-                    {classStudents.map((student) => (
-                      <div
-                        key={student.id}
-                        className={`border rounded-lg p-4 mb-3 flex justify-between ${
-                          student.parent.hasAccount
-                            ? "bg-green-50 border-green-100"
-                            : "bg-red-50 border-red-100"
-                        }`}
-                      >
-                        <div>
-                          <p className="font-medium text-gray-800">
-                            {student.name}
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            {student.gender} | {student.dob}
-                          </p>
-                        </div>
-                        <div className="text-right text-sm text-gray-700">
-                          <p>{student.parent.name}</p>
-                          <p>{student.parent.email}</p>
-                          <p>{student.parent.phone}</p>
-                          {!student.parent.hasAccount && (
-                            <button
-                              className="mt-2 px-2 py-1 bg-blue-100 rounded text-blue-600 text-xs"
-                              onClick={() =>
-                                alert(
-                                  `Tạo tài khoản cho ${student.parent.name}`
-                                )
-                              }
-                            >
-                              <UserPlus size={12} className="inline mr-1" />
-                              Tạo tài khoản
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-center text-gray-500 py-6">
-                    Không có học sinh trong lớp này
-                  </p>
-                );
-              })()}
-            </div>
-
-            {/* Footer */}
-            <div className="p-6 border-t flex justify-between items-center">
-              <p className="text-sm text-gray-600">
-                Tổng số: {getClassStudents(currentClass.name).length} học sinh |{" "}
-                {countParentsWithoutAccounts(currentClass.name)} phụ huynh chưa
-                có tài khoản
-              </p>
-              <Button
-                onClick={handleCreateAllAccounts}
-                disabled={countParentsWithoutAccounts(currentClass.name) === 0}
-                className="flex items-center"
-              >
-                <UserPlus size={16} className="mr-2" />
-                Tạo tất cả tài khoản
-              </Button>
-            </div>
+                {s.name}
+                <button
+                  type="button"
+                  className="ml-1 text-red-600"
+                  onClick={() => removeStudent(s.id)}
+                >
+                  x
+                </button>
+              </span>
+            ))}
           </div>
         </div>
-      )}
+        <div className="flex justify-end gap-2">
+          <Button type="button" variant="outline" onClick={onClose}>
+            Hủy
+          </Button>
+          <Button type="submit">Tạo tài khoản</Button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -236,6 +236,7 @@ export interface Student {
     name: string;
     phone: string;
     email: string;
+    hasAccount: boolean;
   };
   status: "active" | "inactive";
   note?: string;

@@ -145,10 +145,6 @@ export default function ManagerStaff() {
           </p>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" className="flex items-center">
-            <Upload size={16} className="mr-2" />
-            Nhập Excel
-          </Button>
           <Button
             onClick={() => setShowAddModal(true)}
             className="flex items-center"
@@ -186,15 +182,9 @@ export default function ManagerStaff() {
               onChange={(e) => setSelectedRole(e.target.value)}
             >
               <option value="all">Tất cả vai trò</option>
-              <option value="teacher">Giáo viên</option>
+              <option value="teacher">Quản sinh</option>
               <option value="kitchen">Nhân viên bếp</option>
-              <option value="support">Nhân viên hỗ trợ</option>
-              <option value="admin">Quản trị viên</option>
             </select>
-            <button className="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center">
-              <Download size={16} className="mr-1" />
-              Xuất Excel
-            </button>
           </div>
         </div>
       </div>
@@ -408,21 +398,9 @@ export default function ManagerStaff() {
                   </label>
                   <select className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     <option value="">-- Chọn vai trò --</option>
-                    <option value="teacher">Giáo viên</option>
+                    <option value="teacher">Quản sinh</option>
                     <option value="kitchen">Nhân viên bếp</option>
-                    <option value="support">Nhân viên hỗ trợ</option>
-                    <option value="admin">Quản trị viên</option>
                   </select>
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Môn học/Chuyên môn (nếu là giáo viên)
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    placeholder="Ví dụ: Toán, Tiếng Việt..."
-                  />
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
