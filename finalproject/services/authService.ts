@@ -8,10 +8,10 @@ export const authService = {
     return res.data;
   },
 
-  getCurrentUser: async (): Promise<User> => {
-    const res = await axiosInstance.get<AuthResponse>("/me");
-    return res.data.user;
-  },
+  // getCurrentUser: async (): Promise<User> => {
+  //   const res = await axiosInstance.get<AuthResponse>("/me");
+  //   return res.data.user;
+  // },
 
   logout: async (): Promise<void> => {
     await axiosInstance.post("/logout");

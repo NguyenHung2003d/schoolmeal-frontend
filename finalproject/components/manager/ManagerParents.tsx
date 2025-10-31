@@ -15,24 +15,9 @@ import { classes, parents, students } from "@/data/constants";
 import Link from "next/link";
 
 export default function ManagerParentsPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("all");
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const filteredParents = useMemo(() => {
-    return parents.filter((parent: any) => {
-      const matchSearch =
-        parent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        parent.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        parent.children?.some((c: any) =>
-          c.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      const matchStatus =
-        selectedStatus === "all" || parent.status === selectedStatus;
-      return matchSearch && matchStatus;
-    });
-  }, [searchQuery, selectedStatus]);
-
+  
   const getStatusStyle = (status: string) => {
     switch (status) {
       case "active":

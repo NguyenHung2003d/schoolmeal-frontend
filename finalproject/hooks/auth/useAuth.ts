@@ -10,7 +10,8 @@ export const USER_QUERY_KEY = ["user"] as const;
 export const useAuth = () => {
   const userQuery = useQuery<User, AxiosError>({
     queryKey: USER_QUERY_KEY,
-    queryFn: authService.getCurrentUser,
+    queryFn: () => Promise.resolve(null),
+    // queryFn: authService.getCurrentUser,
     staleTime: 5 * 60 * 1000,
     retry: (failureCount, error) => {
       if (error?.response?.status === 401) {
